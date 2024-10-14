@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+
 import com.kdgital.project2.dto.CsDTO;
 
 import jakarta.persistence.CascadeType;
@@ -45,6 +48,7 @@ public class CsEntity {
 	private String content;
 
 	@Column(name = "postdate")
+	@CreationTimestamp //기본값으로 현재 날자가 들어감
 	private LocalDate postdate;
 
 	private static CsEntity toEntity(CsDTO csDTO) {
