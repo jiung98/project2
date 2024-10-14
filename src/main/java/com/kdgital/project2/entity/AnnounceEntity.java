@@ -1,7 +1,11 @@
-package com.kdigital.project2.entity;
+package com.kdgital.project2.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.kdgital.project2.dto.AnnounceDTO;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,14 +30,26 @@ import lombok.ToString;
 @Entity
 @Table(name = "announce")
 public class AnnounceEntity {
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int serno;
+    @Column(name = "serno")
+    private Long serno;
 
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "content", nullable = false)
     private String content;
 
-    @Temporal(TemporalType.DATE)
-    private LocalDateTime postdate;
+    @Column(name = "postdate")
+    private LocalDate postdate;
 
+    private static AnnounceEntity toEntity(AnnounceDTO announceDTO) {
+    	return AnnounceEntity.builder()
+    			.serno(announceDTO.getSerno())
+    			.title(announceDTO.getTitle())
+    			.content(announceDTO.getContent())
+    			.postdate(announceDTO.getPostdate())
+    			.build();
+    }
 }

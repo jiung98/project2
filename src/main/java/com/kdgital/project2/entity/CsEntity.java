@@ -1,9 +1,13 @@
-package com.kdigital.project2.entity;
+package com.kdgital.project2.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.kdgital.project2.dto.CsDTO;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,25 +26,33 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
-@Getter
+@Getter 
 @ToString
 @Builder
 
 @Entity
 @Table(name = "cs")
-public class CSEntity {
+public class CsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int csno;
+	@Column(name = "csno")
+	private Long csno;
 
+	@Column(name = "title", nullable = false)
 	private String title;
+
+	@Column(name = "content", nullable = false)
 	private String content;
 
-	@Temporal(TemporalType.DATE)
-	private LocalDateTime postdate;
+	@Column(name = "postdate")
+	private LocalDate postdate;
 
-
-	@OneToMany(mappedBy = "cs", cascade = CascadeType.ALL)
-	private List<CSAnswerEntity> answers;
-
+	private static CsEntity toEntity(CsDTO csDTO) {
+		return CsEntity.builder()
+				.csno(csDTO.getCsno())
+				.title(csDTO.getTitle())
+				.content(csDTO.getContent())
+				.postdate(csDTO.getPostdate())
+				.build(); 
+	}
 }

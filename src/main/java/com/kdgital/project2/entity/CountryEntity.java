@@ -1,8 +1,10 @@
-package com.kdigital.project2.entity;
+package com.kdgital.project2.entity;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import com.kdgital.project2.dto.CountryDTO;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -25,12 +27,15 @@ import lombok.ToString;
 @Table(name = "countries")
 public class CountryEntity {
     @Id
-    private String c_code;
-
+    @Column(name="c_code")
+    private String cCode;
+    @Column(name = "country", nullable = false)
     private String country;
 
-    @OneToMany(mappedBy = "countries")
-    private List<TradeEntity> trades;
-
-    // Getters and Setters
+    private static CountryEntity toEntity(CountryDTO countryDTO) {
+    	return CountryEntity.builder()
+    			.cCode(countryDTO.getCCode())
+    			.country(countryDTO.getCountry())
+    			.build(); 
+    }
 }

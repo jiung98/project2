@@ -1,7 +1,11 @@
-package com.kdigital.project2.entity;
+package com.kdgital.project2.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import com.kdgital.project2.dto.FaqDTO;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,16 +28,25 @@ import lombok.ToString;
 @Builder
 
 @Entity
-@Table(name = "csanswer")
-public class CSAnswerEntity {
+@Table(name = "faq")
+public class FaqEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int answerno;
+	@Column(name="faq_no")
+	private Long faqNo;
+	
+	@Column(name = "question", nullable = false)
+	private String question;
 
+	@Column(name = "answer", nullable = false)
 	private String answer;
 
-	@ManyToOne
-	@JoinColumn(name = "csno", nullable = false)
-	private CSEntity customerSupport;
 
+	private static FaqEntity toEntity(FaqDTO faqDTO) {
+		return FaqEntity.builder()
+				.faqNo(faqDTO.getFaqNo())
+				.question(faqDTO.getQuestion())
+				.answer(faqDTO.getAnswer())
+				.build();
+	}
 }
