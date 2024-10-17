@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 화면</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* 흰색 배경 */
+            color: #333;
+        }
+        header {
+            background-color: #000000; /* 블랙 배경 */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 24px;
+            color: white;
+        }
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: 2px solid transparent; /* 테두리 투명 */
+            transition: background-color 0.3s ease; /* hover 효과 추가 */
+        }
+        header nav a:hover {
+            background-color: #555555; /* hover 시 색상 변경 */
+            border-radius: 5px; /* 둥근 테두리 */
+        }
+
+        /* 로그인/회원가입 버튼 */
+        header .actions a {
+            background-color: #000000; /* 검정색 배경 */
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 */
+            border: 2px solid transparent; /* 테두리 투명 */
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        header .actions a:hover {
+            background-color: #555555; /* hover 시 색상 변경 */
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        .section {
+            flex: 1;
+            margin: 0 10px;
+            background-color: #f0f0f0; /* 밝은 회색 섹션 배경 */
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid transparent; /* 굵은 검은색 테두리 */
+            position: relative;
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #000000; /* 블랙 글자 */
+            margin-bottom: 20px;
+        }
+
+        .notice-list, .news-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .notice-list li, .news-list li {
+            margin-bottom: 15px;
+        }
+
+        .notice-list li a, .news-list li a {
+            text-decoration: none;
+            color: #000000; /* 블랙 글자 */
+            font-size: 18px;
+        }
+
+        .notice-list li a:hover, .news-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* 더보기 버튼 스타일 */
+        .more-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+        }
+        .more-button img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000000, #ffffff); /* 위쪽은 검정색, 아래쪽으로 연해짐 */
+            color: white;
+            border-radius: 0; /* 각진 모양으로 설정 */
+        }
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #f0f0f0;
+            margin-bottom: 40px;
+        }
+        .hero .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .cta-buttons a {
+            padding: 15px 25px;
+            font-size: 16px;
+            border-radius: 10px; /* 둥글게 설정 */
+            text-decoration: none;
+            border: 2px solid transparent;
+        }
+        .cta-buttons .primary {
+            background-color: #000000;
+            color: white;
+        }
+        .cta-buttons .primary:hover {
+            background-color: #333333;
+        }
+        .cta-buttons .secondary {
+            background-color: transparent;
+            border-color: #000000;
+            color: #000000;
+        }
+        .cta-buttons .secondary:hover {
+            border-color: #333333;
+            color: #333333;
+        }
+
+        img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">JDT</div>
+        <nav>
+            <a href="#">About Us</a>
+            <a href="#">서비스</a>
+            <a href="#">공지사항</a>
+            <a href="#">뉴스</a>
+            <a href="#">고객지원</a>
+        </nav>
+        <div class="actions">
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>메인 화면 제목</h1>
+        <p>메인 화면 내용</p>
+        <div class="cta-buttons">
+            <a href="#" class="primary">예시 버튼 1</a>
+            <a href="#" class="secondary">예시 버튼 2</a>
+        </div>
+    </section>
+
+    <div class="main-container">
+        <!-- Left Section (공지사항) -->
+        <section class="section">
+            <h2>공지사항</h2>
+            <ul class="notice-list">
+                <li><a href="#">공지사항 1</a></li>
+                <li><a href="#">공지사항 2</a></li>
+                <li><a href="#">공지사항 3</a></li>
+                <li><a href="#">공지사항 4</a></li>
+                <li><a href="#">공지사항 5</a></li>
+            </ul>
+            <div class="more-button">
+                <img src="/images/more.png" alt="더보기 버튼">
+
+            </div>
+        </section>
+
+        <!-- Middle Section (뉴스) -->
+        <section class="section">
+            <h2>뉴스</h2>
+            <ul class="news-list">
+                <li><a href="#">뉴스 1</a></li>
+                <li><a href="#">뉴스 2</a></li>
+                <li><a href="#">뉴스 3</a></li>
+                <li><a href="#">뉴스 4</a></li>
+                <li><a href="#">뉴스 5</a></li>
+            </ul>
+            <div class="more-button">
+                <img src="/images/more.png" alt="더보기 버튼">
+
+            </div>
+        </section>
+
+        <!-- Right Section (워드클라우드) -->
+        <section class="section">
+            <h2>워드클라우드</h2>
+            <img src="wordcloud.png" alt="워드클라우드">
+            <div class="more-button">
+                <img src="/images/more.png" alt="더보기 버튼">
+            </div>
+        </section>
+    </div>
+</body>
+</html>

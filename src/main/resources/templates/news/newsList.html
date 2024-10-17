@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        header {
+            background-color: #000000; /* 검정색 단색 배경 */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        header .logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        header nav a:hover {
+            background-color: #444444;
+            border-radius: 8px;
+        }
+
+        header .actions a {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none; /* 테두리를 투명하게 설정 */
+            display: inline-block;
+            text-align: center;
+        }
+
+        header .actions a:hover {
+            background-color: #555555;
+        }
+
+        /* Hero 섹션 스타일 */
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000000, #ffffff); /* 위쪽은 검정색, 아래쪽으로 연해짐 */
+            color: white;
+            border-radius: 0; /* 각진 모양 */
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .filter-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .filter-bar-left {
+            display: flex;
+            gap: 20px;
+        }
+
+        .filter-bar-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-bar input[type="date"],
+        .filter-bar select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .filter-bar input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 200px;
+        }
+
+        .filter-bar button {
+            padding: 8px 16px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .filter-bar button:hover {
+            background-color: #333333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background-color: #000000; /* 검정색 배경 */
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            border: none; /* 테두리 투명 */
+        }
+
+        .pagination a:hover {
+            background-color: #333333;
+        }
+
+        .pagination .active {
+            background-color: #ffffff;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">JDT</div>
+        <nav>
+            <a href="#">About Us</a>
+            <a href="#">서비스</a>
+            <a href="#">공지사항</a>
+            <a href="#">뉴스</a>
+            <a href="#">고객지원</a>
+        </nav>
+        <div class="actions">
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+        </div>
+    </header>
+
+    <!-- Hero 섹션 -->
+    <section class="hero">
+        <h1>뉴스 목록</h1>
+    </section>
+
+    <div class="container">
+        <!-- 기간 설정 및 정렬 옵션, 검색창을 같은 행에 배치 -->
+        <div class="filter-bar">
+            <div class="filter-bar-left">
+                <div>
+                    <label for="start-date">기간 설정: </label>
+                    <input type="date" id="start-date" name="start-date">
+                    ~
+                    <input type="date" id="end-date" name="end-date">
+                </div>
+
+                <div>
+                    <label for="sort">정렬: </label>
+                    <select id="sort" name="sort">
+                        <option value="latest">최신순</option>
+                        <option value="oldest">오래된순</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="filter-bar-right">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button>검색</button>
+            </div>
+        </div>
+
+        <!-- 뉴스 목록 테이블 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>뉴스 제목 1</td>
+                    <td>기자1</td>
+                    <td>2024-10-14</td>
+                    <td><a href="https://newswebsite.com/article1">https://newswebsite.com/article1</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>뉴스 제목 2</td>
+                    <td>기자2</td>
+                    <td>2024-10-13</td>
+                    <td><a href="https://newswebsite.com/article2">https://newswebsite.com/article2</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- 페이징 기능 -->
+        <div class="pagination">
+            <a href="#">&lt;</a>
+            <a href="#">1</a>
+            <a href="#">2</a>
+            <a href="#">&gt;</a>
+        </div>
+    </div>
+</body>
+</html>
