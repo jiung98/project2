@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f6f9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .graph-container, .data-section {
+            margin-bottom: 30px;
+        }
+        .graph-container h2, .data-section h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        canvas {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: 300px;
+        }
+        .description {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+}
+
+header {
+    background-color: #007bff;
+    padding: 10px;
+}
+
+.header-container nav ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.header-container nav ul li a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.dashboard-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.graphs-section, .rates-section {
+    width: 48%;
+}
+
+.graph-container {
+    margin-bottom: 30px;
+}
+
+.graph-container h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.rates-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rate-box {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.rate-box h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rate-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.graph-container, .data-section {
+    margin-bottom: 30px;
+}
+
+.graph-container h2, .data-section h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: 300px;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">상세 정보</h1>
+
+        <!-- 그래프 섹션 -->
+        <div class="graph-container" id="graphSection">
+            <h2 id="graphTitle"></h2>
+            <canvas id="detailChart"></canvas>
+        </div>
+
+        <!-- 근거 자료 및 설명 섹션 -->
+        <div class="data-section">
+            <h2>관련 자료 및 설명</h2>
+            <p id="description" class="description"></p>
+        </div>
+
+        <button onclick="window.location.href='dashboard.html'">대시보드로 돌아가기</button>
+    </div>
+
+    <script>
+        // URL에서 'type' 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const type = urlParams.get('type');
+        const titleElement = document.getElementById('title');
+        const graphTitleElement = document.getElementById('graphTitle');
+        const descriptionElement = document.getElementById('description');
+
+        // 그래프 및 설명 데이터 설정
+        const data = {
+            production: {
+                title: "지역별 생산량",
+                graphTitle: "지역별 생산량 그래프",
+                description: "이 그래프는 각 지역별 생산량 데이터를 기반으로 작성되었습니다. 생산량은 지역의 기후 조건, 지형 및 농업 기술 수준에 따라 달라집니다."
+            },
+            demand: {
+                title: "수요량 상세 정보",
+                graphTitle: "수요량 그래프",
+                description: "이 자료는 수요 변화에 따른 분석 자료입니다. 수요량의 변동은 소비 패턴과 시장 환경에 따라 영향을 받습니다."
+            },
+            export: {
+                title: "수출금액 상세 정보",
+                graphTitle: "수출금액 그래프",
+                description: "이 자료는 수출 실적을 기반으로 작성되었습니다. 수출금액은 세계 경제 상황, 거래 조건, 및 환율 변동에 따라 달라집니다."
+            },
+            import: {
+                title: "수입금액 상세 정보",
+                graphTitle: "수입금액 그래프",
+                description: "이 자료는 수입 실적을 기반으로 작성되었습니다. 수입금액은 국내 수요, 국제 시장 가격, 및 무역 정책에 의해 결정됩니다."
+            }
+        };
+
+        // type에 따라 제목 및 설명 설정
+        if (type && data[type]) {
+            titleElement.textContent = data[type].title;
+            graphTitleElement.textContent = data[type].graphTitle;
+            descriptionElement.textContent = data[type].description;
+
+            // 차트 생성 (예시 데이터 사용)
+            new Chart(document.getElementById('detailChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['지역1', '지역2', '지역3', '지역4', '지역5'],
+                    datasets: [{
+                        label: data[type].graphTitle,
+                        data: [10, 20, 30, 40, 50],
+                        backgroundColor: 'blue'
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html>

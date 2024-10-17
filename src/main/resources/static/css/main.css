@@ -1,0 +1,92 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+}
+
+header {
+    background-color: #3c4b6b;
+    padding: 20px 0;
+}
+
+.header-container nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.header-container nav ul li {
+    margin-right: 30px;
+}
+
+.header-container nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+}
+
+.header-container nav ul li a:hover {
+    border-color: white;
+    border-radius: 8px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section, .right-section {
+    width: 45%;
+}
+
+.left-section h2, .right-section h2 {
+    font-size: 24px;
+    color: #3c4b6b;
+    margin-bottom: 20px;
+}
+
+.notice-list, .news-list {
+    list-style: none;
+    padding: 0;
+}
+
+.notice-list li, .news-list li {
+    margin-bottom: 15px;
+}
+
+.notice-list li a, .news-list li a {
+    text-decoration: none;
+    color: #3c4b6b;
+    font-size: 18px;
+}
+
+.notice-list li a:hover, .news-list li a:hover {
+    text-decoration: underline;
+}
+
+.button-primary {
+    background-color: #0066cc;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.button-primary:hover {
+    background-color: #0055aa;
+}

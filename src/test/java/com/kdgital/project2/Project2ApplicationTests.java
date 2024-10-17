@@ -13,7 +13,7 @@ import com.kdgital.project2.entity.CsEntity;
 import com.kdgital.project2.entity.DemandEntity;
 import com.kdgital.project2.entity.FaqEntity;
 import com.kdgital.project2.entity.MainServiceEntity;
-import com.kdgital.project2.entity.MemberEntity;
+import com.kdgital.project2.entity.UserEntity;
 import com.kdgital.project2.entity.NewsEntity;
 import com.kdgital.project2.entity.RegionEntity;
 import com.kdgital.project2.entity.TradeEntity;
@@ -71,7 +71,7 @@ class Project2ApplicationTests {
 	}
 	@Test
 	void memberTest() {
-		MemberEntity a = new MemberEntity();
+		UserEntity a = new UserEntity();
 		a.setUserId("s234f");
 		a.setUserPwd("df");
 		a.setBirth(LocalDate.now());

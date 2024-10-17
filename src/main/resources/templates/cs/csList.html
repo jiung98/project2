@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객지원</title>
+    <link rel="stylesheet" href="cs.css">
+    
+    
+<style>* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f9;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 40px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+table th, table td {
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f6f9;
+    text-align: left;
+    width: 150px;
+}
+
+.back-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn button {
+    padding: 10px 20px;
+    background-color: #f4f6f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comment-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.comment-section input {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.comment-section button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 0 5px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <h1>고객지원</h1>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>FAQ</h2>
+            <div class="faq-item">
+                <h3>질문 1 <button class="toggle-btn">더보기</button></h3>
+                <p class="answer" style="display:none;">질문 1에 대한 답변입니다.</p>
+            </div>
+            <div class="faq-item">
+                <h3>질문 2 <button class="toggle-btn">더보기</button></h3>
+                <p class="answer" style="display:none;">질문 2에 대한 답변입니다.</p>
+            </div>
+            <div class="faq-item">
+                <h3>질문 3 <button class="toggle-btn">더보기</button></h3>
+                <p class="answer" style="display:none;">질문 3에 대한 답변입니다.</p>
+            </div>
+        </section>
+
+        <!-- QNA Section -->
+        <section class="qna-section">
+            <h2>QNA</h2>
+            <div class="search-group">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button>검색</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>작성자</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><a href="#">QNA 질문 1</a></td>
+                        <td>사용자1</td>
+                        <td>2024-10-14</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td><a href="#">QNA 질문 2</a></td>
+                        <td>사용자2</td>
+                        <td>2024-10-13</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#">&#60;</a>
+                <a href="#">1</a>
+                <a href="#">2</a>
+                <a href="#">&#62;</a>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const answer = button.parentElement.nextElementSibling;
+                answer.style.display = answer.style.display === 'none' ? 'block' : 'none';
+                button.textContent = answer.style.display === 'none' ? '더보기' : '숨기기';
+            });
+        });
+    </script>
+</body>
+</html>

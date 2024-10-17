@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.kdgital.project2.entity.MemberEntity;
+import com.kdgital.project2.entity.UserEntity;
 import com.kdgital.project2.repository.MemberRepository;
 
 import jakarta.transaction.Transactional;
@@ -18,6 +18,6 @@ public class MainController {
 	@GetMapping({"","/"})
 	public String index() {
 		System.out.println("첫 요청이 도착함");
-		return "index";  //  src/main/resources/templetes/index.html
+		return "main/mainPage";  //  src/main/resources/templetes/index.html
 	}
 }

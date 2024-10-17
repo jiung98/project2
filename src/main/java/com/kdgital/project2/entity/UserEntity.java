@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.kdgital.project2.dto.MemberDTO;
+import com.kdgital.project2.dto.UserDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,14 +25,17 @@ import lombok.ToString;
 @Builder
 
 @Entity
-@Table(name="members")
-public class MemberEntity {
+@Table(name="users")
+public class UserEntity {
 	@Id
 	@Column(name="user_id")
 	private String userId;
 
 	@Column(name = "user_pwd")
 	private String userPwd;
+	
+	@Column(name = "user_name")
+	private String userName;
 
 	@Column(name = "email")
 	private String email;
@@ -53,16 +56,17 @@ public class MemberEntity {
 	private Boolean enabled;
 	
 	
-	public static MemberEntity toEntity(MemberDTO memberDTO) {
-		return MemberEntity.builder()
-				.userId(memberDTO.getUserId())
-				.userPwd(memberDTO.getUserPwd())
-				.email(memberDTO.getEmail())
-				.userAdd(memberDTO.getUserAdd())
-				.phone(memberDTO.getPhone())
-				.birth(memberDTO.getBirth())
-				.roles(memberDTO.getRoles())
-				.enabled(memberDTO.getEnabled())
+	public static UserEntity toEntity(UserDTO userDTO) {
+		return UserEntity.builder()
+				.userId(userDTO.getUserId())
+				.userPwd(userDTO.getUserPwd())
+				.email(userDTO.getEmail())
+				.userAdd(userDTO.getUserAdd())
+				.phone(userDTO.getPhone())
+				.userName(userDTO.getUserName())
+				.birth(userDTO.getBirth())
+				.roles(userDTO.getRoles())
+				.enabled(userDTO.getEnabled())
 				.build();  
 	}
 
