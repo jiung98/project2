@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -190,18 +191,23 @@
 </head>
 <body>
     <header>
-        <div class="logo">JDT</div>
+      <div class="logo">JDT</div>
         <nav>
-            <a href="#">About Us</a>
-            <a href="#">서비스</a>
-            <a href="#">공지사항</a>
-            <a href="#">뉴스</a>
-            <a href="#">고객지원</a>
-        </nav>
-        <div class="actions">
-            <a href="#">로그인</a>
-            <a href="#">회원가입</a>
-        </div>
+			<a th:href="@{/about/about}">About Us</a> 
+			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+			<a th:href="@{/announce/announceList}">공지사항</a> 
+			<a th:href="@{/news/newsList}">뉴스</a> 
+			<a th:href="@{/cs/csList}">고객지원</a>
+		</nav>
+		<div class="actions">
+			<!-- 인증이 되지 않은 사람 -->
+			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
+			<a th:href="@{/user/login}">로그인</a></li>
+			<!-- 인증이 된 사람 -->
+			<li sec:authorize="isAuthenticated()">
+			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
+		</div>
     </header>
 
     <!-- Hero 섹션 -->

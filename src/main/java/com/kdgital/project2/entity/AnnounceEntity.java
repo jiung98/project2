@@ -59,9 +59,7 @@ public class AnnounceEntity {
     @Column(name="hit_count")
 	private int hitCount;
     
- // 댓글 개수 처리
- 	@Formula("(SELECT count(1) FROM reply r WHERE board_num  = r.board_num)")
- 	private int replyCount;
+
 
     public static AnnounceEntity toEntity(AnnounceDTO announceDTO) {
     	return AnnounceEntity.builder()

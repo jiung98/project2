@@ -36,13 +36,12 @@ public class AnnounceDTO {
 			, String writer
 			, int hitCount
 			, LocalDateTime createDate
-			, int replyCount) {
+			) {
 		this.serno    = serno;
 		this.title  = title;
 		this.writer = writer;
 		this.hitCount    = hitCount;
 		this.createDate  = createDate;
-		this.replyCount  = replyCount;
 	}
 
     public static AnnounceDTO toDTO(AnnounceEntity announceEntity) {

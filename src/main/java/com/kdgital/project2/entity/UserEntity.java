@@ -39,15 +39,15 @@ public class UserEntity {
 
 	@Column(name = "email")
 	private String email;
-
-	@Column(name = "user_add")
-	private String userAdd;
+//
+//	@Column(name = "user_add")
+//	private String userAdd;
 
 	@Column(name = "phone")
 	private String phone;
 
 	@Column(name = "birth")
-	private LocalDate birth;  
+	private String birth;  
 
 	@Column(name = "roles")
 	private String roles;
@@ -61,7 +61,7 @@ public class UserEntity {
 				.userId(userDTO.getUserId())
 				.userPwd(userDTO.getUserPwd())
 				.email(userDTO.getEmail())
-				.userAdd(userDTO.getUserAdd())
+				//.userAdd(userDTO.getUserAdd())
 				.phone(userDTO.getPhone())
 				.userName(userDTO.getUserName())
 				.birth(userDTO.getBirth())

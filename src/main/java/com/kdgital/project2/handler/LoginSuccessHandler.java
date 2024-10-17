@@ -1,4 +1,4 @@
-package com.kdigital.project2.handler;
+package com.kdgital.project2.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;

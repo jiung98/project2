@@ -25,9 +25,9 @@ public class UserDTO {
     private String userPwd;
     private String userName;
     private String email;
-    private String userAdd;
+   // private String userAdd;
     private String phone;
-    private LocalDate birth;
+    private String birth;
     private String roles;
     private Boolean enabled;
 
@@ -36,7 +36,7 @@ public class UserDTO {
     			.userId(userEntity.getUserId())
 				.userPwd(userEntity.getUserPwd())
 				.email(userEntity.getEmail())
-				.userAdd(userEntity.getUserAdd())
+				//.userAdd(userEntity.getUserAdd())
 				.userName(userEntity.getUserName())
 				.phone(userEntity.getPhone())
 				.birth(userEntity.getBirth())

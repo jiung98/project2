@@ -74,9 +74,9 @@ class Project2ApplicationTests {
 		UserEntity a = new UserEntity();
 		a.setUserId("s234f");
 		a.setUserPwd("df");
-		a.setBirth(LocalDate.now());
+		a.setBirth("dfdf");
 		a.setEmail("12coel56");
-		a.setUserAdd("s123sdf");
+		//a.setUserAdd("s123sdf");
 		a.setPhone("1232555554");
 		a.setRoles("ROLE_USER");
 		a.setEnabled(true);

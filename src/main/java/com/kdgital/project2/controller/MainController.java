@@ -18,6 +18,6 @@ public class MainController {
 	@GetMapping({"","/"})
 	public String index() {
 		System.out.println("첫 요청이 도착함");
-		return "main/mainPage";  //  src/main/resources/templetes/index.html
+		return "main/main";  //  src/main/resources/templetes/index.html
 	}
 }

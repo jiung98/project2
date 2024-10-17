@@ -1,4 +1,4 @@
-package com.kdigital.poject2.util;
+package com.kdgital.project2.util;
 
 import java.io.File;
 import java.io.IOException;

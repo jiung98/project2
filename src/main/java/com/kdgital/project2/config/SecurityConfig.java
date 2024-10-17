@@ -7,9 +7,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.kdgital.project2.handler.LoginFailureHandler;
+import com.kdgital.project2.handler.LoginSuccessHandler;
 import com.kdgital.project2.service.LoginUserDetailsService;
-import com.kdigital.project2.handler.LoginFailureHandler;
-import com.kdigital.project2.handler.LoginSuccessHandler;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,13 +18,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
 	
-	private final LoginUserDetailsService loginUserDetailsService; 
 	private final LoginFailureHandler failureHandler;  	// 로그인 실패 시 처리할 객체
 	private final LoginSuccessHandler successHandler;	// 로그인 성공 시 처리할 객체
 	
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		// 1) 웹 요청에 대한 접근 권한 설정
+		// 1) 웹 요청에 대한 접근 권한 설정     (권한설정하는거 여기에 없으면 no)
 		http
 			.authorizeHttpRequests((auth) -> auth
 					.requestMatchers(
@@ -77,8 +76,3 @@ public class SecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 }
-
-
-
-
-
