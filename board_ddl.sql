@@ -5,14 +5,16 @@ USE project2;
 -- 회원 엔터티
 CREATE TABLE project2.members
 (
-   userid   varchar(100) PRIMARY KEY,
-   userpwd   varchar(100) NOT NULL,
+   user_id   varchar(100) PRIMARY KEY,
+   user_pwd   varchar(100) NOT NULL,
    email      varchar(100) NOT NULL,
-   useradd   varchar(100) NOT NULL,
+   user_add   varchar(100) NOT NULL,
    phone varchar(100) NOT NULL,
    birth datetime not null,
-   userrole varchar(50) DEFAULT 'ROLE_USER',
+   roles varchar(50) DEFAULT 'ROLE_USER',
    enabled char(1) DEFAULT '1'
+  		, CONSTRAINT members_roles CHECK(roles IN ('ROLE_USER', 'ROLE_ADMIN'))
+		, CONSTRAINT members_enabled CHECK(enabled IN ('1', '0'))
 );
 
 drop table project2.members ;
@@ -56,19 +58,23 @@ create table project2.cs
 -- 고객지원 답변 엔터티
 create table project2.csanswer
 (  
-   answerno int auto_increment primary key,
-   csno int not null,
+   answer_no int auto_increment primary key,
+   csno int ,
    answer varchar(1000) not null,
-   foreign key(csno) references project2.cs (csno)
+   CONSTRAINT csanswer_csno FOREIGN key(csno) references project2.cs (csno) ON DELETE CASCADE
 );
+
+drop table project2.csanswer;
 
 -- FAQ 엔터티
 create table project2.faq
 (
-   faqno int auto_increment primary key,
+   faq_no int auto_increment primary key,
    question varchar(1000) not null,
    answer varchar(1000) not null
 );
+
+drop table project2.faq;
 
 -- 지역 엔터티
 create table project2.regions
@@ -80,13 +86,15 @@ create table project2.regions
 -- 메인 서비스 엔터티
 create table project2.mainservice
 (
-   mainno int auto_increment primary key,
-   maindate datetime default current_timestamp,
-   r_code varchar(5) not null,
+   main_no int auto_increment primary key,
+   main_date datetime default current_timestamp,
+   r_code varchar(5),
    production int not null,
    temperatue decimal(2) not null,
-   foreign key(r_code) references project2.regions (r_code)
+   CONSTRAINT mainservice_rcode FOREIGN key(r_code) references project2.regions (r_code) ON DELETE CASCADE
 );
+
+drop table project2.mainservice;
 
 -- 국가 엔터티
 create table project2.countries
@@ -98,26 +106,30 @@ create table project2.countries
 -- 수출입 엔터티
 create table project2.trade
 (
-   tradeno int auto_increment primary key,
-   tradedate datetime default current_timestamp,
-   c_code varchar(5) not null,
-   r_code varchar(5) not null,
+   trade_no int auto_increment primary key,
+   trade_date datetime default current_timestamp,
+   c_code varchar(5) ,
+   r_code varchar(5) ,
    export int not null,
    import int not null,
-   foreign key(c_code) references project2.countries (c_code),
-   foreign key(r_code) references project2.regions (r_code)
+   CONSTRAINT trade_ccode FOREIGN key(c_code) references project2.countries (c_code) ON DELETE CASCADE,
+   CONSTRAINT trade_rcode FOREIGN key(r_code) references project2.regions (r_code) ON DELETE CASCADE
 );
+
+drop table project2.trade;
 
 -- 수요 엔터티
 create table project2.demands
 (
-   demandno int auto_increment primary key,
-   demanddate datetime default current_timestamp,
+   demand_no int auto_increment primary key,
+   demand_date datetime default current_timestamp,
    usa_yk decimal(2),
    usa_gk decimal(2),
    usa_gs decimal(2),
    jp_yk decimal(2),
    jp_ik decimal(2),
    jp_gk decimal(2),
-   demant int not null
+   demand int not null
 );
+
+drop table project2.demands;

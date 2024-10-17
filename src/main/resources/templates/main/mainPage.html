@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th ="http://thymeleaf.org"
+                xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메인 페이지</title>
+    <link rel="stylesheet" href="main.css">
+    
+    
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f2f5;
+}
+
+header {
+    background-color: #3c4b6b;
+    padding: 20px 0;
+}
+
+.header-container nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+
+.header-container nav ul li {
+    margin-right: 30px;
+}
+
+.header-container nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 2px solid transparent;
+}
+
+.header-container nav ul li a:hover {
+    border-color: white;
+    border-radius: 8px;
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-section, .right-section {
+    width: 45%;
+}
+
+.left-section h2, .right-section h2 {
+    font-size: 24px;
+    color: #3c4b6b;
+    margin-bottom: 20px;
+}
+
+.notice-list, .news-list {
+    list-style: none;
+    padding: 0;
+}
+
+.notice-list li, .news-list li {
+    margin-bottom: 15px;
+}
+
+.notice-list li a, .news-list li a {
+    text-decoration: none;
+    color: #3c4b6b;
+    font-size: 18px;
+}
+
+.notice-list li a:hover, .news-list li a:hover {
+    text-decoration: underline;
+}
+
+.button-primary {
+    background-color: #0066cc;
+    color: white;
+    padding: 15px 25px;
+    text-align: center;
+    display: inline-block;
+    border-radius: 8px;
+    font-size: 16px;
+    margin-top: 20px;
+    text-decoration: none;
+}
+
+.button-primary:hover {
+    background-color: #0055aa;
+}
+</style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <nav>
+                <ul>
+                    <li><a href="#">홈</a></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">뉴스</a></li>
+                    <li><a href="#">QNA</a></li>
+                    <!-- 인증 ㄴㄴ -->
+                    <li sec:authorize="isAnonymous()"><a th:href="@{/user/login}">로그인</a></li>
+					<!-- 인증 ㅇㅇ -->
+					<li sec:authorize="isAuthenticated()">
+	            		<a th:href="@{/user/logout}">[[${loginName}]]([[ ${#authentication.name} ]])님, 로그아웃</a> </li>
+	                <li sec:authorize="isAuthenticated()">
+	            		<a th:href="@{/user/mypage}">개인정보 수정</a> </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Left Section (공지사항, 뉴스 목록) -->
+        <section class="left-section">
+            <h2>공지사항</h2>
+            <ul class="notice-list">
+                <li><a href="#">공지사항 1</a></li>
+                <li><a href="#">공지사항 2</a></li>
+                <li><a href="#">공지사항 3</a></li>
+                <li><a href="#">공지사항 4</a></li>
+                <li><a href="#">공지사항 5</a></li>
+            </ul>
+
+            <h2>뉴스</h2>
+            <ul class="news-list">
+                <li><a href="#">뉴스 1</a></li>
+                <li><a href="#">뉴스 2</a></li>
+                <li><a href="#">뉴스 3</a></li>
+                <li><a href="#">뉴스 4</a></li>
+                <li><a href="#">뉴스 5</a></li>
+            </ul>
+        </section>
+
+        <!-- Right Section (워드클라우드, 단어 분석) -->
+        <section class="right-section">
+            <h2>워드클라우드</h2>
+            <img src="images/logo.png" alt="워드클라우드" style="max-width: 100%; border: 1px solid #ddd;">
+
+            <a href="#" class="button-primary">더보기</a>
+        </section>
+    </div>
+
+</body>
+</html>
