@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 보기</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff; /* 흰색 배경 */
+            color: #333;
+        }
+
+        header {
+            background-color: #000000; /* 검정색 배경 */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        header .logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        header nav a:hover {
+            background-color: #444444;
+            border-radius: 8px;
+        }
+
+        header .actions a {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+        }
+
+        header .actions a:hover {
+            background-color: #555555;
+        }
+
+        /* Hero 섹션 스타일 */
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000000, #ffffff); /* 위에서 아래로 그라데이션 */
+            color: white;
+            border-radius: 0; /* 각진 모양 */
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f8f8f8; /* 밝은 회색 배경 */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            text-align: left;
+            color: #333;
+        }
+
+        table td {
+            color: #333;
+        }
+
+        .back-btn {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .back-btn button {
+            padding: 10px 20px;
+            background-color: #000000; /* 검정색 버튼 */
+            color: white;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .back-btn button:hover {
+            background-color: #333333; /* hover 시 배경색 변경 */
+        }
+
+        .comment-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .comment-section input {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .comment-section button {
+            padding: 10px 20px;
+            background-color: #000000; /* 검정색 버튼 */
+            color: white;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .comment-section button:hover {
+            background-color: #333333; /* hover 시 배경색 변경 */
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">JDT</div>
+        <nav>
+            <a href="#">About Us</a>
+            <a href="#">서비스</a>
+            <a href="#">공지사항</a>
+            <a href="#">뉴스</a>
+            <a href="#">고객지원</a>
+        </nav>
+        <div class="actions">
+            <a href="#">로그인</a>
+            <a href="#">회원가입</a>
+        </div>
+    </header>
+
+    <!-- Hero 섹션 -->
+    <section class="hero">
+        <h1>게시글 보기</h1>
+    </section>
+
+    <div class="detail-container">
+        <table>
+            <tr>
+                <th>작성자</th>
+                <td>관리자</td>
+            </tr>
+            <tr>
+                <th>글제목</th>
+                <td>게시물 제목</td>
+            </tr>
+            <tr>
+                <th>작성일</th>
+                <td>2024-09-11 10:15</td>
+            </tr>
+            <tr>
+                <th>수정일</th>
+                <td>2024-10-14 10:50</td>
+            </tr>
+            <tr>
+                <th>글내용</th>
+                <td>여기에 게시물의 내용이 들어갑니다.</td>
+            </tr>
+            <tr>
+                <th>첨부파일</th>
+                <td>없음</td>
+            </tr>
+        </table>
+
+        <div class="back-btn">
+            <button onclick="window.location.href='notice.html'">목록</button>
+        </div>
+
+        <div class="comment-section">
+            <input type="text" placeholder="댓글 입력">
+            <button>댓글입력</button>
+        </div>
+    </div>
+</body>
+</html>
