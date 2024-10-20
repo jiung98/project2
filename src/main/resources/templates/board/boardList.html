@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록</title>
+    <link rel="stylesheet" th:href="@{/css/list.css}">
+    <script defer th:src="@{/script/search.js}"></script>
+     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        header {
+            background-color: #000000; /* 검정색 단색 배경 */
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        header .logo {
+            font-size: 24px;
+            color: white;
+        }
+
+        header nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
+        header nav a:hover {
+            background-color: #444444;
+            border-radius: 8px;
+        }
+
+        header .actions a {
+            background-color: transparent;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none; /* 테두리를 투명하게 설정 */
+            display: inline-block;
+            text-align: center;
+        }
+
+        header .actions a:hover {
+            background-color: #555555;
+        }
+
+        /* Hero 섹션 스타일 */
+        .hero {
+            padding: 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, #000000, #ffffff); /* 위쪽은 검정색, 아래쪽으로 연해짐 */
+            color: white;
+            border-radius: 0; /* 각진 모양 */
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* 게시글 개수, 정렬, 검색어 같은 행에 배치 */
+        .control-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .control-bar-left {
+            display: flex;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+
+        .control-bar-right {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .control-bar select, .control-bar input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .control-bar button {
+            padding: 8px 16px;
+            background-color: #000000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px; /* 검색어와 버튼 사이 간격 */
+        }
+
+        .control-bar button:hover {
+            background-color: #333333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid black;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background-color: #000000; /* 검정색 배경 */
+            color: white;
+            text-decoration: none;
+            font-size: 14px; /* 폰트 크기 줄이기 */
+            border: none; /* 테두리 투명 */
+        }
+
+        .pagination a:hover {
+            background-color: #333333;
+        }
+
+        .pagination .active {
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .write-btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .write-btn button {
+            padding: 10px 15px;
+            background-color: #000000;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .write-btn button:hover {
+            background-color: #333333;
+        }
+
+    </style>
+</head>
+
+<body>
+ <header>
+        <div class="logo">JDT</div>
+       <nav>
+			<a th:href="@{/about/about}">About Us</a> 
+			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+			<a th:href="@{/announce/announceList}">공지사항</a> 
+			<a th:href="@{/news/newsList}">뉴스</a> 
+			<a th:href="@{/cs/csList}">고객지원</a>
+		</nav>
+		<div class="actions">
+			<!-- 인증이 되지 않은 사람 -->
+			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
+			<a th:href="@{/user/login}">로그인</a></li>
+			<!-- 인증이 된 사람 -->
+			<li sec:authorize="isAuthenticated()">
+			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
+		</div>
+    </header>
+    <section class="hero">
+        <h1>공지사항</h1>
+    </section>
+
+    <!-- 게시글 전체 목록 출력 -->
+    <div class="container">
+     <div class="control-bar">
+            <div class="control-bar-left">
+                 <div class="count">
+                <p>게시글 개수: [[ ${list.totalElements } ]]</p>
+            </div>
+                <select name="sort-order" id="sort-order">
+                    <option value="latest">최신순</option>
+                    <option value="oldest">오래된순</option>
+                </select>
+            </div>
+            <div class="control-bar-right">
+                <input type="text" placeholder="검색어를 입력하세요">
+                <button>검색</button>
+            </div>
+        </div>
+		<div class="top">
+            <!-- 전체 글개수 출력 -->
+           
+
+            <!-- 검색창 -->
+            <div class="search">
+                <form action="boardList" method="GET" id="searchForm">
+                    <input type="hidden" name="page" id="requestPage" th:value="${page}">
+                    <select name="searchItem" id="searchItem">
+                        <option value="boardTitle"   th:selected="${searchItem == 'boardTitle'}">글제목</option>
+                        <option value="boardWriter"  th:selected="${searchItem == 'boardWriter'}">작성자</option>
+                        <option value="boardContent" th:selected="${searchItem == 'boardContent'}">글내용</option>
+                    </select>
+                    <input type="text" name="searchWord" id="searchWord" th:value="${searchWord}">
+                    <input type="button" id="search" value="검색" class="btn btn-primary">
+                </form>
+            </div> <!-- end .search-->
+        </div>   <!-- end .top--> 
+
+		<div class="head">
+	        <!-- 게시글 목록 -->
+	        <div>
+	            <table border="1">
+	                <tr>
+	                    <th class="no">글번호</th>
+	                    <th>제목</th>
+	                    <th class="writer">작성자</th>
+	                    <th class="hitcount">조회수</th>
+	                    <th class="create_date">작성일</th>
+	                </tr>
+       				<th:block th:unless="${#lists.isEmpty(list)}">
+       				
+	                <!-- 반복 구간-->
+	                <tr th:each="board, status : ${list}">  
+	                    <td class="no" th:text="${(list.number+1) * list.size - (list.size - status.count)}">1</td>
+	                    <td>
+	                    	<a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}" 
+	                           th:text="${board.boardTitle}">오늘은 날씨가 매우 더워요 </a>
+	                       
+	                        <!--  댓글 개수 출력 -->
+	                        <th:block th:if="${board.replyCount != 0}">
+	                        	<span style="font-weight:bold;color:darkred;">([[ ${board.replyCount} ]])</span>
+	                        </th:block>
+	                        
+	                        <!-- 첨부파일 유무 -->    
+	                        <span th:if="${board.originalFileName != null}">
+	                        	<img th:src="@{/images/attachment.png}" alt="삭제" width="15px">
+	                        </span>   
+	                   	</td>
+	                   	
+	                    <td class="writer" th:text="${board.boardWriter}">임꺽정</td>
+	                    <td class="hitcount" th:text="${board.hitCount}">0</td>
+	                    <td class="create_date" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
+	                        2024-08-26</td>
+	                </tr>
+	                </th:block>
+	            </table>
+	        </div>
+	     </div> <!-- end .head-->
+	      <div class="write-btn">
+            <button>글쓰기</button>
+        </div>
+    </div><!-- end .content -->
+    <!-- 글쓰기 버튼 : 로그인한 회원만 보임 -->
+   
+
+    <!-- Page Navigation -->
+    <nav class="pagination">
+        <!-- 앞 그룹 -->
+        <!-- 두 번째 그룹 이상에서 보고 있을 때는 링크 생김 -->
+		<th:block th:if="${navi.startPageGroup > 1}">
+			<a class="page-no navi" 
+			   th:href="|javascript:pageFormSubmit(${navi.startPageGroup-1})|" >&laquo;</a>
+		</th:block>
+		
+		<!-- 첫 번째 그룹을 보고 있을 때는 링크 안생김 -->
+		<th:block th:unless="${navi.startPageGroup > 1}">
+			<span class="page-no navi" >&laquo;</span>
+		</th:block>
+
+        <!-- 앞 페이지 -->
+        <!-- 2페이지 이상의 페이지를 보고 있다면 링크 생김 -->
+        <th:block th:if="${navi.page > 1}">
+        	<a class="page-no navi" 
+        	   th:href="|javascript:pageFormSubmit(${navi.page - 1})|" >&lsaquo;</a>
+        </th:block>
+        
+        <!-- 1페이지를 보고 있다면 링크 생기지 않음 -->
+        <th:block th:unless="${navi.page > 1}">
+			<span class="page-no navi">&lsaquo;</span>
+        </th:block>
+        
+        <!-- 페이지 번호 출력 -->
+        <span th:each="count : ${#numbers.sequence(navi.startPageGroup, navi.endPageGroup)}">
+        	<!-- 요청한 페이지(링크 불필요) -->
+        	<span th:if="${count == navi.page}">
+        		<b class="page-no current" th:text="${count}"></b>
+        	</span>
+        	       
+        	<!-- 요청하지 않은 나머지 페이지(링크필요) -->
+        	<span th:unless="${count == navi.page}">
+        		<a th:href="|javascript:pageFormSubmit(${count})|" class="page-no" th:text="${count}"></a>
+        	</span>		
+		</span>
+		
+        <!-- 뒷 페이지 -->
+        <!-- 현재 페이지 뒤에 다른 페이지가 있으면 링크 생김 -->
+		<th:block th:if="${(navi.totalPages) > (navi.page)}">
+			<a class="page-no navi" 
+				th:href="|javascript:pageFormSubmit(${navi.page + 1})|">&rsaquo;</a>
+		</th:block>
+		
+        <!-- 마지막 페이지라면 링크 없음 -->
+        <th:block th:unless="${(navi.totalPages) > (navi.page)}">
+			<span class="page-no navi">&rsaquo;</span>
+		</th:block>
+
+        <!-- 뒷 그룹 -->
+        <!-- 다음 그룹이 있으면 링크가 생김 -->
+		<th:block th:if="${(navi.currentGroup) < (navi.totalGroupCount)}">
+			<a class="page-no navi" 
+			   th:href="|javascript:pageFormSubmit(${navi.endPageGroup+1})|">&raquo;</a>
+		</th:block>
+		
+		<!-- 마지막 그룹을 보고 있으면 링크 없음 -->
+		<th:block th:unless="${(navi.currentGroup) < (navi.totalGroupCount)}">
+			<span class="page-no navi" >&raquo;</span>
+		</th:block>
+    </nav>
+</body>
+
+</html>
+
+
+
