@@ -107,15 +107,7 @@ class Project2ApplicationTests {
 		
 		dd.save(a);
 	}
-	@Test
-	void csTest() {
-		CsEntity a =new CsEntity();
-		a.setContent("질문답은 이거입니다.");
-		a.setTitle("이것이 궁굼합니다");
-		
-		
-		ee.save(a);
-	}
+
 	@Test
 	void demandTest() {
 		DemandEntity a =new DemandEntity();

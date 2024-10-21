@@ -27,7 +27,6 @@ public class BoardDTO {
 	private int hitCount;
 	private LocalDateTime createDate;
 	private LocalDateTime updateDate;
-	private int replyCount;
 	
 	// 업로드 하는 파일을 받는 멤버변수 
 	private MultipartFile uploadFile;
@@ -43,14 +42,13 @@ public class BoardDTO {
 			, int hitCount
 			, LocalDateTime createDate
 			, String originalFileName
-			, int replyCount) {
+			) {
 		this.boardNum    = boardNum;
 		this.boardTitle  = boardTitle;
 		this.boardWriter = boardWriter;
 		this.hitCount    = hitCount;
 		this.createDate  = createDate;
 		this.originalFileName = originalFileName;
-		this.replyCount  = replyCount;
 	}
 	
 	// Entity를 받아서 ----> DTO로 반환 
@@ -65,7 +63,6 @@ public class BoardDTO {
 				.updateDate(boardEntity.getUpdateDate())
 				.originalFileName(boardEntity.getOriginalFileName())
 				.savedFileName(boardEntity.getSavedFileName())
-				.replyCount(boardEntity.getReplyCount())	// 댓글 개수
 				.build();
 	}
 

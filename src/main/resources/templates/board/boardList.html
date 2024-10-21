@@ -197,7 +197,7 @@
             cursor: pointer;
         }
 
-        .write-btn button:hover {
+        .write-btn a:hover {
             background-color: #333333;
         }
 
@@ -210,7 +210,7 @@
        <nav>
 			<a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-			<a th:href="@{/announce/announceList}">공지사항</a> 
+			<a th:href="@{/board/boardList}">공지사항</a> 
 			<a th:href="@{/news/newsList}">뉴스</a> 
 			<a th:href="@{/cs/csList}">고객지원</a>
 		</nav>
@@ -284,10 +284,7 @@
 	                    	<a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}" 
 	                           th:text="${board.boardTitle}">오늘은 날씨가 매우 더워요 </a>
 	                       
-	                        <!--  댓글 개수 출력 -->
-	                        <th:block th:if="${board.replyCount != 0}">
-	                        	<span style="font-weight:bold;color:darkred;">([[ ${board.replyCount} ]])</span>
-	                        </th:block>
+	                        
 	                        
 	                        <!-- 첨부파일 유무 -->    
 	                        <span th:if="${board.originalFileName != null}">
@@ -304,12 +301,12 @@
 	            </table>
 	        </div>
 	     </div> <!-- end .head-->
-	      <div class="write-btn">
-            <button>글쓰기</button>
-        </div>
+	      
     </div><!-- end .content -->
     <!-- 글쓰기 버튼 : 로그인한 회원만 보임 -->
-   
+   <div class="write-btn">
+              <a th:href="@{/board/boardWrite}" >글쓰기</a>
+        </div>
 
     <!-- Page Navigation -->
     <nav class="pagination">

@@ -7,9 +7,9 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.kdgital.project2.dto.ReplyDTO;
-import com.kdgital.project2.entity.BoardEntity;
+import com.kdgital.project2.entity.CsEntity;
 import com.kdgital.project2.entity.ReplyEntity;
-import com.kdgital.project2.repository.BoardRepository;
+import com.kdgital.project2.repository.CsRepository;
 import com.kdgital.project2.repository.ReplyRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,35 +20,35 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @Slf4j
 public class ReplyService {
-	final BoardRepository boardRepository;
+	final CsRepository csRepository;
 	final ReplyRepository replyRepository;
 	
 	@Transactional
 	public ReplyDTO replyInsert(ReplyDTO replyDTO) {
 		// 부모의 게시글이 존재하는 여부 확인
-		Optional<BoardEntity> boardEntity = boardRepository.findById(replyDTO.getBoardNum());
-		if(boardEntity.isPresent()) {
-			BoardEntity entity = boardEntity.get();  // 부모글을 꺼냄.
+		Optional<CsEntity> csEntity = csRepository.findById(replyDTO.getCsNum());
+		if(csEntity.isPresent()) {
+			CsEntity entity = csEntity.get();  // 부모글을 꺼냄.
 			System.out.println(entity);
 			ReplyEntity replyEntity = ReplyEntity.toEntity(replyDTO, entity);
 			
 			ReplyEntity temp = replyRepository.save(replyEntity);
-			return ReplyDTO.toDTO(temp, replyDTO.getBoardNum());
+			return ReplyDTO.toDTO(temp, replyDTO.getCsNum());
 		}
 		return null;
 	}
 
-	public List<ReplyDTO> replyAll(Long boardNum) {
-		Optional<BoardEntity> boardEntity = boardRepository.findById(boardNum);
+	public List<ReplyDTO> replyAll(Long csNum) {
+		Optional<CsEntity> csEntity = csRepository.findById(csNum);
 		
 		List<ReplyEntity> replyEntityList 
-			= replyRepository.findAllByBoardEntityOrderByReplyNumDesc(boardEntity);
+			= replyRepository.findAllByCsEntityOrderByReplyNumDesc(csEntity);
 		
 		/* Entity --> DTO로 변환 */
 		List<ReplyDTO> replyDTOList = new ArrayList<>();
 		
 		replyEntityList.forEach(
-				(entity) -> replyDTOList.add(ReplyDTO.toDTO(entity, boardNum)));
+				(entity) -> replyDTOList.add(ReplyDTO.toDTO(entity, csNum)));
 		
 		System.out.println("=================" + replyDTOList);
 		return replyDTOList;

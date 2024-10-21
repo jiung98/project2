@@ -42,8 +42,8 @@ public class ReplyEntity {
 	 * 댓글이 다의 위치, boardnum은 Join컬럼
 	 */
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="board_num")
-	private BoardEntity boardEntity;
+	@JoinColumn(name="cs_num")
+	private CsEntity csEntity;
 	
 	@Column(name="reply_writer")
 	private String replyWriter;
@@ -56,13 +56,13 @@ public class ReplyEntity {
 	private LocalDate createDate;
 	
 	// DTO --> Entity 반환
-	public static ReplyEntity toEntity(ReplyDTO dto, BoardEntity boardEntity) {
+	public static ReplyEntity toEntity(ReplyDTO dto, CsEntity csEntity) {
 		return ReplyEntity.builder()
 				.replyNum(dto.getReplyNum())
 				.replyWriter(dto.getReplyWriter())
 				.replyText(dto.getReplyText())
 				.createDate(dto.getCreateDate())
-				.boardEntity(boardEntity)
+				.csEntity(csEntity)
 				.build();
 	}
 }

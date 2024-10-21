@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import com.kdgital.project2.dto.CsDTO;
 
@@ -38,25 +40,52 @@ import lombok.ToString;
 public class CsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "csno")
-	private Long csno;
+	@Column(name="cs_num")
+	private Long csNum;
+	
+	@Column(name="cs_writer", nullable = false)
+	private String csWriter;
+	
+	@Column(name="cs_title")
+	private String csTitle;
+	
+	@Column(name="cs_content")
+	private String csContent;
+	
+	@Column(name="hit_count")
+	private int hitCount;
+	
+	@Column(name="create_date")
+	@CreationTimestamp 	// 게시글이 처음 생성될 때 자동으로 날짜 세팅
+	private LocalDateTime createDate;
+	
+	@Column(name="update_date")
+	@LastModifiedDate	// 게시글이 수정된 마지막 날짜/시간을 세팅
+	private LocalDateTime updateDate;
+	
+	// 첨부파일이 있을 경우 추가
+	@Column(name="original_file_name")
+	private String originalFileName;
+	
+	@Column(name="saved_file_name")
+	private String savedFileName;
+	
+	// 댓글 개수 처리
+	@Formula("(SELECT count(1) FROM reply r WHERE cs_num  = r.cs_num)")
+	private int replyCount;
 
-	@Column(name = "title", nullable = false)
-	private String title;
-
-	@Column(name = "content", nullable = false)
-	private String content;
-
-	@Column(name = "postdate")
-	@CreationTimestamp //기본값으로 현재 날자가 들어감
-	private LocalDate postdate;
-
-	private static CsEntity toEntity(CsDTO csDTO) {
+	public static CsEntity toEntity(CsDTO csDTO) {
 		return CsEntity.builder()
-				.csno(csDTO.getCsno())
-				.title(csDTO.getTitle())
-				.content(csDTO.getContent())
-				.postdate(csDTO.getPostdate())
-				.build(); 
+				.csNum(csDTO.getCsNum()) 
+				.csWriter(csDTO.getCsWriter())
+				.csTitle(csDTO.getCsTitle())
+				.csContent(csDTO.getCsContent())
+				.hitCount(csDTO.getHitCount())
+			
+				.originalFileName(csDTO.getOriginalFileName())
+				.savedFileName(csDTO.getSavedFileName())
+//				.createDate(boardDTO.getCreateDate())
+//				.updateDate(boardDTO.getUpdateDate())
+				.build();
 	}
 }

@@ -125,12 +125,12 @@
     </style>
 </head>
 <body>
-    <header>
+ <header>
         <div class="logo">JDT</div>
-        <nav>
+       <nav>
 			<a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-			<a th:href="@{/announce/announceList}">공지사항</a> 
+			<a th:href="@{/board/boardList}">공지사항</a> 
 			<a th:href="@{/news/newsList}">뉴스</a> 
 			<a th:href="@{/cs/csList}">고객지원</a>
 		</nav>
@@ -144,43 +144,95 @@
 			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
 		</div>
     </header>
+	<!-- Ajax 전송할 때 필요한 정보 -->
+	<input type="hidden" id="csNum" th:value="${cs.csNum}">
+	<input type="hidden" id="loginId"  th:value="${#authentication.name}">
+	
+    <div class="container" th:replace="fragment/header(title='게시글 보기(f)')">
+    <!-- 
+        <div class="logo">
+            <a th:href="@{/}">
+                <img th:src="@{/images/logo.png}" alt="logo">
+            </a>
+            <h2>게시글 보기</h2>
+        </div>
+        --> 
+    </div> <!-- end .container -->
 
-    <!-- Hero 섹션 -->
-    <section class="hero">
-        <h1>Q&A 게시글 보기</h1>
-    </section>
-
-    <div class="container">
-        <table>
+    <!-- 게시글 보기 화면-->
+    <div class="content">
+        <table border="1">
             <tr>
                 <th>작성자</th>
-                <td>사용자1</td>
+                <td><!-- 로그인한 사람의 아이디 -->
+                    <span th:text="${cs.csWriter}"></span>
+                </td>
             </tr>
             <tr>
-                <th>제목</th>
-                <td>Q&A 질문 1</td>
+                <th>글제목</th>
+                <td>
+                    <span th:text="${cs.csTitle}"></span>
+                </td>
             </tr>
             <tr>
                 <th>작성일</th>
-                <td>2024-10-14 10:15</td>
+                <td>
+                    <span th:text="${#temporals.format(cs.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+                </td>
             </tr>
             <tr>
                 <th>수정일</th>
-                <td>2024-10-14 12:30</td>
+                <td>
+                    <span th:text="${#temporals.format(cs.updateDate, 'yyyy-MM-dd HH:mm')}"></span>
+                </td>
             </tr>
-            <tr>
-                <th>내용</th>
-                <td>여기에 Q&A 질문에 대한 자세한 내용이 표시됩니다.</td>
-            </tr>
-            <tr>
-                <th>첨부파일</th>
-                <td>없음</td>
-            </tr>
-        </table>
 
-        <div class="back-btn">
-            <button onclick="window.location.href='csList.html'">목록</button>
+            <tr>
+                <th>글내용</th>
+                <td>
+                    <pre>[[ ${cs.csContent} ]]</pre>
+                </td>
+            </tr>
+            <tr>
+                <th>첨부파일</th> <!-- 인증이 된 사람만 링크를 제공 -->
+                <td>
+                    <span th:if="${cs.originalFileName != null}">
+                    	<a th:href="@{/cs/download(csNum=${cs.csNum})}" 
+                    	   th:text="${cs.originalFileName}">파일명</a>
+                    </span>
+                </td>
+            </tr>
+			<tr>
+			    <th colspan="2">
+			    	<!-- 글수정과 삭제는 로그인한 사람과 글쓴 사람이 같을 경우에만 보이도록 함-->
+			    	<th:block th:if="${cs.csWriter == #authentication.name}">
+				        <a href="#" id="updateBtn" class="btn btn-primary">수정</a>&nbsp;
+				        <a href="#" id="deleteBtn" class="btn btn-danger">삭제</a>&nbsp;
+			        </th:block>
+			        <a th:href="@{/cs/csList(searchItem=${searchItem}, searchWord=${searchWord})}" class="btn btn-light">목록</a>
+			    </th>
+			</tr>
+        </table>
+        
+		<!-- 검색 키워드를 출력하는 위치 -->
+		<form action="" method="GET" id="modifyForm">
+			<input type="hidden" id="csNum"   name="csNum"   th:value="${cs.csNum}">
+			<input type="hidden" id="searchItem" name="searchItem" th:value="${searchItem}">
+			<input type="hidden" id="searchWord" name="searchWord" th:value="${searchWord}">
+		</form>
+		
+        <!-- 댓글 목록 처리 부분 -->
+        
+        <!-- 댓글 입력란: 입력상자와 버튼 (cs_num, reply_text / date, writer  -->
+        <div class="reply-write">
+        	<input type="text" id="replyText" >
+        	<input type="button" id="replyBtn" class="btn btn-light" value="댓글입력">
         </div>
+        
+        <!--  댓글 출력란 -->
+        <div id="reply-list"></div>
+        
     </div>
 </body>
+
 </html>

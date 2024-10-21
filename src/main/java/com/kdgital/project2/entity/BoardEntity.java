@@ -73,10 +73,6 @@ public class BoardEntity {
 	@Column(name="saved_file_name")
 	private String savedFileName;
 	
-	// 댓글 개수 처리
-	@Formula("(SELECT count(1) FROM reply r WHERE board_num  = r.board_num)")
-	private int replyCount;
-	
 	
 	
 	
@@ -100,7 +96,7 @@ public class BoardEntity {
 			)
 	@OrderBy("reply_num asc")
 	private List<ReplyEntity> replyEntity = new ArrayList<>();
-	*/
+	*/ 
 	
 	//  DTO를 받아서 ----> Entity 반환 
 	public static BoardEntity toEntity(BoardDTO boardDTO) {

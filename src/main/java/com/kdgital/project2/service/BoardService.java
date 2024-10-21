@@ -139,8 +139,7 @@ public class BoardService {
 						board.getBoardWriter(),
 						board.getHitCount(),
 						board.getCreateDate(),
-						board.getOriginalFileName(),
-						board.getReplyCount()
+						board.getOriginalFileName()
 						)
 				);
 

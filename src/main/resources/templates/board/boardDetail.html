@@ -19,7 +19,7 @@
        <nav>
 			<a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-			<a th:href="@{/announce/announceList}">공지사항</a> 
+			<a th:href="@{/board/boardList}">공지사항</a> 
 			<a th:href="@{/news/newsList}">뉴스</a> 
 			<a th:href="@{/cs/csList}">고객지원</a>
 		</nav>
@@ -110,17 +110,6 @@
 			<input type="hidden" id="searchWord" name="searchWord" th:value="${searchWord}">
 		</form>
 		
-        <!-- 댓글 목록 처리 부분 -->
-        
-        <!-- 댓글 입력란: 입력상자와 버튼 (board_num, reply_text / date, writer  -->
-        <div class="reply-write">
-        	<input type="text" id="replyText" >
-        	<input type="button" id="replyBtn" class="btn btn-light" value="댓글입력">
-        </div>
-        
-        <!--  댓글 출력란 -->
-        <div id="reply-list"></div>
-        
     </div>
 </body>
 

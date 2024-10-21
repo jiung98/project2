@@ -37,10 +37,10 @@ public class ReplyController {
 	 * @return
 	 */
 	@GetMapping("/replyAll") 
-	public List<ReplyDTO> replyAll(@RequestParam(name="boardNum") Long boardNum) {
-		log.info("{}", boardNum);
+	public List<ReplyDTO> replyAll(@RequestParam(name="csNum") Long csNum) {
+		log.info("{}", csNum);
 		
-		List<ReplyDTO> list = replyService.replyAll(boardNum);
+		List<ReplyDTO> list = replyService.replyAll(csNum);
 		
 		return list;
 	}

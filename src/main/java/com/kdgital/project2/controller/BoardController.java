@@ -45,12 +45,6 @@ public class BoardController {
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 
-	@GetMapping("/announceList")
-	public String join() {
-		
-		return "announce/announceList";
-	}
-
 	
 	/**
 	 * 게시글 목록 조회를 위해 DB에 요청처리

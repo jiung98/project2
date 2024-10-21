@@ -19,18 +19,18 @@ import lombok.ToString;
 @Builder
 public class ReplyDTO {
 	private Long replyNum;
-	private Long boardNum;
+	private Long csNum;
 	private String replyWriter;
 	private String replyText;
 	private LocalDate createDate;
 	
 	// Entity --> DTO
-	public static ReplyDTO toDTO(ReplyEntity entity, Long boardNum) {
+	public static ReplyDTO toDTO(ReplyEntity entity, Long csNum) {
 		return ReplyDTO.builder()
 				.replyNum(entity.getReplyNum())
 				.replyWriter(entity.getReplyWriter())
 				.replyText(entity.getReplyText())
-				.boardNum(boardNum)
+				.csNum(csNum)
 				.createDate(entity.getCreateDate())
 				.build();
 	}
