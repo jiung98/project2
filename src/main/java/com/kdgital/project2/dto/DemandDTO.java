@@ -23,12 +23,12 @@ import lombok.ToString;
 public class DemandDTO {
     private Long demandNo;
     private LocalDate demandDate;
-    private BigDecimal usaYk;
-    private BigDecimal usaGk;
-    private BigDecimal usaGs;
-    private BigDecimal jpYk;
-    private BigDecimal jpIk;
-    private BigDecimal jpGk;
+    private Long usaYk;
+    private Long usaGk;
+    private Long usaGs;
+    private Long jpYk;
+    private Long jpIk;
+    private Long jpGk;
     private Long demand;
 
     private static DemandDTO toDTO(DemandEntity demandEntity) {

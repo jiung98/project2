@@ -40,17 +40,17 @@ public class DemandEntity {
     private LocalDate demandDate;
 
     @Column(name="usa_yk")
-    private BigDecimal usaYk;
+    private Long usaYk;
     @Column(name="usa_gk")
-    private BigDecimal usaGk;
+    private Long usaGk;
     @Column(name="usa_gs")
-    private BigDecimal usaGs;
+    private Long usaGs;
     @Column(name="jp_yk")
-    private BigDecimal jpYk;
+    private Long jpYk;
     @Column(name="jp_ik")
-    private BigDecimal jpIk;
+    private Long jpIk;
     @Column(name="jp_gk")
-    private BigDecimal jpGk;
+    private Long jpGk;
 
     @Column(name = "demand", nullable = false)
     private Long demand;
