@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org"
-	xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,265 +16,310 @@
             color: #333;
         }
 
+        /* 헤더 스타일 */
         header {
-            background-color: #000000; /* 검정색 단색 배경 */
-            padding: 20px;
+            background-color: #e1e4e8;
+            padding: 30px 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            border-bottom: 1px solid #dcdcdc;
         }
 
+        /* 로고 및 텍스트 박스 */
         header .logo {
-            font-size: 24px;
-            color: white;
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
         }
 
+        header .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        header .circle {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px;
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* 네비게이션 메뉴 */
         header nav {
             display: flex;
-            gap: 30px;
+            gap: 60px;
+            justify-content: center;
         }
 
         header nav a {
-            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
             text-decoration: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px;
+            line-height: 2;
+            transition: color 0.3s;
         }
 
         header nav a:hover {
-            background-color: #444444;
-            border-radius: 8px;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        /* 로그인/회원가입 섹션 */
+        header .actions {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 16px;
+            list-style: none;
+            color: #000000;
         }
 
         header .actions a {
-            background-color: transparent;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            color: #000000;
             text-decoration: none;
-            border: none; /* 테두리를 투명하게 설정 */
-            display: inline-block;
-            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         header .actions a:hover {
-            background-color: #555555;
+            color: #007bff;
         }
 
-        /* Hero 섹션 스타일 */
+        header .actions span.divider {
+            margin: 0 10px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        header .actions .logged-out {
+            display: flex;
+            align-items: center;
+        }
+
+        header .actions .logged-in {
+            margin-top: 10px;
+        }
+
+        /* Hero 섹션 */
         .hero {
-            padding: 50px;
+            background-color: #e1e4e8;
+            padding: 60px 20px;
             text-align: center;
-            background: linear-gradient(to bottom, #000000, #ffffff); /* 위쪽은 검정색, 아래쪽으로 연해짐 */
-            color: white;
-            border-radius: 0; /* 각진 모양 */
-            margin-bottom: 20px;
+        }
+
+        /* 이미지와 텍스트 간격 */
+        .hero {
+            background-color: #e1e4e8; /* 배경색 */
+            padding: 60px 20px;
+            text-align: center;
         }
 
         .hero h1 {
-            font-size: 48px;
-            color: white;
-            margin-bottom: 20px;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
         }
 
         .container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 40px auto;
+            padding: 0 20px;
             background-color: #f8f8f8;
             border-radius: 10px;
             padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
-        h1 {
-            text-align: center;
+        /* 카테고리 섹션 */
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-section h2 {
+            font-size: 24px;
             margin-bottom: 20px;
             color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
         }
 
-        .filter-bar {
+        /* 품목 리스트 */
+        .category-list {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
 
-        .filter-bar-left {
-            display: flex;
-            gap: 20px;
-        }
-
-        .filter-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .filter-bar input[type="date"],
-        .filter-bar select {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-        }
-
-        .filter-bar input[type="text"] {
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            width: 200px;
-        }
-
-        .filter-bar button {
-            padding: 8px 16px;
-            background-color: #000000;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .filter-bar button:hover {
-            background-color: #333333;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table th, table td {
-            padding: 15px;
+        .category-item {
+            flex: 1 1 20%;
             text-align: center;
-            border-bottom: 1px solid black;
+            padding: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        table th {
-            background-color: #f4f4f4;
+        .category-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
-        table tr:hover {
-            background-color: #f9f9f9;
-        }
-
-        .pagination {
+        .category-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            height: 100%;
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 20px;
+            align-items: center;
         }
 
-        .pagination a {
-            padding: 8px 12px;
-            border-radius: 10px;
-            background-color: #000000; /* 검정색 배경 */
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            border: none; /* 테두리 투명 */
-        }
-
-        .pagination a:hover {
-            background-color: #333333;
-        }
-
-        .pagination .active {
-            background-color: #ffffff;
-            color: black;
+        .category-item a:hover {
+            color: #007bff;
         }
 
     </style>
 </head>
 <body>
+
+    <!-- 헤더 -->
     <header>
-      <div class="logo">JDT</div>
+        <div class="logo">
+            <a th:href="@{/}">
+                <div class="circle"></div>
+                <div class="logo-text">
+                    <span>JDT</span>
+                    <span>농수산물 데이터 제공 서비스</span>
+                </div>
+            </a>
+        </div>
         <nav>
-			<a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
 			<a th:href="@{/board/boardList}">공지사항</a> 
 			<a th:href="@{/news/newsList}">뉴스</a> 
 			<a th:href="@{/cs/csList}">고객지원</a>
-		</nav>
-		<div class="actions">
-			<!-- 인증이 되지 않은 사람 -->
-			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
-			<a th:href="@{/user/login}">로그인</a></li>
-			<!-- 인증이 된 사람 -->
-			<li sec:authorize="isAuthenticated()">
-			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
-			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
-		</div>
+        </nav>
+        <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <div class="logged-out" sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span class="divider">|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </div>
+            <!-- 인증이 된 사람 -->
+            <div class="logged-in" sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </div>
+        </div>
     </header>
 
     <!-- Hero 섹션 -->
     <section class="hero">
+        <img src="https://data.mafra.go.kr/images/common/img-service-05.svg" alt="아이콘" class="icon">
         <h1>뉴스 목록</h1>
+        <p>품목을 선택하여 최신 뉴스와 정보를 확인하세요.</p>
     </section>
 
+    <!-- 카테고리 섹션 -->
     <div class="container">
-        <!-- 기간 설정 및 정렬 옵션, 검색창을 같은 행에 배치 -->
-        <div class="filter-bar">
-            <div class="filter-bar-left">
-                <div>
-                    <label for="start-date">기간 설정: </label>
-                    <input type="date" id="start-date" name="start-date">
-                    ~
-                    <input type="date" id="end-date" name="end-date">
-                </div>
-
-                <div>
-                    <label for="sort">정렬: </label>
-                    <select id="sort" name="sort">
-                        <option value="latest">최신순</option>
-                        <option value="oldest">오래된순</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="filter-bar-right">
-                <input type="text" placeholder="검색어를 입력하세요">
-                <button>검색</button>
+        <!-- 채소 카테고리 -->
+        <div class="category-section">
+            <h2>채소</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">파프리카</a></div>
+                <div class="category-item"><a href="#">딸기</a></div>
+                <div class="category-item"><a href="#">토마토</a></div>
             </div>
         </div>
 
-        <!-- 뉴스 목록 테이블 -->
-        <table>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>
-                    <th>URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>뉴스 제목 1</td>
-                    <td>기자1</td>
-                    <td>2024-10-14</td>
-                    <td><a href="https://newswebsite.com/article1">https://newswebsite.com/article1</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>뉴스 제목 2</td>
-                    <td>기자2</td>
-                    <td>2024-10-13</td>
-                    <td><a href="https://newswebsite.com/article2">https://newswebsite.com/article2</a></td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- 과실/임산물 카테고리 -->
+        <div class="category-section">
+            <h2>과실/임산물</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">배</a></div>
+                <div class="category-item"><a href="#">유자(차)</a></div>
+                <div class="category-item"><a href="#">사과</a></div>
+                <div class="category-item"><a href="#">포도</a></div>
+                <div class="category-item"><a href="#">밤</a></div>
+                <div class="category-item"><a href="#">표고버섯</a></div>
+                <div class="category-item"><a href="#">단감</a></div>
+            </div>
+        </div>
 
-        <!-- 페이징 기능 -->
-        <div class="pagination">
-            <a href="#">&lt;</a>
-            <a href="#">1</a>
-            <a href="#">2</a>
-            <a href="#">&gt;</a>
+        <!-- 신선기타 카테고리 -->
+        <div class="category-section">
+            <h2>신선기타</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">인삼</a></div>
+                <div class="category-item"><a href="#">김치</a></div>
+                <div class="category-item"><a href="#">새송이버섯</a></div>
+                <div class="category-item"><a href="#">팽이버섯</a></div>
+                <div class="category-item"><a href="#">쌀</a></div>
+                <div class="category-item"><a href="#">백합</a></div>
+                <div class="category-item"><a href="#">장미</a></div>
+                <div class="category-item"><a href="#">국화</a></div>
+            </div>
+        </div>
+
+        <!-- 가공 카테고리 -->
+        <div class="category-section">
+            <h2>가공</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">과자</a></div>
+                <div class="category-item"><a href="#">라면</a></div>
+                <div class="category-item"><a href="#">음료</a></div>
+                <div class="category-item"><a href="#">막걸리</a></div>
+                <div class="category-item"><a href="#">커피(조제품)</a></div>
+                <div class="category-item"><a href="#">소스</a></div>
+                <div class="category-item"><a href="#">유제품</a></div>
+            </div>
+        </div>
+
+        <!-- 수산물 카테고리 -->
+        <div class="category-section">
+            <h2>수산물</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">참치</a></div>
+                <div class="category-item"><a href="#">넙치</a></div>
+                <div class="category-item"><a th:href="@{/news/newsListMini}">김</a></div>
+                <div class="category-item"><a href="#">전복</a></div>
+            </div>
         </div>
     </div>
 </body>

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kdgital.project2.dto.BoardDTO;
+import com.kdgital.project2.dto.NewsDTO;
 import com.kdgital.project2.entity.BoardEntity;
+import com.kdgital.project2.entity.NewsEntity;
 import com.kdgital.project2.repository.BoardRepository;
 import com.kdgital.project2.util.FileService;
 
@@ -37,7 +40,21 @@ public class BoardService {
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 
+	public List<BoardDTO> getAllBoard() {
+        List<BoardEntity> boardEntities = boardRepository.findAll();
+        List<BoardDTO> boardDTOs = new ArrayList<>();
 
+        for (BoardEntity entity : boardEntities) {
+            BoardDTO dto = new BoardDTO();
+            dto.setBoardNum(entity.getBoardNum());
+            dto.setBoardTitle(entity.getBoardTitle());
+            dto.setCreateDate(entity.getCreateDate());
+            boardDTOs.add(dto);
+        }
+
+        return boardDTOs;
+    }
+	
 	/**
 	 * DB에 게시글 저장
 	 * @param boardDTO : 저장해야하는 게시글

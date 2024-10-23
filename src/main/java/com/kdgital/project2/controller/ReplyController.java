@@ -23,7 +23,9 @@ public class ReplyController {
 	final ReplyService replyService;
 	
 	@PostMapping("/replyInsert")
-	public ReplyDTO replyInsert(@ModelAttribute ReplyDTO replyDTO) {
+	public ReplyDTO replyInsert(
+			@ModelAttribute ReplyDTO replyDTO
+			) {
 		log.info("댓글 삽입: {}", replyDTO.toString());
 	
 		replyService.replyInsert(replyDTO);

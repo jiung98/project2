@@ -65,8 +65,8 @@ public class CsDTO {
 			
 				.originalFileName(csEntity.getOriginalFileName())
 				.savedFileName(csEntity.getSavedFileName())
-//				.createDate(boardDTO.getCreateDate())
-//				.updateDate(boardDTO.getUpdateDate())
+				.createDate(csEntity.getCreateDate())
+				.updateDate(csEntity.getUpdateDate())
 				.build();
     }
 }

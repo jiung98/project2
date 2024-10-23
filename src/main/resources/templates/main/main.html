@@ -4,261 +4,427 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>메인 화면</title>
-<style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+  <title>메인화면</title>
+    <!-- TagCanvas 라이브러리 -->
+    <script src="https://www.goat1000.com/tagcanvas.min.js" type="text/javascript"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-	font-family: 'Arial', sans-serif;
-	background-color: #ffffff; /* 흰색 배경 */
-	color: #333;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e1e4e8; /* 바디 배경색 */
+            color: #333;
+        }
 
-header {
-	background-color: #000000; /* 블랙 배경 */
-	padding: 20px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
+        /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8; /* 바디와 동일한 배경색 */
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* 텍스트를 더 아래로 정렬 */
+            position: relative;
+            border-bottom: 1px solid #dcdcdc; /* 구분선 */
+        }
 
-header .logo {
-	font-size: 24px;
-	color: white;
-}
+        /* 로고 및 텍스트 박스 */
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer; /* 로고도 버튼처럼 변환 */
+        }
 
-header nav {
-	display: flex;
-	gap: 30px;
-}
+        /* 로고 이미지 */
+        header .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px; /* 텍스트와 간격 */
+        }
 
-header nav a {
-	color: white;
-	text-decoration: none;
-	padding: 10px 20px;
-	font-size: 16px;
-	border: 2px solid transparent; /* 테두리 투명 */
-	transition: background-color 0.3s ease; /* hover 효과 추가 */
-}
+        /* 로고 텍스트 부분 */
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-header nav a:hover {
-	background-color: #555555; /* hover 시 색상 변경 */
-	border-radius: 5px; /* 둥근 테두리 */
-}
+        header .logo-text span:first-child {
+            font-size: 14px; /* 작은 글씨 */
+            color: #555;
+        }
 
-/* 로그인/회원가입 버튼 */
-header .actions a {
-	background-color: #000000; /* 검정색 배경 */
-	color: white;
-	padding: 10px 20px;
-	border-radius: 5px;
-	text-decoration: none;
-	display: inline-block;
-	text-align: center;
-	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* 그림자 */
-	border: 2px solid transparent; /* 테두리 투명 */
-	font-weight: bold;
-	transition: background-color 0.3s ease;
-}
+        header .logo-text span:last-child {
+            font-size: 18px; /* 큰 글씨 */
+            font-weight: bold;
+        }
 
-header .actions a:hover {
-	background-color: #555555; /* hover 시 색상 변경 */
-}
+        /* 네비게이션 메뉴 중앙 배치 */
+        header nav {
+            display: flex;
+            gap: 60px; /* 메뉴 간격을 더 넓게 설정 */
+            justify-content: center;
+        }
 
-.main-container {
-	display: flex;
-	justify-content: space-between;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 40px;
-}
+        /* 네비게이션 메뉴 스타일 */
+        header nav a {
+            font-size: 20px; /* 글씨 크기 증가 */
+            font-weight: bold; /* 글씨 굵게 */
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            line-height: 2; /* 텍스트 위치 아래로 이동 */
+            transition: color 0.3s;
+            cursor: pointer; /* 커서가 손모양으로 변경 */
+        }
 
-.section {
-	flex: 1;
-	margin: 0 10px;
-	background-color: #f0f0f0; /* 밝은 회색 섹션 배경 */
-	padding: 20px;
-	border-radius: 10px;
-	border: 2px solid transparent; /* 굵은 검은색 테두리 */
-	position: relative;
-}
+        header nav a:hover {
+            color: #007bff; /* hover 시 파란색 */
+        }
 
-.section h2 {
-	font-size: 24px;
-	color: #000000; /* 블랙 글자 */
-	margin-bottom: 20px;
-}
+        /* 로그인/회원가입 섹션 */
+        header .actions {
+            position: absolute;
+            right: 20px; /* 화면 오른쪽 상단에 배치 */
+            display: flex;
+            flex-direction: column; /* 세로 배치 */
+            align-items: flex-end;
+            gap: 5px;
+            font-size: 16px; /* 글씨 크기 살짝 증가 */
+            list-style: none; /* 불릿 포인트 제거 */
+            color: #000000; /* 글씨 색상 검정으로 변경 */
+        }
 
-.notice-list, .news-list {
-	list-style: none;
-	padding: 0;
-}
+        header .actions a {
+            color: #000000; /* 검정색 글씨 */
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer; /* 커서가 손모양으로 변경 */
+        }
 
-.notice-list li, .news-list li {
-	margin-bottom: 15px;
-}
+        header .actions a:hover {
+            color: #007bff; /* hover 시 파란색 */
+        }
 
-.notice-list li a, .news-list li a {
-	text-decoration: none;
-	color: #000000; /* 블랙 글자 */
-	font-size: 18px;
-}
+        header .actions span {
+            color: #999;
+            padding: 0 5px; /* 구분 기호 사이 여백 */
+        }
 
-.notice-list li a:hover, .news-list li a:hover {
-	text-decoration: underline;
-}
+        /* hero 섹션: 중앙 배치 */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e1e4e8;
+            padding: 40px;
+        }
 
-/* 더보기 버튼 스타일 */
-.more-button {
-	position: absolute;
-	top: 10px;
-	right: 10px;
-	width: 30px;
-	height: 30px;
-}
+        /* 왼쪽 콘텐츠 (농수산물, 공지사항, 뉴스) */
+        .hero-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* 간격을 줄임 */
+            justify-content: flex-start;
+        }
 
-.more-button img {
-	width: 100%;
-	height: 100%;
-}
+        /* 농수산물 데이터 제공 서비스 문구 스타일 */
+        .hero-left h1 {
+            font-size: 48px; /* 글자 크기 증가 */
+            font-weight: bold;
+            color: #00008B; /* 농수산물 데이터 진한 파란색 */
+        }
 
-.hero {
-	padding: 50px;
-	text-align: center;
-	background: linear-gradient(to bottom, #000000, #ffffff);
-	/* 위쪽은 검정색, 아래쪽으로 연해짐 */
-	color: white;
-	border-radius: 0; /* 각진 모양으로 설정 */
-}
+        .hero-left h1 span {
+            color: #007bff; /* 서비스 부분 로고색과 동일 */
+        }
 
-.hero h1 {
-	font-size: 48px;
-	color: white;
-	margin-bottom: 20px;
-}
+        /* 여백 추가: "품목별~서비스입니다."와 공지사항 박스 사이 */
+        .hero-left p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 50px; /* 텍스트와 아래 섹션 간격 추가 */
+        }
 
-.hero p {
-	font-size: 18px;
-	color: #f0f0f0;
-	margin-bottom: 40px;
-}
+        /* 공지사항과 뉴스 사이 간격을 조정 */
+        .hero-left .section {
+            margin-bottom: 20px; /* 공지사항과 뉴스 섹션 사이의 간격을 20px로 설정 */
+        }
 
-.hero .cta-buttons {
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-}
+        /* 공지사항과 뉴스 섹션 테두리 수정 */
+        .section {
+            background-color: transparent; /* 배경 투명 */
+            padding: 20px; /* 패딩 설정 */
+            border-radius: 20px; /* 둥근 모서리 */
+            position: relative;
+            width: 100%; /* 섹션 가로 길이 100% 설정 */
+            border: 2px solid #007bff; /* 테두리 색상: 파란색 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 가벼운 그림자 추가 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* hover 애니메이션 추가 */
+        }
 
-.cta-buttons a {
-	padding: 15px 25px;
-	font-size: 16px;
-	border-radius: 10px; /* 둥글게 설정 */
-	text-decoration: none;
-	border: 2px solid transparent;
-}
+        /* hover 시 박스가 튀어오르는 효과 */
+        .section:hover {
+            transform: translateY(-10px); /* 튀어오르는 효과 */
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 확대 */
+        }
 
-.cta-buttons .primary {
-	background-color: #000000;
-	color: white;
-}
+        .section h2 {
+            font-size: 24px;
+            color: #000000;
+            margin-bottom: 10px; /* 제목과 리스트 사이 간격 줄임 */
+            border-bottom: 1px solid #dcdcdc; /* 네비게이션 바와 동일한 구분선 */
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between; /* 제목과 더보기 버튼 간 공간 분리 */
+            align-items: center; /* 더보기 버튼과 같은 높이 */
+        }
 
-.cta-buttons .primary:hover {
-	background-color: #333333;
-}
+        /* 더보기 버튼 스타일 */
+        .more-button img {
+            width: 24px; /* 아이콘 크기 조정 */
+            height: 24px; /* 아이콘 크기 조정 */
+            cursor: pointer; /* 클릭 가능한 버튼 */
+        }
 
-.cta-buttons .secondary {
-	background-color: transparent;
-	border-color: #000000;
-	color: #000000;
-}
+        .notice-list, .news-list {
+            list-style-type: none !important;
+            margin: 0;
+            padding: 0;
+        }
 
-.cta-buttons .secondary:hover {
-	border-color: #333333;
-	color: #333333;
-}
+        /* 항목 간격 줄이기 */
+        .notice-list li, .news-list li {
+            margin-bottom: 8px; /* 리스트 항목 간격 줄임 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-img {
-	max-width: 100%;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-}
-</style>
+        .notice-list li a, .news-list li a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 18px;
+        }
+
+        .notice-list li .date, .news-list li .date {
+            font-size: 16px;
+            color: #777;
+            text-align: right;
+        }
+
+        .notice-list li a:hover, .news-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* 4, 5 공지사항/뉴스를 제거하여 높이를 조정 */
+        .notice-list li:nth-child(4),
+        .notice-list li:nth-child(5),
+        .news-list li:nth-child(4),
+        .news-list li:nth-child(5) {
+            display: none;
+        }
+
+        /* 오른쪽 워드클라우드 */
+        .hero-right {
+            flex: 0.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 캔버스 스타일 */
+        #myCanvasContainer {
+            width: 1000px; /* 타원형을 위한 넓은 가로 설정 */
+            height: 600px; /* 타원형을 위한 낮은 세로 설정 */
+            position: relative;
+        }
+
+        #myCanvas {
+            width: 100%;
+            height: 100%;
+            background-color: transparent; /* 배경 투명 설정 */
+            border-radius: 50%; /* 타원형으로 만들기 위한 설정 */
+        }
+
+        /* 단어 스타일 */
+        #tags a {
+            font-size: 18px;
+            color: #007bff; /* 단어 색상 변경 */
+            text-decoration: none;
+        }
+
+        /* 김, 라면, 참치, 인삼을 더 크게 표시 */
+        #tags a.kim, #tags a.ramen, #tags a.tuna, #tags a.ginseng {
+            font-size: 50px; /* 더 크게 표시 */
+        }
+    </style>
 </head>
 <body>
-	<header>
-		<div class="logo">JDT</div>
+    <header>
+        <!-- 로고 및 텍스트 박스 -->
+        <div class="logo">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
         <nav>
-			<a th:href="@{/about/about}">About Us</a> 
-			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-			<a th:href="@{/board/boardList}">공지사항</a> 
-			<a th:href="@{/news/newsList}">뉴스</a> 
-			<a th:href="@{/cs/csList}">고객지원</a>
-		</nav>
-		<div class="actions">
-			<!-- 인증이 되지 않은 사람 -->
-			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
-			<a th:href="@{/user/login}">로그인</a></li>
-			<!-- 인증이 된 사람 -->
-			<li sec:authorize="isAuthenticated()">
-			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
-			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
-		</div>
-	</header>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
+            <a th:href="@{/cs/csList}">고객지원</a>
+        </nav>
 
-	<section class="hero">
-		<h1>메인 화면 제목</h1>
-		<p>메인 화면 내용</p>
-		<div class="cta-buttons">
-			<a href="#" class="primary">예시 버튼 1</a> <a href="#" class="secondary">예시
-				버튼 2</a>
-		</div>
-	</section>
+        <!-- 로그인/회원가입 -->
+        <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span>|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </li>
+        </div>
+    </header>
 
-	<div class="main-container">
-		<!-- Left Section (공지사항) -->
-		<section class="section">
-			<h2>공지사항</h2>
-			<ul class="notice-list">
-				<li><a href="#">공지사항 1</a></li>
-				<li><a href="#">공지사항 2</a></li>
-				<li><a href="#">공지사항 3</a></li>
-				<li><a href="#">공지사항 4</a></li>
-				<li><a href="#">공지사항 5</a></li>
-			</ul>
-			<div class="more-button">
-				<img src="/images/more.png" alt="더보기 버튼">
+    <!-- hero 섹션: 왼쪽에 농수산물 데이터 제공 서비스, 공지사항, 뉴스 / 오른쪽에 워드클라우드 -->
+    <section class="hero-section">
+        <!-- 왼쪽 콘텐츠 -->
+        <div class="hero-left">
+            <h1>농수산물 <span>데이터 제공 서비스</span></h1>
+            <p>품목별 K-농수산물 정보를 제공하는 서비스입니다.</p>
 
-			</div>
-		</section>
+            <!-- 공지사항 섹션 -->
+            <section class="section">
+                <h2>공지사항 
+                    <a href="#" class="more-button">
+                        <img src="https://data.mafra.go.kr/images/ico/ico-search_bl.svg" alt="검색 아이콘">
+                    </a>
+                </h2> <!-- 더보기 버튼을 아이콘으로 변경 -->
+                <ul class="notice-list">
+                    <li th:each="board : ${boardList}">
+                        <a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}" > <!-- 각 뉴스의 상세 페이지로 이동하는 링크 -->
+                        <span th:text="${board.boardTitle}">공지사항 제목</span>
+                        </a>
+                         <span class="date" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd')}">날짜</span> <!-- 날짜를 포맷팅해서 표시 -->
+                    </li>
+                </ul>
+            </section>
 
-		<!-- Middle Section (뉴스) -->
-		<section class="section">
-			<h2>뉴스</h2>
-			<ul class="news-list">
-				<li><a href="#">뉴스 1</a></li>
-				<li><a href="#">뉴스 2</a></li>
-				<li><a href="#">뉴스 3</a></li>
-				<li><a href="#">뉴스 4</a></li>
-				<li><a href="#">뉴스 5</a></li>
-			</ul>
-			<div class="more-button">
-				<img src="/images/more.png" alt="더보기 버튼">
+            <!-- 뉴스 섹션 -->
+            <section class="section">
+                <h2>뉴스 
+                    <a href="#" class="more-button">
+                        <img src="https://data.mafra.go.kr/images/ico/ico-search_bl.svg" alt="검색 아이콘">
+                    </a>
+                </h2> <!-- 더보기 버튼을 아이콘으로 변경 -->
+                <ul class="news-list">
+                    <li th:each="news : ${newsList}">
+                        <a th:href="${news.url}"> <!-- 각 뉴스의 상세 페이지로 이동하는 링크 -->
+                        <span th:text="${news.title}">뉴스 제목</span>
+                        </a>
+                        <span class="date" th:text="${news.postdate}">날짜</span> <!-- 뉴스 날짜 표시 -->
+                    </li>
+                </ul>
+            </section>
+        </div>
 
-			</div>
-		</section>
+        <!-- 오른쪽 워드클라우드 -->
+        <div class="hero-right">
+            <!-- 3D 워드클라우드 캔버스 -->
+            <div id="myCanvasContainer">
+                <h2 style="text-align: center;">인기 검색품목</h2> <!-- 워드클라우드 위에 텍스트 추가 -->
+                <canvas width="600" height="400" id="myCanvas">
+                    <!-- TagCanvas에서 그려지므로 HTML에서는 비워둠 -->
+                </canvas>
+            </div>
 
-		<!-- Right Section (워드클라우드) -->
-		<section class="section">
-			<h2>워드클라우드</h2>
-			<img src="wordcloud.png" alt="워드클라우드">
-			<div class="more-button">
-				<img src="/images/more.png" alt="더보기 버튼">
-			</div>
-		</section>
-	</div>
+            <!-- 단어 리스트 (숨김 처리된) -->
+            <ul id="tags" style="display:none;">
+                <li><a th:href="@{/dashboard/dashboard}"class="kim">김</a></li>
+                <li><a href="#" class="tuna">참치</a></li>
+                <li><a href="#" class="ramen">라면</a></li>
+                <li><a href="#" class="ginseng">인삼</a></li>
+                <li><a href="#">음료</a></li>
+                <li><a href="#">커피조제품</a></li>
+                <li><a href="#">설탕</a></li>
+                <li><a href="#">비스킷</a></li>
+                <li><a href="#">제3맥주</a></li>
+                <li><a href="#">옥수수</a></li>
+                <li><a href="#">쇠고기</a></li>
+                <li><a href="#">돼지고기</a></li>
+                <li><a href="#">혼합조제 시료품</a></li>
+                <li><a href="#">밀</a></li>
+                <li><a href="#">대두박</a></li>
+                <li><a href="#">사탕수수당</a></li>
+                <li><a href="#">대두</a></li>
+                <li><a href="#">커피</a></li>
+                <li><a href="#">치즈</a></li>
+                <li><a href="#">고추</a></li>
+                <li><a href="#">배추</a></li>
+                <li><a href="#">마늘</a></li>
+                <li><a href="#">감자</a></li>
+                <li><a href="#">당근</a></li>
+                <li><a href="#">참깨</a></li>
+                <li><a href="#">쌀</a></li>
+                <li><a href="#">사과</a></li>
+				<li><a href="#">고추</a></li>
+				<li><a href="#">배추</a></li>
+				<li><a href="#">마늘</a></li>
+				<li><a href="#">감자</a></li>
+				<li><a href="#">당근</a></li>
+				<li><a href="#">참깨</a></li>
+				<li><a href="#">쌀</a></li>
+				<li><a href="#">사과</a></li>
+				<li><a href="#">보리</a></li>
+				<li><a href="#">밀</a></li>
+				<li><a href="#">옥수수</a></li>
+				<li><a href="#">고구마</a></li>
+				<li><a href="#">무</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        window.onload = function() {
+            try {
+                TagCanvas.Start('myCanvas', 'tags', {
+                    textColour: '#007bff',      // 단어 색상 변경 (#007bff)
+                    outlineColour: '#ff0000',   // 단어 외곽선 색상 (빨간색)
+                    reverse: true,              // 회전 방향 반전
+                    depth: 0.8,                 // 깊이감 (3D 효과)
+                    maxSpeed: 0.05,             // 회전 속도
+                    weight: true,               // 단어 크기 가중치 적용
+                    zoom: 0.9,                  // 줌 크기 설정
+                    shadow: '#ccf',             // 그림자 색상
+                    shadowBlur: 3,              // 그림자 흐림 정도
+                    wheelZoom: false,           // 휠 확대/축소 비활성화
+                    shape: "ellipse",           // 타원형으로 배치
+                });
+            } catch(e) {
+                // 캔버스 지원하지 않는 경우 에러 처리
+                document.getElementById('myCanvasContainer').style.display = 'none';
+            }
+        };
+    </script>
+
 </body>
 </html>

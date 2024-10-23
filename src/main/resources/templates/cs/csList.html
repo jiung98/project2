@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>고객지원</title>
     <style>
-        * {
+         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -19,69 +19,125 @@
         }
 
         header {
-            background-color: #000000; /* 검정색 배경 */
-            padding: 20px;
+            background-color: #e1e4e8;
+            padding: 30px 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: white;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            border-bottom: 1px solid #dcdcdc;
         }
 
+        /* 로고 및 텍스트 박스 */
         header .logo {
-            font-size: 24px;
-            color: white;
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
         }
 
+        /* 원형 도형 */
+        header .circle {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        /* 로고 텍스트 */
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px;
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* 네비게이션 메뉴 */
         header nav {
             display: flex;
-            gap: 30px;
+            gap: 60px;
+            justify-content: center;
         }
 
+        /* 네비게이션 메뉴 스타일 */
         header nav a {
-            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            color: #333;
             text-decoration: none;
-            padding: 10px 20px;
-            font-size: 16px;
+            padding: 10px;
+            line-height: 2;
+            transition: color 0.3s;
         }
 
         header nav a:hover {
-            background-color: #444444;
-            border-radius: 8px;
+            color: #007bff;
+        }
+
+        /* 로그인/회원가입 섹션 */
+        header .actions {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 5px;
+            font-size: 16px;
+            list-style: none;
+            color: #000000;
         }
 
         header .actions a {
-            background-color: transparent;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            color: #000000;
             text-decoration: none;
-            border: none;
+            font-weight: bold;
+            cursor: pointer;
         }
 
         header .actions a:hover {
-            background-color: #555555;
+            color: #007bff;
+        }
+
+        header .actions span {
+            color: #999;
+            padding: 0 5px;
         }
 
         /* Hero 섹션 */
         .hero {
             padding: 50px;
             text-align: center;
-            background: linear-gradient(to bottom, #000000, #ffffff);
-            color: white;
-            border-radius: 0;
+            background-color: #e1e4e8;
+            color: black;
             margin-bottom: 20px;
         }
 
         .hero h1 {
-            font-size: 48px;
-            color: white;
-            margin-bottom: 20px;
+            font-size: 36px;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #f8f8f8; /* 밝은 회색 배경 */
+            background-color: #f8f8f8;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -93,13 +149,14 @@
             margin-bottom: 20px;
         }
 
-        .faq-section, .qna-section {
+        .faq-section,
+        .qna-section {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
-            text-align: center; /* 가운데 정렬 */
+            text-align: center;
         }
 
         .faq-item {
@@ -118,30 +175,25 @@
             cursor: pointer;
         }
 
+        .faq-item h3 img {
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+        }
+
         .faq-item p {
             font-size: 16px;
             color: #555;
             margin-top: 10px;
             display: none;
-        }
-
-        .toggle-btn {
-            padding: 8px 16px;
-            background-color: #000000;
-            color: white;
-            border: none;
+            background-color: #e1e4e8;
+            padding: 10px;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .toggle-btn:hover {
-            background-color: #333333;
         }
 
         .search-group {
             display: flex;
-            justify-content: flex-end; /* 오른쪽 정렬 */
+            justify-content: flex-end;
             align-items: center;
             margin-bottom: 20px;
             gap: 10px;
@@ -157,7 +209,7 @@
 
         .search-group button {
             padding: 8px 16px;
-            background-color: #000000;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
@@ -166,7 +218,7 @@
         }
 
         .search-group button:hover {
-            background-color: #333333;
+            background-color: #0056b3;
         }
 
         table {
@@ -175,14 +227,15 @@
             margin-bottom: 20px;
         }
 
-        table th, table td {
+        table th,
+        table td {
             padding: 15px;
             text-align: center;
             border-bottom: 1px solid #ddd;
         }
 
         table th {
-            background-color: #f4f4f4; /* 그레이 톤 */
+            background-color: #f4f4f4;
             color: #333;
         }
 
@@ -205,19 +258,21 @@
         .pagination a {
             padding: 8px 12px;
             border-radius: 10px;
-            background-color: #000000;
-            color: white;
+            background-color: transparent;
+            color: #000000;
             text-decoration: none;
             font-size: 14px;
+            border: none;
         }
 
         .pagination a:hover {
-            background-color: #333333;
+            background-color: #f0f0f0;
         }
 
         .pagination .active {
-            background-color: #ffffff;
+            background-color: transparent;
             color: black;
+            border: none;
         }
 
         .write-btn {
@@ -226,23 +281,29 @@
             margin-top: 20px;
         }
 
-        .write-btn button {
+        .write-btn a {
             padding: 10px 15px;
-            background-color: #000000;
+            background-color: #007bff;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
         }
 
-        .write-btn button:hover {
-            background-color: #333333;
+        .write-btn a:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
  <header>
-        <div class="logo">JDT</div>
+        <div class="logo" th:href="@{/}">
+            <div class="circle"></div>
+            <div class="logo-text">
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+        </div>
        <nav>
 			<a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
@@ -250,60 +311,63 @@
 			<a th:href="@{/news/newsList}">뉴스</a> 
 			<a th:href="@{/cs/csList}">고객지원</a>
 		</nav>
-		<div class="actions">
-			<!-- 인증이 되지 않은 사람 -->
-			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
-			<a th:href="@{/user/login}">로그인</a></li>
-			<!-- 인증이 된 사람 -->
-			<li sec:authorize="isAuthenticated()">
-			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
-			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
-		</div>
+		 <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a><span>|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </li>
+        </div>
     </header>
     <section class="hero">
-        <h1>공지사항</h1>
+        <img src="https://data.mafra.go.kr/images/common/img-subject-notice.svg" alt="고객지원 아이콘" />
+        <h1>고객지원</h1>
+        <p>고객지원 페이지에서 자주 묻는 질문 및 문의 사항을 확인하세요.</p> <!-- 한 줄 소개 추가 -->
     </section>
 
     <!-- 게시글 전체 목록 출력 -->
     <div class="container">
-     <div class="control-bar">
-            <div class="control-bar-left">
-                 <div class="count">
-                <p>게시글 개수: [[ ${list.totalElements } ]]</p>
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <div class="faq-item">
+                <h3>생산량과 수요량 예측 데이터는 무엇인가요?
+                    <img src="https://www.shinchunghae.co.kr/assets/pc/img/front/icon/icon-chevron_down_lg.svg" alt="더보기" class="toggle-icon">
+                </h3>
+                <p class="answer">생산량 예측은 특정 농수산물의 향후 생산량을 추정하는 데이터입니다. 수요량 예측은 소비자가 해당 농수산물을 얼마나 필요로 할지에 대한 추정치를 제공합니다.</p>
             </div>
-                <select name="sort-order" id="sort-order">
-                    <option value="latest">최신순</option>
-                    <option value="oldest">오래된순</option>
-                </select>
+            <div class="faq-item">
+                <h3>생산량과 수요량 예측은 어떻게 이루어지나요?
+                    <img src="https://www.shinchunghae.co.kr/assets/pc/img/front/icon/icon-chevron_down_lg.svg" alt="더보기" class="toggle-icon">
+                </h3>
+                <p class="answer">기후 데이터, 재배 지역 통계, 과거 생산 및 수요 패턴 등 다양한 데이터를 바탕으로 머신러닝 알고리즘을 사용해 예측이 이루어집니다.</p>
             </div>
-            <div class="control-bar-right">
+            <div class="faq-item">
+                <h3>제공되는 데이터는 얼마나 자주 업데이트되나요?
+                    <img src="https://www.shinchunghae.co.kr/assets/pc/img/front/icon/icon-chevron_down_lg.svg" alt="더보기" class="toggle-icon">
+                </h3>
+                <p class="answer">데이터는 월 단위로 주기적으로 업데이트 됩니다. 공지사항을 통해 특정 농수산물의 업데이트 소식을 공지하고 있습니다.</p>
+            </div>
+        </section>
+                <!-- Q&A Section -->
+        <section class="qna-section">
+            <h2>Q&A</h2>
+             <div class="search-group">
                 <input type="text" placeholder="검색어를 입력하세요">
                 <button>검색</button>
             </div>
-        </div>
+      
 		<div class="top">
-            <!-- 전체 글개수 출력 -->
-           
-
-            <!-- 검색창 -->
-            <div class="search">
-                <form action="csList" method="GET" id="searchForm">
-                    <input type="hidden" name="page" id="requestPage" th:value="${page}">
-                    <select name="searchItem" id="searchItem">
-                        <option value="csTitle"   th:selected="${searchItem == 'csTitle'}">글제목</option>
-                        <option value="csWriter"  th:selected="${searchItem == 'csWriter'}">작성자</option>
-                        <option value="csContent" th:selected="${searchItem == 'csContent'}">글내용</option>
-                    </select>
-                    <input type="text" name="searchWord" id="searchWord" th:value="${searchWord}">
-                    <input type="button" id="search" value="검색" class="btn btn-primary">
-                </form>
-            </div> <!-- end .search-->
-        </div>   <!-- end .top--> 
-
+   
 		<div class="head">
 	        <!-- 게시글 목록 -->
 	        <div>
-	            <table border="1">
+	            <table>
 	                <tr>
 	                    <th class="no">글번호</th>
 	                    <th>제목</th>
@@ -340,9 +404,7 @@
 	            </table>
 	        </div>
 	     </div> <!-- end .head-->
-	      
-    </div><!-- end .content -->
-    <!-- 글쓰기 버튼 : 로그인한 회원만 보임 -->
+	       <!-- 글쓰기 버튼 : 로그인한 회원만 보임 -->
    <div class="write-btn">
               <a th:href="@{/cs/csWrite}" >글쓰기</a>
         </div>
@@ -410,6 +472,24 @@
 			<span class="page-no navi" >&raquo;</span>
 		</th:block>
     </nav>
+    </div><!-- end .content -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        document.querySelectorAll('.faq-item h3').forEach(header => {
+            header.addEventListener('click', () => {
+                const answer = header.nextElementSibling;
+                const icon = header.querySelector('.toggle-icon');
+                
+                $(answer).slideToggle(300); // 스르륵 내려가는 효과
+
+                if (answer.style.display === 'block') {
+                    icon.src = 'https://www.shinchunghae.co.kr/assets/pc/img/front/icon/icon-chevron_down_lg.svg';
+                } else {
+                    icon.src = 'https://www.shinchunghae.co.kr/assets/pc/img/front/icon/icon-chevron_up_lg.svg';
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

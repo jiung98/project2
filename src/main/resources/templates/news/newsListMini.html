@@ -1,13 +1,11 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org">
-
+<html lang="ko" xmlns:th="http://thymeleaf.org"
+	xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 목록</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}">
-    <script defer th:src="@{/script/search.js}"></script>
-      <style>
+    <title>뉴스 목록</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -182,6 +180,7 @@
             gap: 10px;
         }
 
+        .filter-bar input[type="date"],
         .filter-bar select {
             padding: 8px;
             border: 1px solid #ccc;
@@ -258,33 +257,11 @@
             color: black;
         }
 
-        /* 글쓰기 버튼 */
-        .write-btn {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 10px;
-        }
-
-        .write-btn a {
-            padding: 8px 16px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .write-btn a:hover {
-            background-color: #0056b3;
-        }
-
     </style>
 </head>
-
 <body>
- <header>
-        <div class="logo">
+    <header>
+       <div class="logo">
             <!-- 로고 클릭 시 홈으로 이동 -->
             <a th:href="@{/}">
                 <div class="circle"></div>
@@ -294,7 +271,7 @@
                 </div>
             </a>
         </div>
-       <nav>
+        <nav>
 			<a th:href="@{/about/about}">About Us</a> 
 			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
 			<a th:href="@{/board/boardList}">공지사항</a> 
@@ -303,29 +280,33 @@
 		</nav>
 		<div class="actions">
 			<!-- 인증이 되지 않은 사람 -->
-			<div class="logged-out" sec:authorize="isAnonymous()">
-                <a th:href="@{/user/join}">회원가입</a>
-                <span class="divider">|</span> <!-- 구분선 추가 -->
-                <a th:href="@{/user/login}">로그인</a>
-            </div>
+			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
+			<a th:href="@{/user/login}">로그인</a></li>
 			<!-- 인증이 된 사람 -->
-			 <div class="logged-in" sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
-                <a th:href="@{/user/mypage}">개인정보 수정</a>
-            </div>
+			<li sec:authorize="isAuthenticated()">
+			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
 		</div>
     </header>
-    <section class="hero">
-        <img src="https://data.mafra.go.kr/images/common/img-service-06.svg" alt="공지사항 아이콘" />
-        <h1>공지사항</h1>
-        <p>JDT 농수산물 데이터 제공 서비스의 최신 소식과 중요한 공지사항을 확인하세요.</p>
+
+    <!-- Hero 섹션 -->
+   <section class="hero">
+        <img src="https://data.mafra.go.kr/images/common/img-service-05.svg" alt="뉴스 아이콘" />
+        <h1>품목별 뉴스 목록</h1>
+        <p>품목별 최신 뉴스와 정보를 확인하세요.</p>
     </section>
 
-    <!-- 게시글 전체 목록 출력 -->
     <div class="container">
-    <!-- 필터 및 검색 섹션 -->
+        <!-- 기간 설정 및 정렬 옵션, 검색창을 같은 행에 배치 -->
         <div class="filter-bar">
             <div class="filter-bar-left">
+                <div>
+                    <label for="start-date">기간 설정: </label>
+                    <input type="date" id="start-date" name="start-date">
+                    
+                    <input type="date" id="end-date" name="end-date">
+                </div>
+
                 <div>
                     <label for="sort">정렬: </label>
                     <select id="sort" name="sort">
@@ -334,73 +315,35 @@
                     </select>
                 </div>
             </div>
-            
-            <div class="control-bar-right">
+
+            <div class="filter-bar-right">
                 <input type="text" placeholder="검색어를 입력하세요">
                 <button>검색</button>
             </div>
         </div>
-		
-            <!-- 전체 글개수 출력 -->       
-            <!-- 검색창 -->
-           <!--   <div class="search">
-                <form action="boardList" method="GET" id="searchForm">
-                    <input type="hidden" name="page" id="requestPage" th:value="${page}">
-                    <select name="searchItem" id="searchItem">
-                        <option value="boardTitle"   th:selected="${searchItem == 'boardTitle'}">글제목</option>
-                        <option value="boardWriter"  th:selected="${searchItem == 'boardWriter'}">작성자</option>
-                        <option value="boardContent" th:selected="${searchItem == 'boardContent'}">글내용</option>
-                    </select>
-                    <input type="text" name="searchWord" id="searchWord" th:value="${searchWord}">
-                    <input type="button" id="search" value="검색" class="btn btn-primary">
-                </form>
-            </div> --><!-- end .search-->
-       
 
-		<div class="head">
-	        <!-- 게시글 목록 -->
-	        <div>
-	            <table>
-	                <tr>
-	                    <th class="no">글번호</th>
-	                    <th>제목</th>
-	                    <th class="writer">작성자</th>
-	                    <th class="hitcount">조회수</th>
-	                    <th class="create_date">작성일</th>
-	                </tr>
-       				<th:block th:unless="${#lists.isEmpty(list)}">
-       				
-	                <!-- 반복 구간-->
-	                <tr th:each="board, status : ${list}">  
-	                    <td class="no" th:text="${(list.number+1) * list.size - (list.size - status.count)}">1</td>
-	                    <td>
-	                    	<a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}" 
-	                           th:text="${board.boardTitle}">오늘은 날씨가 매우 더워요 </a>
-	                       
-	                        
-	                        
-	                        <!-- 첨부파일 유무 -->    
-	                        <span th:if="${board.originalFileName != null}">
-	                        	<img th:src="@{/images/attachment.png}" alt="삭제" width="15px">
-	                        </span>   
-	                   	</td>
-	                   	
-	                    <td class="writer" th:text="${board.boardWriter}">임꺽정</td>
-	                    <td class="hitcount" th:text="${board.hitCount}">0</td>
-	                    <td class="create_date" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}">
-	                        2024-08-26</td>
-	                </tr>
-	                </th:block>
-	            </table>
-	        </div>
-	     </div> <!-- end .head-->
-	      
-    
-    <!-- 글쓰기 버튼 : 로그인한 회원만 보임 -->
-   <div class="write-btn">
-              <a th:href="@{/board/boardWrite}" >글쓰기</a>
-        </div>
+        <!-- 뉴스 목록 테이블 -->
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>  
+                </tr>
+            </thead>
+             <tbody>
+        		<tr th:each="news : ${newsList}">
+        	    	<td th:text="${news.serno}"></td>
+            		<td><a th:href="${news.url}" th:text="${news.title}" target="_blank"></a></td>
+            		<td th:text="${news.media}"></td>
+            		
+            		<td th:text="${news.postdate}"></td>
+        		</tr>
+    		</tbody>
+        </table>
 
+    </div>
     <!-- Page Navigation -->
     <nav class="pagination">
         <!-- 앞 그룹 -->
@@ -464,10 +407,5 @@
 			<span class="page-no navi" >&raquo;</span>
 		</th:block>
     </nav>
-    </div><!-- end .container -->
 </body>
-
 </html>
-
-
-

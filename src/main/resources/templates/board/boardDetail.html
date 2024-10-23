@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org"
-                xmlns:sec="http://thymeleaf.org/extras/spring-security">
-
+    xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,49 +9,297 @@
     <script th:src="@{/script/jquery-3.7.1.min.js}"></script>
     <script th:src="@{/script/reply.js}"></script>
     <script defer th:src="@{/script/modify.js}"></script>
-</head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5; /* 밝은 회색 배경 */
+            color: #333;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8; /* 메인화면과 동일한 배경색 */
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        header .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        header .circle {
+            width: 50px;
+            height: 50px;
+            background-color: #007bff;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px;
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        header nav {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+        }
+
+        header nav a {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        header .actions {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 16px;
+            list-style: none;
+            color: #000000;
+        }
+
+        header .actions a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        header .actions a:hover {
+            color: #007bff;
+        }
+
+        header .actions span.divider {
+            margin: 0 10px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        header .actions .logged-out {
+            display: flex;
+            align-items: center;
+        }
+
+        header .actions .logged-in {
+            margin-top: 10px;
+        }
+
+        /* Hero 섹션 */
+        .hero {
+            background-color: #e1e4e8;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table th, table td {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+            background-color: #ffffff;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* 버튼 스타일 */
+        .button-group {
+            display: flex;
+            justify-content: center; /* 가운데 정렬 */
+            gap: 10px; /* 버튼 간 간격 */
+            margin-top: 20px;
+        }
+
+        .button-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .button-group button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 댓글 섹션 */
+        .comment-section {
+            display: flex;
+            justify-content: space-between; /* 같은 행에 위치하게 함 */
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .comment-section input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 90%; /* 글상자가 더 많은 공간 차지 */
+        }
+
+        .comment-section button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-left: 10px; /* 버튼과 입력창 간 간격 */
+        }
+
+        .comment-section button:hover {
+            background-color: #0056b3;
+        }
+ 		 .write-btn {
+            display: flex;
+            justify-content: center; /* 중앙에 정렬 */
+            gap: 20px; /* 버튼 간의 간격을 20px로 설정 */
+            margin-top: 20px;
+        }
+
+        .write-btn a {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .write-btn a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
 <body>
- <header>
-        <div class="logo">JDT</div>
-       <nav>
-			<a th:href="@{/about/about}">About Us</a> 
-			<a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-			<a th:href="@{/board/boardList}">공지사항</a> 
-			<a th:href="@{/news/newsList}">뉴스</a> 
-			<a th:href="@{/cs/csList}">고객지원</a>
-		</nav>
-		<div class="actions">
-			<!-- 인증이 되지 않은 사람 -->
-			<li sec:authorize="isAnonymous()"><a th:href="@{/user/join}">회원가입</a>
-			<a th:href="@{/user/login}">로그인</a></li>
-			<!-- 인증이 된 사람 -->
-			<li sec:authorize="isAuthenticated()">
-			<a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
-			<a th:href="@{/user/mypage}">개인정보 수정</a></li>
-		</div>
-    </header>
-	<!-- Ajax 전송할 때 필요한 정보 -->
-	<input type="hidden" id="boardNum" th:value="${board.boardNum}">
-	<input type="hidden" id="loginId"  th:value="${#authentication.name}">
-	
-    <div class="container" th:replace="fragment/header(title='게시글 보기(f)')">
-    <!-- 
+
+    <!-- 헤더 -->
+    <header>
         <div class="logo">
             <a th:href="@{/}">
-                <img th:src="@{/images/logo.png}" alt="logo">
+                <div class="circle"></div>
+                <div class="logo-text">
+                    <span>JDT</span>
+                    <span>농수산물 데이터 제공 서비스</span>
+                </div>
             </a>
-            <h2>게시글 보기</h2>
         </div>
-        --> 
-    </div> <!-- end .container -->
+        <nav>
+            <a th:href="@{/about/about}">About Us</a>
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a>
+            <a th:href="@{/board/boardList}">공지사항</a>
+            <a th:href="@{/news/newsList}">뉴스</a>
+            <a th:href="@{/cs/csList}">고객지원</a>
+        </nav>
+        <div class="actions">
+            <div class="logged-out" sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span class="divider">|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </div>
+            <div class="logged-in" sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님,</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </div>
+        </div>
+    </header>
 
-    <!-- 게시글 보기 화면-->
-    <div class="content">
-        <table border="1">
+    <!-- Hero 섹션 -->
+    <section class="hero">
+        <img src="https://data.mafra.go.kr/images/common/img-service-06.svg" alt="공지사항 아이콘" />
+        <h1>공지사항 보기</h1>
+        <p>JDT 농수산물 데이터 제공 서비스의 최신 소식과 중요한 공지사항을 확인하세요.</p>
+    </section>
+
+    <div class="container">
+        <table>
             <tr>
                 <th>작성자</th>
-                <td><!-- 로그인한 사람의 아이디 -->
+                <td>
                     <span th:text="${board.boardWriter}"></span>
                 </td>
             </tr>
@@ -75,7 +321,6 @@
                     <span th:text="${#temporals.format(board.updateDate, 'yyyy-MM-dd HH:mm')}"></span>
                 </td>
             </tr>
-
             <tr>
                 <th>글내용</th>
                 <td>
@@ -83,34 +328,22 @@
                 </td>
             </tr>
             <tr>
-                <th>첨부파일</th> <!-- 인증이 된 사람만 링크를 제공 -->
+                <th>첨부파일</th>
                 <td>
                     <span th:if="${board.originalFileName != null}">
-                    	<a th:href="@{/board/download(boardNum=${board.boardNum})}" 
-                    	   th:text="${board.originalFileName}">파일명</a>
+                        <a th:href="@{/board/download(boardNum=${board.boardNum})}"
+                           th:text="${board.originalFileName}">파일명</a>
                     </span>
                 </td>
             </tr>
-			<tr>
-			    <th colspan="2">
-			    	<!-- 글수정과 삭제는 로그인한 사람과 글쓴 사람이 같을 경우에만 보이도록 함-->
-			    	<th:block th:if="${board.boardWriter == #authentication.name}">
-				        <a href="#" id="updateBtn" class="btn btn-primary">수정</a>&nbsp;
-				        <a href="#" id="deleteBtn" class="btn btn-danger">삭제</a>&nbsp;
-			        </th:block>
-			        <a th:href="@{/board/boardList(searchItem=${searchItem}, searchWord=${searchWord})}" class="btn btn-light">목록</a>
-			    </th>
-			</tr>
         </table>
-        
-		<!-- 검색 키워드를 출력하는 위치 -->
-		<form action="" method="GET" id="modifyForm">
-			<input type="hidden" id="boardNum"   name="boardNum"   th:value="${board.boardNum}">
-			<input type="hidden" id="searchItem" name="searchItem" th:value="${searchItem}">
-			<input type="hidden" id="searchWord" name="searchWord" th:value="${searchWord}">
-		</form>
-		
+
+        <div class="write-btn">
+            <a th:href="@{/board/boardUpdate(boardNum=${board.boardNum}, earchItem=${searchItem}, searchWord=${searchWord})}" id="updateBtn" class="btn btn-primary">수정</a>
+            <a th:href="@{/board/boardList(searchItem=${searchItem}, searchWord=${searchWord})}" class="btn btn-light">목록</a>
+            <a th:href="@{/board/boardDelete(boardNum=${board.boardNum}, earchItem=${searchItem}, searchWord=${searchWord})}" id="deleteBtn" class="btn btn-danger">삭제</a>
+        </div>
+
     </div>
 </body>
-
 </html>

@@ -66,6 +66,11 @@ public class BoardDTO {
 				.build();
 	}
 
+	public BoardDTO(Long boardNum2, String boardWriter2, String boardTitle2, String boardContent2, int hitCount2,
+			LocalDateTime createDate2) {
+		// TODO Auto-generated constructor stub
+	}
+
 
 
 

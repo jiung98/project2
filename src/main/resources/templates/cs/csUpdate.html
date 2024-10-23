@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org"
-                xmlns:sec="http://thymeleaf.org/extras/spring-security" >
+<html lang="ko" xmlns:th="http://thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>게시글 등록화면</title>
+    <title>질문 수정 화면</title>
     <link rel="stylesheet" th:href="@{/css/write.css}">
-   <style>   * {
+     <style>
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -18,6 +19,7 @@
             color: #333;
         }
 
+        /* 헤더 스타일 */
         header {
             background-color: #e1e4e8;
             padding: 30px 0;
@@ -28,16 +30,21 @@
             border-bottom: 1px solid #dcdcdc;
         }
 
-        /* 로고 및 텍스트 박스 */
         header .logo {
             position: absolute;
             left: 20px;
             display: flex;
             align-items: center;
             font-size: 20px;
+            cursor: pointer;
         }
 
-        /* 원형 도형 */
+        header .logo a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
         header .circle {
             width: 50px;
             height: 50px;
@@ -46,7 +53,6 @@
             margin-right: 10px;
         }
 
-        /* 로고 텍스트 */
         header .logo-text {
             display: flex;
             flex-direction: column;
@@ -60,20 +66,18 @@
         header .logo-text span:last-child {
             font-size: 18px;
             font-weight: bold;
+            color: #000;
         }
 
-        /* 네비게이션 메뉴 */
         header nav {
             display: flex;
             gap: 60px;
             justify-content: center;
         }
 
-        /* 네비게이션 메뉴 스타일 */
         header nav a {
             font-size: 20px;
             font-weight: bold;
-            font-family: 'Arial', sans-serif;
             color: #333;
             text-decoration: none;
             padding: 10px;
@@ -83,16 +87,15 @@
 
         header nav a:hover {
             color: #007bff;
+            cursor: pointer;
         }
 
-        /* 로그인/회원가입 섹션 */
         header .actions {
             position: absolute;
             right: 20px;
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 5px;
             font-size: 16px;
             list-style: none;
             color: #000000;
@@ -109,23 +112,31 @@
             color: #007bff;
         }
 
-        header .actions span {
+        header .actions span.divider {
+            margin: 0 10px;
             color: #999;
-            padding: 0 5px;
+            font-size: 16px;
+        }
+
+        header .actions .logged-out {
+            display: flex;
+            align-items: center;
+        }
+
+        header .actions .logged-in {
+            margin-top: 10px;
         }
 
         /* Hero 섹션 */
         .hero {
-            padding: 50px;
-            text-align: center;
             background-color: #e1e4e8;
-            color: black;
-            margin-bottom: 20px;
+            padding: 60px 20px;
+            text-align: center;
         }
 
         .hero h1 {
             font-size: 36px;
-            color: black;
+            color: #333;
             margin-bottom: 10px;
         }
 
@@ -136,11 +147,19 @@
 
         .container {
             max-width: 800px;
-            margin: 0 auto;
-            background-color: #ffffff;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f8f8f8;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         table {
@@ -149,25 +168,22 @@
             margin-bottom: 20px;
         }
 
-        table th,
-        table td {
+        table th, table td {
             padding: 15px;
             border-bottom: 1px solid #ddd;
             text-align: left;
+            background-color: #ffffff;
         }
 
         table th {
             background-color: #f4f4f4;
             color: #333;
-            width: 150px;
         }
 
         /* 동일한 폰트 스타일 적용 */
-        textarea,
-        input[type="text"],
-        input[type="file"] {
+        textarea, input[type="text"] {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             font-size: 16px;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -176,7 +192,7 @@
         }
 
         textarea {
-            height: 150px;
+            height: 200px;
             resize: vertical;
         }
 
@@ -202,16 +218,44 @@
             background-color: #0056b3;
         }
 
-        .button-group .reset-btn {
+        .button-group .cancel-btn {
             background-color: #007bff;
         }
 
-        .button-group .reset-btn:hover {
-            background-color:#0056b3;
+        .button-group .cancel-btn:hover {
+            background-color: #0056b3;
         }
-        /* 등록 및 초기화 버튼을 중앙에 배치 */
-        .button-cell {
-            text-align: center; /* 중앙 정렬 */
+        .write-btn {
+            display: flex;
+            justify-content: center; /* 중앙에 정렬 */
+            gap: 20px; /* 버튼 간의 간격을 20px로 설정 */
+            margin-top: 20px;
+        }
+
+         .write-btn a {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .write-btn a:hover {
+            background-color: #0056b3;
+        }
+
+  		.write-btn input {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+       .write-btn input :hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -219,11 +263,13 @@
 <body>
 <header>
         <div class="logo">
-            <div class="circle"></div>
-            <div class="logo-text">
-                <span>JDT</span>
-                <span>농수산물 데이터 제공 서비스</span>
-            </div>
+            <a th:href="@{/}">
+                <div class="circle"></div>
+                <div class="logo-text">
+                    <span>JDT</span>
+                    <span>농수산물 데이터 제공 서비스</span>
+                </div>
+            </a>
         </div>
         <nav>
             <a th:href="@{/about/about}">About Us</a>
@@ -233,70 +279,85 @@
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
         <div class="actions">
-            <!-- 인증이 되지 않은 사람 -->
-            <li sec:authorize="isAnonymous()">
-                <a th:href="@{/user/join}">회원가입</a><span>|</span>
+            <div class="logged-out" sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span class="divider">|</span>
                 <a th:href="@{/user/login}">로그인</a>
-            </li>
-            <!-- 인증이 된 사람 -->
-            <li sec:authorize="isAuthenticated()">
+            </div>
+            <div class="logged-in" sec:authorize="isAuthenticated()">
                 <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
-            </li>
+            </div>
         </div>
     </header>
     <section class="hero">
-        <img src="https://data.mafra.go.kr/images/common/img-subject-notice.svg" alt="Q&A 아이콘" />
-        <h1>Q&A 글쓰기</h1>
-        <p>문의사항을 작성하세요.</p>
+        <img src="https://data.mafra.go.kr/images/common/img-service-06.svg" alt="공지사항 아이콘" />
+        <h1>질문 수정하기</h1>
+        <p>질문 내용을 수정하세요.</p>
     </section>
-   <!-- <div class="container" >
         <!-- 
         <div class="logo">
             <a th:href="@{/}">
                 <img th:src="@{/images/logo.png}" alt="logo">
             </a>
-            <h2>게시글 쓰기</h2>
+            <h2>게시글 수정</h2>
         </div>
-         --> 
-  <!--  </div> <!-- end .container -->  
+        -->
+   <!-- end .container -->
 
-    <!-- 게시글 쓰기 화면-->
+    <!-- 게시글 수정 화면-->
     <div class="container">
-        <form th:action="@{/cs/csWrite}" method="POST" enctype="multipart/form-data">
-            <table border="1">
+        <form th:action="@{/cs/csUpdate}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csNum" th:value="${cs.csNum}">
+			<input type="hidden" id="searchItem" name="searchItem" th:value="${searchItem}">
+			<input type="hidden" id="searchWord" name="searchWord" th:value="${searchWord}">
+            
+            <table>
                 <tr>
                     <th>작성자</th>
                     <td><!-- 로그인한 사람의 아이디 -->
-                        <input type="text" id="csWriter" name="csWriter" th:value="${#authentication.name}" readonly>
+                        <input type="text" id="csWriter" name="csWriter" th:value="${cs.csWriter}" readonly>
                     </td>
                 </tr>
-                <tr>
+                <tr> 
                     <th>글제목</th>
                     <td>
-                        <input type="text" id="csTitle" name="csTitle" required>
+                        <input type="text" id="csTitle" name="csTitle" th:value="${cs.csTitle}" required>
                     </td>
                 </tr>
+            <tr>
+                <th>작성일</th>
+                <td>
+                    <span th:text="${#temporals.format(cs.createDate, 'yyyy-MM-dd HH:mm')}"></span>
+                </td>
+            </tr>                
                 <tr>
                     <th>글내용</th>
                     <td>
-                        <textarea name="csContent" id="csContent" cols="30" rows="10" required></textarea>
+                        <textarea name="csContent" id="csContent" cols="30" rows="10" th:text="${cs.csContent}" required></textarea>
                     </td>
                 </tr>
                 <tr>
                     <th>첨부파일</th> <!-- 첨부파일 작성 시 수정-->
                     <td>
+                    	<span th:if="${cs.originalFileName != null}" th:text="${cs.originalFileName}">
+                    		파일명
+                    	</span>
+                    	<span th:if="${cs.originalFileName != null}" >
+                    		<a th:href="@{/cs/deleteFile(csNum=${cs.csNum})}">
+                    			<img th:src="@{/images/trash.png}" alt="파일삭제" style="width:15px;height:15px;">
+                    		</a>
+                    	</span>
                         <input type="file" id="uploadFile" name="uploadFile" class="btn btn-light">
                     </td>
                 </tr>
                 <tr>
-                    <!-- 버튼들이 중앙에 배치될 수 있도록 text-align: center 적용 -->
-                    <td colspan="2" class="button-cell">
-                        <div class="button-group">
-                            <button type="submit" class="btn-primary">글등록</button>
-                            <button type="reset" class="reset-btn">초기화</button>
-                        </div>
-                    </td>
+                    <th colspan="2">
+                    <div class="write-btn">
+                        <input type="submit" value="수정" class="btn btn-primary"> &nbsp;
+                        <a th:href="@{/cs/csList(searchItem=${searchItem}, searchWord=${searchWord})}" class="btn btn-light">목록</a>
+                    </div>
+                    </th>
                 </tr>
             </table>
         </form>

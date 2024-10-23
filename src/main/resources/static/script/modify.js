@@ -11,26 +11,27 @@ if(updateBtn != null) updateBtn.addEventListener('click', goto);
 // 이벤트 핸들러
 function goto() {
     let target = this.getAttribute("id");
-    // let boardNum = this.getAttribute("data-no");
-	let boardNum   = document.getElementById("boardNum").value;
+    // let csNum = this.getAttribute("data-no");
+	let csNum   = document.getElementById("csNum").value;
 	let searchItem = document.getElementById("searchItem").value;
 	let searchWord = document.getElementById("searchWord").value;
 	
     let go = '';
 
     switch (target) {
-        case "updateBtn": go = "boardUpdate"; break;
+        case "updateBtn": go = "csUpdate"; break;
         case "deleteBtn": 
 			if(!confirm("정말 삭제할까요?")) return;
-			go = "boardDelete"; 
+			go = "csDelete"; 
 			break;
     }
 
+	 //alert(csNum+"/ "+searchItem+" /"+searchWord + "/" +go);
 	let modifyForm = document.getElementById("modifyForm");
-	modifyForm.action = `/board/${go}`;
+	modifyForm.action = `/cs/${go}`;
 	modifyForm.submit();
 	
-    // let url = `/board/${go}?boardNum=${boardNum}&searchItem=${searchItem}&searchWord=${searchWord}`;	
+    // let url = `/cs/${go}?csNum=${csNum}&searchItem=${searchItem}&searchWord=${searchWord}`;	
     // location.replace(url);   // GET 요청
 }
 

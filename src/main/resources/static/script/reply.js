@@ -9,12 +9,12 @@ $(function() {
 
 // 모든 댓글 목록(게시글의 모든 댓글)을 읽어옴 
 function init() {
-	let boardNum = $("#boardNum").val();   // '${board.boardNum}'
+	let csNum = $("#csNum").val();   // '${board.boardNum}'
 	
 	$.ajax({
 		url: '/reply/replyAll'
 		, method: 'GET'
-		, data : {"boardNum":boardNum }
+		, data : {"csNum":csNum }
 		, success : output
 	})
 }
@@ -61,7 +61,7 @@ function deleteReply() {
 	
 	$.ajax({
 		url: '/reply/replyDelete'
-		, method :'GET'
+		, method :'Post'
 		, data : {"replyNum":replyNum}
 		, success : function(resp) {
 			init();
@@ -73,13 +73,15 @@ function deleteReply() {
 function replyWrite() {
 	let writer = $('#loginId').val();    				// 로그인한 사람의 이름
 	let replyText = $('#replyText').val();  // 댓글을 입력하지 않고 전송버튼을 누를 경우 처리 
-	let boardNum = $("#boardNum").val();
+	let csNum = $("#csNum").val();
 	
 	let sendData = {
 		"replyWriter" : writer
 		,"replyText": replyText 
-		, "boardNum" : boardNum
+		, "csNum" : csNum
 	};
+	
+	// alert("댓글 정보: " + JSON.stringify(sendData))
 	
 	// POST / replyInsert
 	$.ajax({

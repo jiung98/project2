@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -45,6 +46,12 @@ public class BoardController {
 	@Value("${spring.servlet.multipart.location}")
 	private String uploadPath;
 
+	 @GetMapping("/boardList/simple")
+	    public String getBoardList(Model model) {
+	        List<BoardDTO> boardList = boardService.getAllBoard(); // 모든 공지사항 리스트 가져오기
+	        model.addAttribute("boardList", boardList);
+	        return "main/main"; // main.html 템플릿으로 데이터 전달
+	    }
 	
 	/**
 	 * 게시글 목록 조회를 위해 DB에 요청처리

@@ -131,6 +131,7 @@ public class CsController {
 			, Model model) {
 
 		CsDTO cs = csService.selectOne(csNum);
+		System.out.println(cs);
 		System.out.println(csNum);
 		// 조회수 증가
 		csService.incrementHitcount(csNum);
@@ -170,7 +171,7 @@ public class CsController {
 		rttr.addAttribute("searchItem", searchItem);
 		rttr.addAttribute("searchWord", searchWord);
 
-		return "redirect:/csNum/csList";
+		return "redirect:/cs/csList";
 	}
 
 	/**
@@ -187,7 +188,8 @@ public class CsController {
 			, Model model
 			) {
 
-
+		//System.out.println("asdfasdfasdf");
+		
 		CsDTO cs = csService.selectOne(csNum); // 조회
 
 		model.addAttribute("cs", cs);
@@ -200,7 +202,7 @@ public class CsController {
 		if(loginUser != null) {
 			model.addAttribute("loginName",loginUser.getUserName());
 		}
-		
+		//System.out.println("===================" + cs);
 		return "cs/csUpdate";
 	}
 

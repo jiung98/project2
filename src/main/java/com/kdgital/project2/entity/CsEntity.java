@@ -84,8 +84,8 @@ public class CsEntity {
 			
 				.originalFileName(csDTO.getOriginalFileName())
 				.savedFileName(csDTO.getSavedFileName())
-//				.createDate(boardDTO.getCreateDate())
-//				.updateDate(boardDTO.getUpdateDate())
+				.createDate(LocalDateTime.now())
+	//			.updateDate(csDTO.getUpdateDate())
 				.build();
 	}
 }
