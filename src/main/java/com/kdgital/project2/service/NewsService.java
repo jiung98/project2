@@ -28,7 +28,7 @@ public class NewsService {
 	
 	// 전체 뉴스 목록을 DTO로 변환하여 반환하는 메서드
     public List<NewsDTO> getAllNews() {
-        List<NewsEntity> newsList = newsRepository.findAll();
+        List<NewsEntity> newsList = newsRepository.findAll(Sort.by(Sort.Direction.DESC, "postdate"));
         return newsList.stream()
                 .map(news -> new NewsDTO(
                         news.getSerno(),

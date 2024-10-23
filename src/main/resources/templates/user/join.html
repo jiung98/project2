@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>회원가입</title>
-    <style>
+   <style>
         * {
             margin: 0;
             padding: 0;
@@ -14,72 +14,98 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0; /* 차분한 회색 배경 */
+            background-color: #e1e4e8; /* 메인 화면과 동일한 배경색 */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #333;
         }
+		 /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8; /* 바디와 동일한 배경색 */
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* 텍스트를 더 아래로 정렬 */
+            position: relative;
+            border-bottom: 1px solid #dcdcdc; /* 구분선 */
+        }
 
+        /* 로고 및 텍스트 박스 */
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer; /* 로고도 버튼처럼 변환 */
+        }
+
+        /* 로고 이미지 */
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px; /* 텍스트와 간격 */
+        }
+
+        /* 로고 텍스트 부분 */
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px; /* 작은 글씨 */
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px; /* 큰 글씨 */
+            font-weight: bold;
+        }
         .signup-container {
             background-color: #ffffff; /* 흰색 배경 */
-            padding: 30px; /* 컨테이너 안의 여백을 줄임 */
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 그림자 */
-            width: 350px; /* 가로폭을 줄임 */
+            width: 400px;
             text-align: center;
         }
 
         h1 {
-            margin-bottom: 20px; /* 제목과 입력 필드 간의 여백을 줄임 */
-            font-size: 20px; /* 폰트 크기를 줄임 */
+            margin-bottom: 10px;
+            font-size: 24px; /* 제목 폰트 크기 */
             font-weight: bold;
-            color: #333; /* 검정색 글자 */
+            color: #333; /* 검정색 */
+        }
+
+        /* 환영 문구 스타일 */
+        .welcome-message {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #007bff; /* 파란색으로 설정 */
         }
 
         .form-group {
-            margin-bottom: 15px; /* 입력 필드 간의 여백을 줄임 */
+            margin-bottom: 15px;
             text-align: left;
         }
 
         .form-group label {
             display: block;
-            font-size: 12px; /* 폰트 크기를 줄임 */
-            margin-bottom: 6px; /* 라벨과 입력 필드 간의 여백을 줄임 */
-            color: #333; /* 검정색 글자 */
-            font-weight: bold; /* 입력 항목을 진하게 표시 */
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: bold;
         }
 
         .form-group input {
             width: 100%;
-            padding: 8px; /* 입력 필드 안의 여백을 줄임 */
-            border: 1px solid #ccc; /* 연한 회색 테두리 */
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 14px; /* 폰트 크기를 줄임 */
-        }
-
-        /* 성별 및 국적 섹션 구분을 위한 스타일 */
-        .inline-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .inline-group label {
-            margin-right: 5px;
-            font-size: 12px; /* 폰트 크기를 줄임 */
-            font-weight: bold; /* 성별과 국적도 진하게 표시 */
-        }
-
-        .inline-group input {
-            margin-right: 5px;
-        }
-
-        /* 성별과 국적 구분을 위한 구분선 */
-        .section-divider {
-            border-bottom: 1px solid #ccc; /* 회색 구분선 */
-            margin: 10px 0; /* 위아래 여백 */
+            font-size: 16px;
         }
 
         /* 버튼 스타일 */
@@ -90,36 +116,53 @@
 
         .cancel-btn, .signup-btn {
             width: 48%;
-            padding: 10px; /* 버튼의 크기를 줄임 */
-            font-size: 14px; /* 폰트 크기를 줄임 */
+            padding: 10px;
+            font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            transition: transform 0.2s, background-color 0.3s ease;
         }
 
         .cancel-btn {
-            background-color: #ccc; /* 회색 배경 */
+            background-color: #ccc;
             color: #333;
         }
 
         .signup-btn {
-            background-color: #333; /* 검정색 배경 */
+            background-color: #007bff;
             color: white;
         }
 
         .cancel-btn:hover {
             background-color: #999;
+            transform: translateY(-2px); /* 버튼이 약간 튀어오르는 효과 */
         }
 
         .signup-btn:hover {
-            background-color: #555; /* 버튼 hover 시 조금 더 연한 검정색 */
+            background-color: #0056b3;
+            transform: translateY(-2px);
         }
 
-    .icon-label-container {
-      display: flex;
-      align-items: center;
-      gap: 10px; /* 아이콘과 텍스트 사이의 간격 */
-    }
+        /* 아이콘과 텍스트 라벨 사이의 간격을 조정 */
+        .icon-label-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* 아이콘과 텍스트 사이의 간격 */
+        }
+
+        /* 아이콘 스타일을 메인화면처럼 */
+        .icon-label-container i {
+            font-size: 1.2em;
+            color: #007bff; /* 아이콘 색상 */
+        }
+
+        /* 아이디 중복 확인 등의 메시지 */
+        .form-group div {
+            font-size: 0.8em;
+            color: #999;
+        }
+
     </style>
   <!-- CSS 설정 -->
     <link rel="stylesheet" th:href="@{/css/user.css}">
@@ -129,65 +172,104 @@
 	<script defer th:src="@{/script/join.js}"></script>
 </head>
 <body>
+<header>
+        <!-- 로고 및 텍스트 박스 -->
+        <div class="logo">
+        <a th:href="@{/}">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
+            </a>
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
+        <nav>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
+            <a th:href="@{/cs/csList}">고객지원</a>
+        </nav>
+
+        <!-- 로그인/회원가입 -->
+        <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span>|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </li>
+        </div>
+    </header>
 <div class="signup-container">
         <h1>회원가입</h1>
+        <p class="welcome-message">JDT 농수산물 데이터 제공 서비스<br>회원가입을 환영합니다.</p>
     <div class="content">
         <form th:action="@{/user/join}" method="POST" id="joinForm">
             <div class="section pointColor">
                 <div class="article">
-                    <ul>
-                    
                     <div class="form-group">
-                        <li><div class="icon-label-container">
+                        <div class="icon-label-container">
                             <i class="fa-solid fa-fingerprint"> </i>
                             <label for="username">아이디</label></div>
                             <input type="text" name="userId" id="userId" placeholder="ID 입력">
-                            <div id="confirmId" style="font-size:0.8em;"></div>
-                        </li></div>
-                        <div class="form-group">
-                        <li><div class="icon-label-container">
-                            <i class="fa-solid fa-lock"></i>
-                      		<label for="password">비밀번호</label></div>
-                            <input type="password" name="userPwd" id="userPwd" placeholder="Password 입력">
-                        	<div id="confirmPwd" style="font-size:0.8em;"></div>
-                        </li></div>
-                        <div class="form-group">
-                        <li><div class="icon-label-container">
-                            <i class="fa-solid fa-key"></i>
-                            <label for="password-confirm">비밀번호 확인</label></div>
-                            <input type="password" id="userPwdCheck" placeholder="Password 확인">
-                        </li></div>
-                        <div class="form-group">
-                        <li><div class="icon-label-container">
-                            <i class="fa-solid fa-user"></i>
-                            <label for="name">이름</label></div>
-                            <input type="text" name="userName" id="userName" placeholder="이름 입력" required>
-                            <div id="userNameCheck" style="font-size:0.8em;"></div>
-                        </li>
+                            <div id="confirmId"></div>
                         </div>
-                         
-            			<div class="form-group">
-            			<li><div class="icon-label-container">
-            			 <i class="fa-solid fa-key"></i>
-                		<label for="birth">생년월일</label></div>
-                		<input type="text" id="birth" name="birth" placeholder="생년월일 입력(8자리)" required>
-            			 <div id="birth" style="font-size:0.8em;"></div>
-            			 </li>
-            			</div>
                         <div class="form-group">
-                        <li><div class="icon-label-container">
-                            <i class="fa-solid fa-envelope"></i>
-                            <label for="email">[선택] 이메일</label> </div>
-                            <input type="email" name="email" id="email" placeholder="email 입력" required>
-                            <div id="emailCheck" style="font-size:0.8em;"></div>
-                        </li>
-                        </div> 
-                    </ul>
+                        <div class="icon-label-container">
+                            <i class="fa-solid fa-lock"></i>
+                      		<label for="password">비밀번호</label> </div>
+                            <input type="password" name="userPwd" id="userPwd" placeholder="Password 입력">
+                            <div id="confirmPwd"></div>
+                        </div>
 
-            <div class="btns">
-                <input type="reset" id="resetBtn" value="초기화" class="cancel-btn">
-                <input type="submit" id="submitBtn" value="회원가입" class="signup-btn">
-            </div>
+                        <div class="form-group">
+                            <div class="icon-label-container">
+                                <i class="fa-solid fa-key"></i>
+                                <label for="password-confirm">비밀번호 확인</label>
+                            </div>
+                            <input type="password" id="userPwdCheck" placeholder="Password 확인">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon-label-container">
+                                <i class="fa-solid fa-user"></i>
+                                <label for="name">이름</label>
+                            </div>
+                            <input type="text" name="userName" id="userName" placeholder="이름 입력" required>
+                            <div id="userNameCheck"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon-label-container">
+                                <i class="fa-solid fa-calendar-alt"></i>
+                                <label for="birth">생년월일</label>
+                            </div>
+                            <input type="text" id="birth" name="birth" placeholder="생년월일 입력(8자리)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="icon-label-container">
+                                <i class="fa-solid fa-envelope"></i>
+                                <label for="email">[선택] 이메일</label>
+                            </div>
+                            <input type="email" name="email" id="email" placeholder="email 입력">
+                            <div id="emailCheck"></div>
+                        </div> 
+
+                        <div class="button-group">
+                            <input type="reset" id="resetBtn" value="초기화" class="cancel-btn">
+                            <input type="submit" id="submitBtn" value="회원가입" class="signup-btn">
+                        </div>
 
                 </div> <!-- end .article-->
             </div> <!-- end .section.pointColor-->

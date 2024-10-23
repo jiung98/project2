@@ -41,7 +41,7 @@ public class BoardService {
 	private String uploadPath;
 
 	public List<BoardDTO> getAllBoard() {
-        List<BoardEntity> boardEntities = boardRepository.findAll();
+        List<BoardEntity> boardEntities = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "createDate"));
         List<BoardDTO> boardDTOs = new ArrayList<>();
 
         for (BoardEntity entity : boardEntities) {

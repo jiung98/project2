@@ -14,28 +14,77 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f0f0f0; /* 차분한 회색 배경 */
+            background-color: #e1e4e8; /* 메인화면과 동일한 배경색 */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #333;
         }
+		 /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8; /* 바디와 동일한 배경색 */
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; /* 텍스트를 더 아래로 정렬 */
+            position: relative;
+            border-bottom: 1px solid #dcdcdc; /* 구분선 */
+        }
 
+        /* 로고 및 텍스트 박스 */
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer; /* 로고도 버튼처럼 변환 */
+        }
+
+        /* 로고 이미지 */
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px; /* 텍스트와 간격 */
+        }
+
+        /* 로고 텍스트 부분 */
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px; /* 작은 글씨 */
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px; /* 큰 글씨 */
+            font-weight: bold;
+        }
         .login-container {
             background-color: #ffffff; /* 흰색 배경 */
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 그림자 */
-            width: 350px; /* 가로폭을 줄임 */
+            width: 400px; /* 가로폭 설정 */
             text-align: center;
         }
 
         h1 {
-            margin-bottom: 20px;
-            font-size: 20px; /* 폰트 크기를 줄임 */
+            margin-bottom: 10px;
+            font-size: 24px; /* 제목 폰트 크기 */
             font-weight: bold;
-            color: #333; /* 검정색 글자 */
+            color: #333; /* 검정색 */
+        }
+
+        /* 환영 문구 스타일 */
+        .welcome-message {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #007bff; /* 파란색 */
         }
 
         .form-group {
@@ -45,35 +94,37 @@
 
         .form-group label {
             display: block;
-            font-size: 12px;
+            font-size: 14px;
             margin-bottom: 6px;
-            color: #333; /* 검정색 글자 */
-            font-weight: bold; /* 입력 항목을 진하게 표시 */
+            color: #333;
+            font-weight: bold;
         }
 
         .form-group input {
             width: 100%;
             padding: 10px;
-            border: 1px solid #ccc; /* 연한 회색 테두리 */
+            border: 1px solid #ccc;
             border-radius: 4px;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         /* 버튼 스타일 */
         .login-btn {
             width: 100%;
             padding: 12px;
-            background-color: #333; /* 검정색 배경 */
+            background-color: #007bff; /* 파란색 배경 */
             color: white;
             font-size: 16px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
             margin-top: 20px;
+            transition: transform 0.2s, background-color 0.3s ease;
         }
 
         .login-btn:hover {
-            background-color: #555; /* hover 시 연한 검정색 */
+            background-color: #0056b3; /* hover 시 색상 변경 */
+            transform: translateY(-2px); /* 버튼 튀어오름 효과 */
         }
 
         /* 아이디 찾기, 비밀번호 찾기, 회원가입 링크 */
@@ -98,26 +149,89 @@
         /* 구분선 스타일 */
         .divider {
             height: 14px;
-            border-left: 1px solid #ccc; /* 연한 회색 구분선 */
+            border-left: 1px solid #ccc;
             margin: 0 10px;
         }
 
+        /* 아이콘과 텍스트 라벨 사이의 간격을 조정 */
+        .icon-label-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 아이콘 스타일 */
+        .icon-label-container i {
+            font-size: 1.2em;
+            color: #007bff; /* 파란색 아이콘 */
+        }
+
     </style>
+    <!-- 아이콘 추가를 위한 FontAwesome -->
+    <script src="https://kit.fontawesome.com/def97ee41b.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<header>
+        <!-- 로고 및 텍스트 박스 -->
+        <div class="logo">
+        <a th:href="@{/}">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
+            </a>
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
+        <nav>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
+            <a th:href="@{/cs/csList}">고객지원</a>
+        </nav>
+
+        <!-- 로그인/회원가입 -->
+        <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span>|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </li>
+        </div>
+    </header>
     <div class="login-container">
         <h1>로그인</h1>
-        <form th:action="@{/user/loginProc}" method="POST" id="loginForm">
+          <p class="welcome-message">JDT 농수산물 데이터 제공 서비스</p> <!-- 환영 문구 추가 -->
+          <form th:action="@{/user/loginProc}" method="POST" id="loginForm">
             <div class="form-group">
-                <label for="username">아이디</label>
+                <div class="icon-label-container">
+                    <i class="fa-solid fa-fingerprint"></i>
+                    <label for="username">아이디</label>
+                </div>
                 <input type="text" id="userId" name="userId" placeholder="아이디 입력" required>
             </div>
+
             <div class="form-group">
-                <label for="password">비밀번호</label>
+                <div class="icon-label-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <label for="password">비밀번호</label>
+                </div>
                 <input type="password" id="userPwd" name="userPwd" placeholder="비밀번호 입력" required>
             </div>
+
             <button type="submit" class="login-btn">로그인</button>
         </form>
+
         <div class="help-links">
             <a href="#">아이디 찾기</a>
             <span class="divider"></span> <!-- 구분선 추가 -->

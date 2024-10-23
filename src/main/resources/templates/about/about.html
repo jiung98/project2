@@ -39,22 +39,12 @@
             cursor: pointer; /* 커서가 버튼처럼 보이도록 */
         }
 
-        /* 로고 버튼을 클릭할 수 있게 */
-        header .logo a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
+       /* 로고 이미지 */
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px; /* 텍스트와 간격 */
         }
-
-        /* 원형 도형 */
-        header .circle {
-            width: 50px;
-            height: 50px;
-            background-color: #007bff; /* 하늘색 */
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
         /* 로고 텍스트 */
         header .logo-text {
             display: flex;
@@ -244,36 +234,43 @@
 <body>
 
     <!-- 헤더 -->
-    <header>
+   <header>
+        <!-- 로고 및 텍스트 박스 -->
         <div class="logo">
-            <!-- 로고 클릭 시 홈으로 이동 -->
-            <a th:href="@{/}">
-            
-                <div class="logo-text">
-                    <span>JDT</span>
-                    <span>농수산물 데이터 제공 서비스</span>
-                </div>
-            </a>
+        <a th:href="@{/}">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
+             </a>
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+           
         </div>
+
+        <!-- 네비게이션 메뉴 -->
         <nav>
-            <a th:href="@{/about/about}">About Us</a>
-            <a th:href="@{/dashboard/dashboard}">메인 서비스</a>
-            <a th:href="@{/board/boardList}">공지사항</a>
-            <a th:href="@{/news/newsList}">뉴스</a>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
+
+        <!-- 로그인/회원가입 -->
         <div class="actions">
             <!-- 인증이 되지 않은 사람 -->
-            <div class="logged-out" sec:authorize="isAnonymous()">
+            <li sec:authorize="isAnonymous()">
                 <a th:href="@{/user/join}">회원가입</a>
-                <span class="divider">|</span>
+                <span>|</span>
                 <a th:href="@{/user/login}">로그인</a>
-            </div>
+            </li>
             <!-- 인증이 된 사람 -->
-            <div class="logged-in" sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님,</a>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
-            </div>
+            </li>
         </div>
     </header>
 

@@ -39,18 +39,11 @@
             cursor: pointer;
         }
 
-        header .logo a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-        }
-
-        header .circle {
-            width: 50px;
-            height: 50px;
-            background-color: #007bff;
-            border-radius: 50%;
-            margin-right: 10px;
+        /* 로고 이미지 */
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px; /* 텍스트와 간격 */
         }
 
         header .logo-text {
@@ -306,38 +299,157 @@
             font-weight: bold;
             color: #000000;
         }
+
+        /* 챗봇 버튼 스타일 */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* 챗봇 창 스타일 */
+        #chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        /* 챗봇 헤더 스타일 */
+        #chatbot-header {
+            background-color: #0084FF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #close-chatbot {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+        }
+
+        /* 메시지 영역 스타일 */
+        #chatbot-messages {
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 사용자 메시지 스타일 (오른쪽) */
+        .user-message {
+            align-self: flex-end;
+            background-color: #9FE2BF;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 70%;
+            text-align: right;
+        }
+
+        /* 봇 메시지 스타일 (왼쪽) */
+        .bot-message {
+            align-self: flex-start;
+            background-color: #E0E0E0;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 70%;
+        }
+
+        /* 입력란 스타일 */
+        #chatbot-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        #send-button {
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
     <!-- 헤더 -->
     <header>
+        <!-- 로고 및 텍스트 박스 -->
         <div class="logo">
-            <a th:href="@{/}">
-                <div class="circle"></div>
-                <div class="logo-text">
-                    <span>JDT</span>
-                    <span>농수산물 데이터 제공 서비스</span>
-                </div>
+        <a th:href="@{/}">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
             </a>
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+            
         </div>
+
+        <!-- 네비게이션 메뉴 -->
         <nav>
-            <a th:href="@{/about/about}">About Us</a>
-            <a th:href="@{/dashboard/dashboard}">메인 서비스</a>
-            <a th:href="@{/board/boardList}">공지사항</a>
-            <a th:href="@{/news/newsList}">뉴스</a>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
+
+        <!-- 로그인/회원가입 -->
         <div class="actions">
-            <div class="logged-out" sec:authorize="isAnonymous()">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
                 <a th:href="@{/user/join}">회원가입</a>
-                <span class="divider">|</span>
+                <span>|</span>
                 <a th:href="@{/user/login}">로그인</a>
-            </div>
-            <div class="logged-in" sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님, 로그아웃</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
-            </div>
+            </li>
         </div>
     </header>
 
@@ -407,6 +519,22 @@
         </div>
     </div>
 
+    <!-- 챗봇 버튼 -->
+    <button id="chatbot-button">💬</button>
+
+    <!-- 챗봇 컨테이너 -->
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            JDT 도우미 챗봇
+            <button id="close-chatbot">&times;</button>
+        </div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="메시지를 입력하세요..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
     <script>
         function showPopup(title, items = []) {
             document.getElementById('popupTitle').textContent = title;
@@ -449,6 +577,63 @@
                     borderColor: '#007bff',
                     fill: false
                 }]
+            }
+        });
+
+        // 챗봇 버튼과 창 제어
+        const chatbotButton = document.getElementById('chatbot-button');
+        const chatbotContainer = document.getElementById('chatbot-container');
+        const closeButton = document.getElementById('close-chatbot');
+
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'block' : 'none';
+        });
+
+        closeButton.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+        });
+
+        // 서버에 메시지 전송 및 응답 받기
+        async function sendMessage() {
+            const userInput = document.getElementById("chatbot-input").value;
+            if (!userInput) return;
+
+            // 사용자 메시지 추가
+            const messageContainer = document.getElementById("chatbot-messages");
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("user-message");
+            userMessage.textContent = userInput;
+            messageContainer.appendChild(userMessage);
+
+            // 서버로 POST 요청 보내기
+            const response = await fetch('http://localhost:8000/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userInput })
+            });
+            
+            const data = await response.json();
+
+            // 챗봇 응답 추가
+            const botMessage = document.createElement("div");
+            botMessage.classList.add("bot-message");
+            botMessage.textContent = data.response;
+            messageContainer.appendChild(botMessage);
+
+            // 입력 창 비우기
+            document.getElementById("chatbot-input").value = '';
+            messageContainer.scrollTop = messageContainer.scrollHeight;  // 스크롤 하단으로 이동
+        }
+
+        // 전송 버튼 클릭 이벤트
+        document.getElementById("send-button").addEventListener("click", sendMessage);
+
+        // 엔터 키 입력 시 전송
+        document.getElementById("chatbot-input").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                sendMessage();
             }
         });
     </script>
