@@ -10,13 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.kdgital.project2.dto.BoardDTO;
 import com.kdgital.project2.dto.NewsDTO;
-import com.kdgital.project2.entity.BoardEntity;
 import com.kdgital.project2.entity.NewsEntity;
 import com.kdgital.project2.repository.NewsRepository;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,6 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 public class NewsService {
 	final NewsRepository newsRepository;
 	
+	// 페이징할 때 한 페이지 출력할 글 개수
+		@Value("${user.newsListMini.pageLimit:10}")
+		private int pageLimit;	
+
 	// 전체 뉴스 목록을 DTO로 변환하여 반환하는 메서드
     public List<NewsDTO> getAllNews() {
         List<NewsEntity> newsList = newsRepository.findAll(Sort.by(Sort.Direction.DESC, "postdate"));
@@ -40,9 +41,10 @@ public class NewsService {
                 .collect(Collectors.toList());
     }
 	
-	// 페이징할 때 한 페이지 출력할 글 개수
-		@Value("${user.newsListMini.pageLimit}")
-		private int pageLimit;	
+    public Page<NewsEntity> getPagedNews(int page) {
+        // 페이지 번호는 0부터 시작하며, 10개씩 페이지당 보여주기
+        return newsRepository.findAll(PageRequest.of(page, 10));
+    }
 		public Page<NewsDTO> selectAll(Pageable pageable, String searchItem, String searchWord) {
 			int page = pageable.getPageNumber() - 1;
 			// -1을 한 이유 : DB page의 위치의 값은 0부터 시작하므로
@@ -61,6 +63,11 @@ public class NewsService {
 				break;
 			case "Media"  :
 				entityList = newsRepository.findByMediaContains(
+						searchWord, 
+						PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "serno") ));
+				break;
+			case "Url" :
+				entityList = newsRepository.findByUrlContains(
 						searchWord, 
 						PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "serno") ));
 				break;

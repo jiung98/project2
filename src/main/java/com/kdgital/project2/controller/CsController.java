@@ -70,7 +70,7 @@ public class CsController {
 		PageNavigator navi = new PageNavigator(pageLimit, page, totalPages);
 
 		// 검색기능이 가능
-		// List<BoardDTO> list = boardService.selectAll(searchItem, searchWord); 
+		// List<csDTO> list = csService.selectAll(searchItem, searchWord); 
 
 		model.addAttribute("list", list);
 		model.addAttribute("searchItem", searchItem);
@@ -118,7 +118,7 @@ public class CsController {
 	/**
 	 * 글 자세히 보기
 	 * 검색 후의 정보를 전달받도록 함 
-	 * @param boardNum
+	 * @param csNum
 	 * @param model
 	 * @return
 	 */
@@ -154,8 +154,8 @@ public class CsController {
 	}
 
 	/**
-	 * 전달받은 글번호(boardNum)을 받아 service로 전달
-	 * @param boardNum
+	 * 전달받은 글번호(csNum)을 받아 service로 전달
+	 * @param csNum
 	 * @return
 	 */
 	@GetMapping("/csDelete")
@@ -176,7 +176,7 @@ public class CsController {
 
 	/**
 	 * 게시글 수정을 위해 화면에 출력할 내용을 조회
-	 * @param boardNum
+	 * @param csNum
 	 * @return
 	 */
 	@GetMapping("/csUpdate")
@@ -208,7 +208,7 @@ public class CsController {
 
 	/**
 	 * 게시글 수정 요청
-	 * @param boardNum
+	 * @param csNum
 	 * @return
 	 */
 	@PostMapping("/csUpdate")
@@ -289,7 +289,7 @@ public class CsController {
 			, RedirectAttributes rttr
 			) {
 
-		// boardService에 파일삭제 요청 (Update와 동일)
+		// csService에 파일삭제 요청 (Update와 동일)
 		csService.deleteFile(csNum);
 
 		rttr.addAttribute("csNum", csNum);
