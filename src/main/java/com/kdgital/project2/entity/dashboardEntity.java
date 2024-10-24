@@ -2,11 +2,8 @@ package com.kdgital.project2.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import javax.swing.plaf.synth.Region;
-
-import com.kdgital.project2.dto.MainServiceDTO;
+import com.kdgital.project2.dto.dashboardDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,8 +14,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,7 +30,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "mainservice")
-public class MainServiceEntity {
+public class dashboardEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "main_no")
@@ -47,20 +42,30 @@ public class MainServiceEntity {
 	@Column(name = "production", nullable = false)
 	private Long production;
 
-	@Column(name = "temperatue", nullable = false)
+	@Column(name = "temperature", nullable = false)  // 오타 수정 "temperature"
 	private BigDecimal temperature;
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "r_code") //DB 기준?
-	private RegionEntity regionEntity; // 왜 이렇게 쓰는거지??? 질문사항
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "r_code")
+	private RegionEntity regionEntity;  // RegionEntity 참조
 
-	private static MainServiceEntity toEntity(MainServiceDTO mainServiceDTO, RegionEntity regionEntity) {
-		return MainServiceEntity.builder()
-				.mainNo(mainServiceDTO.getMainNo())
-				.mainDate(mainServiceDTO.getMainDate())
-				.production(mainServiceDTO.getProduction())
-				.temperature(mainServiceDTO.getTemperature())
+	// Entity -> DTO 변환 메서드
+	public static dashboardDTO toDTO(dashboardEntity entity) {
+		return dashboardDTO.builder()
+				.mainNo(entity.getMainNo())
+				.regionName(entity.getRegionEntity().getRegionName())
+				.production(entity.getProduction())
+				.year(entity.getMainDate().getYear())  // LocalDate에서 연도 추출
+				.build();
+	}
+
+	// DTO -> Entity 변환 메서드
+	public static dashboardEntity toEntity(dashboardDTO dto, RegionEntity regionEntity) {
+		return dashboardEntity.builder()
+				.mainNo(dto.getMainNo())
+				.mainDate(LocalDate.of(dto.getYear(), 1, 1))  // 연도만을 사용해 LocalDate 생성
+				.production(dto.getProduction())
 				.regionEntity(regionEntity)
-				.build(); 
+				.build();
 	}
 }

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://thymeleaf.org"
-    xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +18,6 @@
             color: #333;
         }
 
-        /* 헤더 스타일 */
         header {
             background-color: #e1e4e8;
             padding: 30px 0;
@@ -39,11 +37,10 @@
             cursor: pointer;
         }
 
-        /* 로고 이미지 */
         header .logo img {
             width: 80px;
             height: 80px;
-            margin-right: 10px; /* 텍스트와 간격 */
+            margin-right: 10px;
         }
 
         header .logo-text {
@@ -122,7 +119,6 @@
             margin-top: 5px;
         }
 
-        /* Hero 섹션 */
         .hero {
             background-color: #e1e4e8;
             padding: 60px 20px;
@@ -144,7 +140,6 @@
             color: #555;
         }
 
-        /* 카드 섹션 */
         .category-row {
             display: flex;
             justify-content: space-between;
@@ -159,7 +154,7 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             text-align: center;
-            width: 18%; /* 크기 조정 */
+            width: 18%;
         }
 
         .category-box h3 {
@@ -167,7 +162,6 @@
             margin-bottom: 10px;
         }
 
-        /* 다섯 개 카드의 더보기 버튼 배치 */
         .category-box .more-btn {
             position: absolute;
             top: 45%;
@@ -202,7 +196,6 @@
             background-color: #0056b3;
         }
 
-        /* 팝업 */
         .modal {
             position: fixed;
             top: 50%;
@@ -238,7 +231,6 @@
             z-index: 9;
         }
 
-        /* 세 가지 주요 카드 */
         .dashboard-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -257,7 +249,6 @@
             margin-top: 20px;
         }
 
-        /* 생산량, 수요량 더보기 버튼 조정 */
         .graph-container h2 {
             display: flex;
             align-items: center;
@@ -300,113 +291,8 @@
             color: #000000;
         }
 
-        /* 챗봇 버튼 스타일 */
-        #chatbot-button {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #0084FF;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 1000;
-        }
-
-        /* 챗봇 창 스타일 */
-        #chatbot-container {
-            display: none;
-            position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 350px;
-            height: 500px;
-            border: 1px solid #ddd;
-            border-radius: 15px;
-            background-color: white;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        /* 챗봇 헤더 스타일 */
-        #chatbot-header {
-            background-color: #0084FF;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        #close-chatbot {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 20px;
-        }
-
-        /* 메시지 영역 스타일 */
-        #chatbot-messages {
-            padding: 10px;
-            height: 400px;
-            overflow-y: scroll;
-            background-color: #f7f7f7;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 사용자 메시지 스타일 (오른쪽) */
-        .user-message {
-            align-self: flex-end;
-            background-color: #9FE2BF;
-            color: black;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 5px;
-            max-width: 70%;
-            text-align: right;
-        }
-
-        /* 봇 메시지 스타일 (왼쪽) */
-        .bot-message {
-            align-self: flex-start;
-            background-color: #E0E0E0;
-            color: black;
-            padding: 10px;
-            border-radius: 10px;
-            margin: 5px;
-            max-width: 70%;
-        }
-
-        /* 입력란 스타일 */
-        #chatbot-input-container {
-            display: flex;
-            padding: 10px;
-            border-top: 1px solid #ddd;
-        }
-
-        #chatbot-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-        }
-
-        #send-button {
-            background-color: #0084FF;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin-left: 10px;
-            border-radius: 10px;
-            cursor: pointer;
+        #productionChart, #demandChart {
+            height: 300px;
         }
     </style>
 </head>
@@ -414,21 +300,15 @@
 
     <!-- 헤더 -->
     <header>
-        <!-- 로고 및 텍스트 박스 -->
         <div class="logo">
-        <a th:href="@{/}">
-            <!-- 로고 이미지 -->
-            <img th:src="@{/images/logo.png}" alt="logo">
-            <!-- 로고 텍스트 -->
-            <div class="logo-text">
+            <a th:href="@{/}">
+                <img th:src="@{/images/logo.png}" alt="logo">
+                <div class="logo-text">
+                    <span>JDT</span>
+                    <span>농수산물 데이터 제공 서비스</span>
+                </div>
             </a>
-                <span>JDT</span>
-                <span>농수산물 데이터 제공 서비스</span>
-            </div>
-            
         </div>
-
-        <!-- 네비게이션 메뉴 -->
         <nav>
             <a th:href="@{/about/about}">About Us</a> 
             <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
@@ -436,16 +316,12 @@
             <a th:href="@{/news/newsList}">뉴스</a> 
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
-
-        <!-- 로그인/회원가입 -->
         <div class="actions">
-            <!-- 인증이 되지 않은 사람 -->
             <li sec:authorize="isAnonymous()">
                 <a th:href="@{/user/join}">회원가입</a>
                 <span>|</span>
                 <a th:href="@{/user/login}">로그인</a>
             </li>
-            <!-- 인증이 된 사람 -->
             <li sec:authorize="isAuthenticated()">
                 <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
@@ -459,37 +335,6 @@
         <h1>DashBoard</h1>
         <p>다양한 품목별 무역데이터를 제공받을 수 있는 대시보드 페이지입니다.<br>아래 메뉴에서 품목을 선택해주세요.</p>
     </section>
-
-    <!-- 다섯 개의 카테고리 카드 -->
-    <div class="category-row">
-        <div class="category-box">
-            <h3>채소</h3>
-            <button class="more-btn" onclick="showPopup('채소', ['파프리카', '딸기', '토마토'])"></button>
-        </div>
-        <div class="category-box">
-            <h3>과실/임산물</h3>
-            <button class="more-btn" onclick="showPopup('과실/임산물', ['배', '유자(차)', '사과', '포도', '밤'])"></button>
-        </div>
-        <div class="category-box">
-            <h3>신선기타</h3>
-            <button class="more-btn" onclick="showPopup('신선기타', ['인삼', '김치', '새송이버섯'])"></button>
-        </div>
-        <div class="category-box">
-            <h3>가공</h3>
-            <button class="more-btn" onclick="showPopup('가공', ['과자', '라면', '음료'])"></button>
-        </div>
-        <div class="category-box">
-            <h3>수산물</h3>
-            <button class="more-btn" onclick="showPopup('수산물', ['참치', '넙치', '전복', '김'])"></button>
-        </div>
-    </div>
-
-    <!-- 팝업 창 -->
-    <div id="popup" class="modal">
-        <h2 id="popupTitle">카테고리</h2>
-        <div class="button-list" id="popupButtons"></div>
-    </div>
-    <div id="overlay" class="overlay" onclick="closePopup()"></div>
 
     <!-- 수출/수입증감률 및 무역수지 카드 -->
     <div class="dashboard-container">
@@ -510,131 +355,45 @@
     <!-- 차트 섹션 -->
     <div class="graph-row">
         <div class="graph-container">
-            <h2>생산량 <button class="more-btn" onclick="showPopup('생산량')"></button></h2>
+            <h2>생산량</h2>
             <canvas id="productionChart"></canvas>
         </div>
         <div class="graph-container">
-            <h2>수요량 <button class="more-btn" onclick="showPopup('수요량')"></button></h2>
+            <h2>수요량</h2>
             <canvas id="demandChart"></canvas>
         </div>
     </div>
 
-    <!-- 챗봇 버튼 -->
-    <button id="chatbot-button">💬</button>
-
-    <!-- 챗봇 컨테이너 -->
-    <div id="chatbot-container">
-        <div id="chatbot-header">
-            JDT 도우미 챗봇
-            <button id="close-chatbot">&times;</button>
-        </div>
-        <div id="chatbot-messages"></div>
-        <div id="chatbot-input-container">
-            <input type="text" id="chatbot-input" placeholder="메시지를 입력하세요..." />
-            <button id="send-button">Send</button>
-        </div>
-    </div>
-
     <script>
-        function showPopup(title, items = []) {
-            document.getElementById('popupTitle').textContent = title;
-            const buttonList = document.getElementById('popupButtons');
-            buttonList.innerHTML = ''; // 기존 버튼 제거
-            items.forEach(item => {
-                const button = document.createElement('button');
-                button.textContent = item;
-                buttonList.appendChild(button);
-            });
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-        }
+        // 데이터 로드 및 차트 업데이트
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/api/production-data')
+                .then(response => response.json())
+                .then(data => {
+                    const years = data.map(item => item.year);
+                    const productionValues = data.map(item => item.totalProduction);
 
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
-
-        new Chart(document.getElementById('productionChart'), {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023'],
-                datasets: [{
-                    label: '생산량',
-                    data: [100, 200, 150, 250, 300],
-                    borderColor: '#007bff',
-                    fill: false
-                }]
-            }
-        });
-
-        new Chart(document.getElementById('demandChart'), {
-            type: 'line',
-            data: {
-                labels: ['2019', '2020', '2021', '2022', '2023'],
-                datasets: [{
-                    label: '수요량',
-                    data: [150, 180, 200, 220, 250],
-                    borderColor: '#007bff',
-                    fill: false
-                }]
-            }
-        });
-
-        // 챗봇 버튼과 창 제어
-        const chatbotButton = document.getElementById('chatbot-button');
-        const chatbotContainer = document.getElementById('chatbot-container');
-        const closeButton = document.getElementById('close-chatbot');
-
-        chatbotButton.addEventListener('click', () => {
-            chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'block' : 'none';
-        });
-
-        closeButton.addEventListener('click', () => {
-            chatbotContainer.style.display = 'none';
-        });
-
-        // 서버에 메시지 전송 및 응답 받기
-        async function sendMessage() {
-            const userInput = document.getElementById("chatbot-input").value;
-            if (!userInput) return;
-
-            // 사용자 메시지 추가
-            const messageContainer = document.getElementById("chatbot-messages");
-            const userMessage = document.createElement("div");
-            userMessage.classList.add("user-message");
-            userMessage.textContent = userInput;
-            messageContainer.appendChild(userMessage);
-
-            // 서버로 POST 요청 보내기
-            const response = await fetch('http://localhost:8000/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ message: userInput })
-            });
-            
-            const data = await response.json();
-
-            // 챗봇 응답 추가
-            const botMessage = document.createElement("div");
-            botMessage.classList.add("bot-message");
-            botMessage.textContent = data.response;
-            messageContainer.appendChild(botMessage);
-
-            // 입력 창 비우기
-            document.getElementById("chatbot-input").value = '';
-            messageContainer.scrollTop = messageContainer.scrollHeight;  // 스크롤 하단으로 이동
-        }
-
-        // 전송 버튼 클릭 이벤트
-        document.getElementById("send-button").addEventListener("click", sendMessage);
-
-        // 엔터 키 입력 시 전송
-        document.getElementById("chatbot-input").addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                sendMessage();
-            }
+                    const productionChart = document.getElementById('productionChart').getContext('2d');
+                    new Chart(productionChart, {
+                        type: 'line',
+                        data: {
+                            labels: years,
+                            datasets: [{
+                                label: '생산량',
+                                data: productionValues,
+                                borderColor: '#007bff',
+                                fill: false
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                x: { title: { display: true, text: '연도' } },
+                                y: { title: { display: true, text: '생산량' } }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Error fetching production data:', error));
         });
     </script>
 

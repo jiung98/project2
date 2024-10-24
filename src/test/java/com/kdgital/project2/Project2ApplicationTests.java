@@ -12,7 +12,7 @@ import com.kdgital.project2.entity.CsAnswerEntity;
 import com.kdgital.project2.entity.CsEntity;
 import com.kdgital.project2.entity.DemandEntity;
 import com.kdgital.project2.entity.FaqEntity;
-import com.kdgital.project2.entity.MainServiceEntity;
+import com.kdgital.project2.entity.dashboardEntity;
 import com.kdgital.project2.entity.UserEntity;
 import com.kdgital.project2.entity.NewsEntity;
 import com.kdgital.project2.entity.RegionEntity;
@@ -23,7 +23,7 @@ import com.kdgital.project2.repository.CsAnswerRepository;
 import com.kdgital.project2.repository.CsRepository;
 import com.kdgital.project2.repository.DemandRepository;
 import com.kdgital.project2.repository.FaqRepository;
-import com.kdgital.project2.repository.MainServiceRepository;
+import com.kdgital.project2.repository.dashboardRepository;
 import com.kdgital.project2.repository.MemberRepository;
 import com.kdgital.project2.repository.NewsRepository;
 import com.kdgital.project2.repository.RegionRepository;
@@ -55,7 +55,7 @@ class Project2ApplicationTests {
 	private FaqRepository gg;
 	
 	@Autowired
-	private MainServiceRepository hh;
+	private dashboardRepository hh;
 	
 	@Autowired
 	private NewsRepository ii;
