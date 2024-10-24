@@ -37,7 +37,7 @@ public class CsService {
 
 	/**
 	 * DB에 게시글 저장
-	 * @param boardDTO : 저장해야하는 게시글
+	 * @param csDTO : 저장해야하는 게시글
 	 */
 	public void insertCs(CsDTO csDTO) {
 		log.info("저장 경로: {}", uploadPath);
@@ -77,7 +77,7 @@ public class CsService {
 		// -1을 한 이유 : DB page의 위치의 값은 0부터 시작하므로
 		// 사용자가 1페이지를 요청하면 DB페이지를 0페이지를 가져와야 한다.
 
-		// List<BoardDTO> list = new ArrayList<>();
+		// List<csDTO> list = new ArrayList<>();
 
 		// 3) 페이징이 추가된 조회
 		Page<CsEntity> entityList = null;
@@ -88,7 +88,7 @@ public class CsService {
 					searchWord, 
 					PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "csNum") ));
 			break;
-		case "boardWriter"  :
+		case "csWriter"  :
 			entityList = csRepository.findByCsWriterContains(
 					searchWord, 
 					PageRequest.of(page, pageLimit, Sort.by(Sort.Direction.DESC, "csNum") ));
@@ -101,31 +101,31 @@ public class CsService {
 		}
 
 		/* 2) 검색기능이 추가된 조회
-		List<BoardEntity> entityList = null;
+		List<csEntity> entityList = null;
 
 		switch(searchItem) {
-		case "boardTitle"   :
-			entityList = boardRepository.findByBoardTitleContains(searchWord, Sort.by(Sort.Direction.DESC, "boardNum"));
+		case "csTitle"   :
+			entityList = csRepository.findBycsTitleContains(searchWord, Sort.by(Sort.Direction.DESC, "csNum"));
 			break;
-		case "boardWriter"  :
-			entityList = boardRepository.findByBoardWriterContains(searchWord, Sort.by(Sort.Direction.DESC, "boardNum"));
+		case "csWriter"  :
+			entityList = csRepository.findBycsWriterContains(searchWord, Sort.by(Sort.Direction.DESC, "csNum"));
 			break;
-		case "boardContent" :
-			entityList = boardRepository.findByBoardContentContains(searchWord, Sort.by(Sort.Direction.DESC, "boardNum"));
+		case "csContent" :
+			entityList = csRepository.findBycsContentContains(searchWord, Sort.by(Sort.Direction.DESC, "csNum"));
 			break;
 		}
 		 */
 
 
 		// 1) 1단계 - 단순 조회
-		// List<BoardEntity> entityList = boardRepository.findAll(Sort.by(Sort.Direction.DESC, "boardNum"));
+		// List<csEntity> entityList = csRepository.findAll(Sort.by(Sort.Direction.DESC, "csNum"));
 
 		// Entity를 DTO로 바꾸는 작업 수행
 
 		Page<CsDTO> list = null;
 
 		// 일반 기능만 가지고 있는 형태
-		// entityList.forEach((entity) -> list.add(BoardDTO.toDTO(entity)));
+		// entityList.forEach((entity) -> list.add(csDTO.toDTO(entity)));
 
 		// 페이징 형태의 list로 변환
 		// 목록에서 사용할 필요한 데이터만 간추림(생성자 만듦)
@@ -144,14 +144,14 @@ public class CsService {
 		return list;
 	}
 	/**
-	 * PK에 해당하는 boardNum 값을 이용해 글 한 개 조회
-	 * @param boardNum
+	 * PK에 해당하는 csNum 값을 이용해 글 한 개 조회
+	 * @param csNum
 	 * @return
 	 */
 	public CsDTO selectOne(Long csNum) {
 		Optional<CsEntity> entity = csRepository.findById(csNum);
 
-		// 데이터를 꺼내 BoardDTO로 변환
+		// 데이터를 꺼내 csDTO로 변환
 		if(entity.isPresent()) {
 			CsEntity temp = entity.get();
 			return CsDTO.toDTO(temp);
@@ -160,8 +160,8 @@ public class CsService {
 	}
 
 	/**
-	 * 전달받은 글번호(boardNum)을 DB 에서 삭제
-	 * @param boardNum
+	 * 전달받은 글번호(csNum)을 DB 에서 삭제
+	 * @param csNum
 	 */
 	@Transactional
 	public void deleteOne(Long csNum) {
@@ -190,7 +190,7 @@ public class CsService {
 	 *    1) 저장 작업 - 원래 글에 첨부파일이 없는 경우
 	 *    2) 또는 삭제 후 다른 파일로 수정하는 작업 - 이전에 첨부 파일이 있는 상태에서
 	 *       다른 파일을 첨부 했을 경우
-	 * @param board
+	 * @param cs
 	 * @return
 	 */
 	@Transactional
@@ -245,7 +245,7 @@ public class CsService {
 
 	/**
 	 * 조회수 증가
-	 * @param boardNum
+	 * @param csNum
 	 */
 	@Transactional
 	public void incrementHitcount(Long csNum) {
@@ -258,7 +258,7 @@ public class CsService {
 	}
 	/**
 	 * 게시글은 그대로, 파일만 삭제
-	 * @param boardNum : 파일이 저장된 게시글번호
+	 * @param csNum : 파일이 저장된 게시글번호
 	 */
 	@Transactional
 	public void deleteFile(Long csNum) {

@@ -10,14 +10,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kdgital.project2.dto.BoardDTO;
 import com.kdgital.project2.dto.LoginUserDetails;
 import com.kdgital.project2.dto.NewsDTO;
+import com.kdgital.project2.entity.NewsEntity;
 import com.kdgital.project2.service.NewsService;
 import com.kdgital.project2.util.PageNavigator;
 
@@ -67,13 +65,14 @@ public class NewsController {
 		model.addAttribute("searchItem", searchItem);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("navi", navi);
+		
 
 		// 인증을 받은 사용자
 		if(loginUser != null) {
 			model.addAttribute("loginName",loginUser.getUserName());
 		}
 		return "news/newsListMini";
-	}
+	} 
 
 //	 // 전체 뉴스 목록을 화면에 보여주는 메서드
 //    @GetMapping("/newsListMini")

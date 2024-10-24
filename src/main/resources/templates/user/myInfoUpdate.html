@@ -21,24 +21,27 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #e1e4e8; /* 메인 화면과 동일한 배경색 */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: #333; /* 기본 글자 색상 */
-        }
-		 /* 헤더 스타일 */
+   			 font-family: 'Arial', sans-serif;
+    		 background-color: #f5f5f5; /* 밝은 회색 배경 */
+			 color: #333;
+			 margin: 0;
+		     padding: 0;
+		     display: flex;
+	         flex-direction: column;
+		     min-height: 100vh; /* 화면 전체 높이를 설정 */
+}
+        
+
+/* 헤더 스타일 */
         header {
-            background-color: #e1e4e8; /* 바디와 동일한 배경색 */
-            padding: 30px 0;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end; /* 텍스트를 더 아래로 정렬 */
-            position: relative;
-            border-bottom: 1px solid #dcdcdc; /* 구분선 */
-        }
+		    background-color: #e1e4e8; /* 메인화면과 동일한 배경색 */
+		    padding: 30px 0;
+		    display: flex;
+		    justify-content: center;
+		    align-items: flex-end;
+		    position: relative;
+		    border-bottom: 1px solid #dcdcdc;
+}
 
         /* 로고 및 텍스트 박스 */
         header .logo {
@@ -47,134 +50,208 @@
             display: flex;
             align-items: center;
             font-size: 20px;
-            cursor: pointer; /* 로고도 버튼처럼 변환 */
+            cursor: pointer; /* 커서가 버튼처럼 보이도록 */
         }
 
-        /* 로고 이미지 */
+       /* 로고 이미지 */
         header .logo img {
             width: 80px;
             height: 80px;
             margin-right: 10px; /* 텍스트와 간격 */
         }
-
-        /* 로고 텍스트 부분 */
+        /* 로고 텍스트 */
         header .logo-text {
             display: flex;
             flex-direction: column;
         }
 
         header .logo-text span:first-child {
-            font-size: 14px; /* 작은 글씨 */
+            font-size: 14px;
             color: #555;
         }
 
         header .logo-text span:last-child {
-            font-size: 18px; /* 큰 글씨 */
+            font-size: 18px;
             font-weight: bold;
-        }
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background-color: #ffffff; /* 흰색 배경 */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 그림자 */
-            text-align: center;
+            color: #000;
         }
 
-        h2 {
-            margin-bottom: 10px;
-            font-size: 24px; /* 제목 폰트 크기 */
-            font-weight: bold;
-            color: #333; /* 검정색 */
-        }
-
-        .welcome-message {
-            font-size: 14px; /* 로그인 페이지와 동일한 글자 크기 */
-            color: #007bff; /* 파란색 */
-            margin-bottom: 20px; /* 하단 여백 */
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            margin-bottom: 6px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-        /* 버튼 스타일 */
-        .btn-group {
+        /* 네비게이션 메뉴 */
+        header nav {
             display: flex;
-            justify-content: space-between;
-            gap: 10px;
+            gap: 60px; /* 메뉴 간격을 더 넓게 설정 */
+            justify-content: center;
         }
 
-        .btn {
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 48%;
-        }
-
-        .btn-primary {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-light {
-            background-color: #e0e0e0;
+        /* 네비게이션 메뉴 스타일 */
+        header nav a {
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Arial', sans-serif;
             color: #333;
+            text-decoration: none;
+            padding: 10px;
+            line-height: 2;
+            transition: color 0.3s;
         }
 
-        .btn-light:hover {
-            background-color: #cccccc;
+        header nav a:hover {
+            color: #007bff;
+            cursor: pointer;
         }
 
-        .error-message {
-            font-size: 12px;
-            color: #ff0000;
-            text-align: left;
-            margin-top: 5px;
+        /* 로그인/회원가입 섹션 */
+        header .actions {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 16px;
+            list-style: none;
+            color: #000000;
+            gap: 0px;
         }
 
-        .form-group .optional {
-            color: #666; /* 선택사항 텍스트 색상 */
-            font-size: 12px;
-            margin-left: 4px;
+        header .actions a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
         }
 
-        /* 아이콘과 텍스트 라벨 사이의 간격을 조정 */
-        .icon-label-container {
+        header .actions a:hover {
+            color: #007bff;
+        }
+
+        header .actions span.divider {
+            margin: 0 10px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        header .actions .logged-out {
             display: flex;
             align-items: center;
-            gap: 10px;
+            margin-bottom: 5px; /* 로그인/회원가입과 다음 섹션 간격을 5px로 설정 */
         }
 
-        /* 아이콘 스타일 */
-        .icon-label-container i {
-            font-size: 1.2em;
-            color: #007bff; /* 파란색 아이콘 */
+        header .actions .logged-in {
+            margin-top: 5px; /* 위쪽과 간격을 5px로 설정 */
         }
+
+        /* 구분선 스타일 */
+        header .divider {
+            margin: 0 8px;
+            color: #999;
+        }
+        
+
+.main-content {
+    flex: 1; /* 남은 공간을 차지 */
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%;
+    margin-top: 50px; /* 헤더 아래에 적당한 여백 */
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff; /* 흰색 배경 */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 그림자 */
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 24px; /* 제목 폰트 크기 */
+    font-weight: bold;
+    color: #333; /* 검정색 */
+}
+
+.welcome-message {
+    font-size: 14px; /* 로그인 페이지와 동일한 글자 크기 */
+    color: #007bff; /* 파란색 */
+    margin-bottom: 20px; /* 하단 여백 */
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* 버튼 스타일 */
+.btn-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 48%;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-light {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-light:hover {
+    background-color: #cccccc;
+}
+
+.error-message {
+    font-size: 12px;
+    color: #ff0000;
+    text-align: left;
+    margin-top: 5px;
+}
+
+/* 아이콘과 텍스트 라벨 사이의 간격을 조정 */
+.icon-label-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-label-container i {
+    font-size: 1.2em;
+    color: #007bff; /* 파란색 아이콘 */
+}
     </style>
 </head>
 
@@ -217,6 +294,7 @@
             </li>
         </div>
     </header>
+    <div class="main-content">
     <div class="container">
         <h2>회원정보 수정</h2>
         <p class="welcome-message">JDT 농수산물 데이터 제공 서비스</p> <!-- 로그인 페이지와 동일한 문구 추가 -->
@@ -267,7 +345,7 @@
                 <input type="reset" id="resetBtn" value="취소" class="btn btn-light">
             </div>
         </form>
-
+ </div>
     </div>
 </body>
 
