@@ -20,10 +20,10 @@ import lombok.extern.slf4j.Slf4j;
 public class dashboardController {
     private final dashboardService service;
 
-    @GetMapping("/dashboard")
-    public String dashboardPage(Model model) {
-        List<dashboardDTO> productionData = service.getYearlyProductionData();
-        model.addAttribute("productionData", productionData);  // 생산량 데이터를 모델에 추가
-        return "dashboard/dashboard";
-    }
+//    @GetMapping("/dashboard")
+//    public String dashboardPage(Model model) {
+//        List<dashboardDTO> productionData = service.getYearlyProductionData();
+//        model.addAttribute("productionData", productionData);  // 생산량 데이터를 모델에 추가
+//        return "dashboard/dashboard";
+//    }
 }

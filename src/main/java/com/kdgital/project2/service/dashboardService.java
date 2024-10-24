@@ -20,16 +20,16 @@ public class dashboardService {
 
     // 저장 메서드
     public void saveMainService(dashboardDTO dto) {
-        RegionEntity regionEntity = regionService.findByCode(dto.getRegionName());
-        dashboardEntity entity = dashboardDTO.toEntity(dto, regionEntity);
-        repository.save(entity);
+      //  RegionEntity regionEntity = regionService.findByCode(dto.getRegionName());
+       // dashboardEntity entity = dashboardDTO.toEntity(dto, regionEntity);
+      // repository.save(entity);
     }
 
-    // 연도별 생산량 데이터 조회
-    public List<dashboardDTO> getYearlyProductionData() {
-        List<dashboardEntity> entities = repository.findAll();
-        return entities.stream()
-                .map(dashboardEntity::toDTO)
-                .collect(Collectors.toList());
-    }
+//    // 연도별 생산량 데이터 조회
+//    public List<dashboardDTO> getYearlyProductionData() {
+//        List<dashboardEntity> entities = repository.findAll();
+//        return entities.stream()
+//                .map(dashboardEntity::toDTO)
+//                .collect(Collectors.toList());
+//    }
 }
