@@ -291,9 +291,22 @@
             color: #000000;
         }
 
-        #productionChart, #demandChart {
-            height: 300px;
+         .graph-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            width: 60%;
+            text-align: center;  /* 그래프를 중앙 정렬 */
         }
+
+        /* 차트 크기 조정 */
+        #productionChart, #demandChart, #tradeChart, #importChart {
+            width: 90%;  /* 너비를 50%로 조정 */
+            height: 300px;  /* 높이를 200px로 줄임 */
+            margin: 0 auto;  /* 중앙 정렬 */
+        } 
     </style>
 </head>
 <body>
@@ -304,10 +317,11 @@
             <a th:href="@{/}">
                 <img th:src="@{/images/logo.png}" alt="logo">
                 <div class="logo-text">
+                </a>
                     <span>JDT</span>
                     <span>농수산물 데이터 제공 서비스</span>
                 </div>
-            </a>
+            
         </div>
         <nav>
             <a th:href="@{/about/about}">About Us</a> 
@@ -353,49 +367,239 @@
     </div>
 
     <!-- 차트 섹션 -->
-    <div class="graph-row">
-        <div class="graph-container">
-            <h2>생산량</h2>
-            <canvas id="productionChart"></canvas>
-        </div>
-        <div class="graph-container">
-            <h2>수요량</h2>
-            <canvas id="demandChart"></canvas>
-        </div>
+     <<!-- 차트 섹션 -->
+     <!-- 생산량 차트 -->
+    <div class="graph-container">
+        <h2>생산량 차트</h2>
+        <canvas id="productionChart"></canvas> <!-- 생산량 차트를 그릴 캔버스 -->
+        
     </div>
 
+    <!-- 수요량 차트 -->
+    <div class="graph-container">
+        <h2>수요량 차트</h2>
+        <canvas id="demandChart"></canvas> <!-- 수요량 차트를 그릴 캔버스 -->
+    </div>
+    
+    <!-- 무역 차트 -->
+    <div class="graph-container">
+        <h2>수출 차트</h2>
+        <canvas id="tradeChart"></canvas> <!-- 무역 차트를 위한 캔버스 -->
+    </div>
+    
+    <div class="graph-container">
+    <h2>수입 차트 </h2>
+    <canvas id="importChart"></canvas> <!-- 수입 차트를 위한 캔버스 -->
+	</div>
     <script>
-        // 데이터 로드 및 차트 업데이트
         document.addEventListener("DOMContentLoaded", function () {
-            fetch('/api/production-data')
-                .then(response => response.json())
+            // 서버로부터 데이터를 fetch를 사용해 가져옴
+            fetch('/api/production-data') // API 엔드포인트
+                .then(response => response.json()) // JSON 형식으로 변환
                 .then(data => {
-                    const years = data.map(item => item.year);
-                    const productionValues = data.map(item => item.totalProduction);
+                    // 데이터 확인을 위한 console 출력
+                   // console.log("서버로부터 받은 데이터:", data);
 
-                    const productionChart = document.getElementById('productionChart').getContext('2d');
-                    new Chart(productionChart, {
-                        type: 'line',
+                    // mainDate와 production 값을 배열로 분리
+                    const mainDates = data.map(item => item.mainDate); // X축 데이터 (날짜)
+                    const productionValues = data.map(item => item.production); // Y축 데이터 (생산량)
+
+                    // 배열이 비어 있지 않은지 확인
+                    if (mainDates.length === 0 || productionValues.length === 0) {
+                        console.error("데이터가 없습니다.");
+                        return;
+                    }
+
+                    // Chart.js를 사용해 차트 생성
+                    const ctx = document.getElementById('productionChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line', // 차트 유형: 선형 차트
                         data: {
-                            labels: years,
+                            labels: mainDates, // X축: 날짜
                             datasets: [{
-                                label: '생산량',
-                                data: productionValues,
-                                borderColor: '#007bff',
-                                fill: false
+                                label: '생산량',  // 차트 제목
+                                data: productionValues,  // Y축: 생산량
+                                borderColor: '#007bff',  // 선 색상
+                                backgroundColor: 'rgba(0, 123, 255, 0.2)',  // 배경 색상
+                                fill: true,  // 채우기 여부
+                                tension: 0.1  // 곡선 정도
                             }]
                         },
                         options: {
+                            responsive: true, // 반응형 설정
                             scales: {
-                                x: { title: { display: true, text: '연도' } },
-                                y: { title: { display: true, text: '생산량' } }
+                                x: { 
+                                    title: { display: true, text: '날짜' }  // X축 제목
+                                },
+                                y: { 
+                                    title: { display: true, text: '생산량' },  // Y축 제목
+                                    beginAtZero: true // Y축이 0부터 시작
+                                }
                             }
                         }
                     });
                 })
-                .catch(error => console.error('Error fetching production data:', error));
+                .catch(error => {
+                    console.error('데이터를 가져오는 중 오류 발생:', error);
+                });
         });
     </script>
+ <script>
 
+ document.addEventListener("DOMContentLoaded", function () {
+ 		    // 서버로부터 수요량 데이터를 가져와 차트를 그리는 함수
+ 		    fetch('/api/demand-data')  // 수요량 API 엔드포인트
+ 		        .then(response => response.json())
+ 		        .then(data => {
+ 		            console.log("서버로부터 받은 Demand 데이터:", data);
+
+ 		            // demand_date와 demand 값을 배열로 분리
+ 		            const demandDates = data.map(item => item.demandDate);  // X축: 날짜
+ 		            const demandValues = data.map(item => item.demand);  // Y축: 수요량
+
+ 		            // 데이터가 비어있는지 확인
+ 		            if (demandDates.length === 0 || demandValues.length === 0) {
+ 		                console.error('수요량 데이터가 없습니다.');
+ 		                return;
+ 		            }
+
+ 		            // Chart.js로 수요량 차트 그리기
+ 		            const ctxDemand = document.getElementById('demandChart').getContext('2d');
+ 		            new Chart(ctxDemand, {
+ 		                type: 'line',
+ 		                data: {
+ 		                    labels: demandDates,  // X축: 날짜
+ 		                    datasets: [{
+ 		                        label: '날짜별 수요량',  // 차트 제목
+ 		                        data: demandValues,  // Y축: 수요량 데이터
+ 		                        borderColor: '#ff6384',  // 선 색상
+ 		                        backgroundColor: 'rgba(255, 99, 132, 0.2)',  // 배경 색상
+ 		                        fill: true,  // 선 아래 영역 채우기
+ 		                        tension: 0.1  // 곡선 정도
+ 		                    }]
+ 		                },
+ 		                options: {
+ 		                    responsive: true,
+ 		                    scales: {
+ 		                        x: {
+ 		                            title: {
+ 		                                display: true,
+ 		                                text: '날짜'
+ 		                            }
+ 		                        },
+ 		                        y: {
+ 		                            title: {
+ 		                                display: true,
+ 		                                text: '수요량'
+ 		                            },
+ 		                            beginAtZero: true  // Y축을 0부터 시작
+ 		                        }
+ 		                    }
+ 		                }
+ 		            });
+ 		        })
+ 		        .catch(error => console.error('Demand 데이터를 가져오는 중 오류 발생:', error));
+ 		});
+    </script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    // Trade 데이터를 가져와 차트를 그리는 함수
+	    fetch('/api/trade-data')  // Trade API 엔드포인트
+	        .then(response => response.json())
+	        .then(data => {
+	            console.log("서버로부터 받은 Trade 데이터:", data);
+
+	            // trade_date와 export 값을 배열로 분리
+	            const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
+	            const exportValues = data.map(item => item.export);  // Y축: export 합계
+
+	            // Chart.js로 Trade 차트 그리기
+	            const ctxTrade = document.getElementById('tradeChart').getContext('2d');
+	            new Chart(ctxTrade, {
+	                type: 'line',
+	                data: {
+	                    labels: tradeDates,  // X축: trade_date
+	                    datasets: [{
+	                        label: '날짜별 수출 합계',  // 차트 제목
+	                        data: exportValues,  // Y축: export 합계 데이터
+	                        borderColor: '#28a745',  // 선 색상
+	                        backgroundColor: 'rgba(40, 167, 69, 0.2)',  // 배경 색상
+	                        fill: true,  // 선 아래 영역 채우기
+	                        tension: 0.1  // 곡선 정도
+	                    }]
+	                },
+	                options: {
+	                    responsive: true,
+	                    scales: {
+	                        x: {
+	                            title: {
+	                                display: true,
+	                                text: '날짜'  // X축 제목
+	                            }
+	                        },
+	                        y: {
+	                            title: {
+	                                display: true,
+	                                text: '수출 합계'  // Y축 제목
+	                            },
+	                            beginAtZero: true  // Y축을 0부터 시작
+	                        }
+	                    }
+	                }
+	            });
+	        })
+	        .catch(error => console.error('Trade 데이터를 가져오는 중 오류 발생:', error));
+	});
+	</script>
+	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+	    // Import 데이터를 가져와 차트를 그리는 함수
+	    fetch('/api/import-data')  // API에서 수입 데이터를 가져옴
+	        .then(response => response.json())
+	        .then(data => {
+	            console.log("서버로부터 받은 Import 데이터:", data);  // 콘솔에 데이터 확인
+
+	            // trade_date와 import 값을 배열로 분리
+	            const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
+	            const importValues = data.map(item => item.importValue);  // Y축: import 합계
+
+	            // Chart.js로 Import 차트 그리기
+	            const ctxImport = document.getElementById('importChart').getContext('2d');
+	            new Chart(ctxImport, {
+	                type: 'line',
+	                data: {
+	                    labels: tradeDates,  // X축: trade_date
+	                    datasets: [{
+	                        label: '날짜별 수입 합계',  // 차트 제목
+	                        data: importValues,  // Y축: import 합계 데이터
+	                        borderColor: '#6f42c1',  // 선 색상
+	                        backgroundColor: 'rgba(111, 66, 193, 0.2)',  // 배경 색상
+	                        fill: true,  // 선 아래 영역 채우기
+	                        tension: 0.1  // 곡선 정도
+	                    }]
+	                },
+	                options: {
+	                    responsive: true,
+	                    scales: {
+	                        x: {
+	                            title: {
+	                                display: true,
+	                                text: '날짜'  // X축 제목
+	                            }
+	                        },
+	                        y: {
+	                            title: {
+	                                display: true,
+	                                text: '수입 합계'  // Y축 제목
+	                            },
+	                            beginAtZero: true  // Y축을 0부터 시작
+	                        }
+	                    }
+	                }
+	            });
+	        })
+	        .catch(error => console.error('Import 데이터를 가져오는 중 오류 발생:', error));
+	});
+	</script>
 </body>
 </html>

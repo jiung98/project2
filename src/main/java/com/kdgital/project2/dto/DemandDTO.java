@@ -45,4 +45,9 @@ public class DemandDTO {
     			.build();  
     			
     }
+    // 생성자 추가: JPQL 쿼리에서 사용될 생성자
+    public DemandDTO(LocalDate demandDate, Long demand) {
+        this.demandDate = demandDate;
+        this.demand = demand;
+    }
 }

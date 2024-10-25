@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>뉴스 목록</title>
+    <script defer th:src="@{/script/news.js}"></script>
     <style>
         * {
             margin: 0;
@@ -364,28 +365,38 @@
             </div> <!-- end .search-->
         </div>
 
-        <!-- 뉴스 목록 테이블 -->
+<!-- 뉴스 목록 테이블 -->
         <table>
-            <thead>
-                <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>작성일</th>  
-                </tr>
-            </thead>
-             <tbody>
-        		<tr th:each="news : ${newsList}">
+                 <tr>
+	                    <th >글번호</th>
+	                    <th>제목</th>
+	                    <th class="media">작성자</th>
+	                    <th class="postdate">작성일</th>
+	                </tr>
+	                <th:block th:unless="${#lists.isEmpty(list)}">
+       				
+	                <!-- 반복 구간-->
+	                <tr th:each="news, status : ${list}">  
+	                    <td class="no" th:text="${(list.number+1) * list.size - (list.size - status.count)}">1</td>
+	                    
+            		<td><a th:href="${news.url}" th:text="${news.title}" target="_blank"></a></td>
+            		<td th:text="${news.media}"></td>
+            		
+            		<td th:text="${news.postdate}"></td>
+	                </tr>
+	                </th:block>
+	            
+            <!--   <tbody>
+        		<tr th:each="news : ${list}">
         	    	<td th:text="${news.serno}"></td>
             		<td><a th:href="${news.url}" th:text="${news.title}" target="_blank"></a></td>
             		<td th:text="${news.media}"></td>
             		
             		<td th:text="${news.postdate}"></td>
         		</tr>
-    		</tbody>
+    		</tbody>-->
         </table>
-
-    </div>
+    
     <!-- Page Navigation -->
     <nav class="pagination">
         <!-- 앞 그룹 -->
@@ -449,5 +460,6 @@
 			<span class="page-no navi" >&raquo;</span>
 		</th:block>
     </nav>
+    </div>
 </body>
 </html>

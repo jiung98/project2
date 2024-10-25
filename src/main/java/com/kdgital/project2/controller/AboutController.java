@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
-@RequestMapping("/about")
+@RequestMapping
 @Slf4j
 @RequiredArgsConstructor
 public class AboutController {
@@ -18,10 +18,14 @@ public class AboutController {
 	 * about us을 위한 화면 요청
 	 * @return
 	 */
-	@GetMapping("/about")
+	@GetMapping("/about/about")
 	public String join() {
 		
 		return "about/about";
 	}
-
+	@GetMapping("/dashboard/dashboard")
+	public String joinIn() {
+		
+		return "dashboard/dashboard";
+	}
 }

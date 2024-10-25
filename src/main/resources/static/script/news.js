@@ -16,7 +16,7 @@ function goto() {
 	searchForm.action='/news/newsListMini'
 	searchForm.submit();
 }
-
+	//alert(goto);
 /** 
  * 페이징 시 current 페이지 요청 함수
 */

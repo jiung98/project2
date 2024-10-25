@@ -27,16 +27,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class NewsController {
-	
+
 	final NewsService newsService;
-	
+
 	// 한 페이지의 게시글 수
-		@Value("${user.newsListMini.pageLimit}")
-		private int pageLimit;	
-	
+	@Value("${user.newsListMini.pageLimit}")
+	private int pageLimit;	
+
 	@GetMapping("newsList")
 	public String join() {
-		
+
 		return "news/newsList";
 	}
 	@GetMapping("newsListMini")
@@ -56,16 +56,15 @@ public class NewsController {
 
 		PageNavigator navi = new PageNavigator(pageLimit, page, totalPages);
 
-		// 검색기능이 가능
-		// List<BoardDTO> list = boardService.selectAll(searchItem, searchWord); 
-		List<NewsDTO> newsList = newsService.getAllNews();
 		
+		List<NewsDTO> newsList = newsService.getAllNews(); // 3개짜리
+
 		model.addAttribute("newsList", newsList);
 		model.addAttribute("list", list);
 		model.addAttribute("searchItem", searchItem);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("navi", navi);
-		
+
 
 		// 인증을 받은 사용자
 		if(loginUser != null) {
@@ -74,11 +73,11 @@ public class NewsController {
 		return "news/newsListMini";
 	} 
 
-//	 // 전체 뉴스 목록을 화면에 보여주는 메서드
-//    @GetMapping("/newsListMini")
-//    public String showNewsList(Model model) {
-//        List<NewsDTO> newsList = newsService.getAllNews();
-//        model.addAttribute("newsList", newsList);
-//        return "news/newsListMini";  // Thymeleaf 템플릿 이름
-//    }
+	//	 // 전체 뉴스 목록을 화면에 보여주는 메서드
+	//    @GetMapping("/newsListMini")
+	//    public String showNewsList(Model model) {
+	//        List<NewsDTO> newsList = newsService.getAllNews();
+	//        model.addAttribute("newsList", newsList);
+	//        return "news/newsListMini";  // Thymeleaf 템플릿 이름
+	//    }
 }

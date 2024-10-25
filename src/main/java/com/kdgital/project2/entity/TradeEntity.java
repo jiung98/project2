@@ -45,7 +45,7 @@ public class TradeEntity {
     private Long export;
     
     @Column(name = "import", nullable = false)
-    private Long importC;
+    private Long importValue;
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "c_code")
@@ -60,7 +60,7 @@ public class TradeEntity {
     			.tradeNo(tradeDTO.getTradeNo())
     			.tradeDate(tradeDTO.getTradeDate())
     			.export(tradeDTO.getExport())
-    			.importC(tradeDTO.getImportC())
+    			.importValue(tradeDTO.getImportValue())
     			.countryEntity(countryEntity)
     			.regionEntity(regionEntity)
     			.build(); 
