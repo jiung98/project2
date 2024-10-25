@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>대시보드</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -307,6 +308,171 @@
             height: 300px;  /* 높이를 200px로 줄임 */
             margin: 0 auto;  /* 중앙 정렬 */
         } 
+          /* 챗봇 버튼 스타일 */
+        #chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        /* 챗봇 창 스타일 */
+        #chatbot-container {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            background-color: white;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        /* 챗봇 헤더 스타일 */
+        #chatbot-header {
+            background-color: #0084FF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* 메시지 영역 스타일 */
+        #chatbot-messages {
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+            background-color: #f7f7f7;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 사용자 메시지 스타일 (오른쪽) */
+        .user-message {
+            align-self: flex-end;
+            background-color: #9FE2BF;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 70%;
+            text-align: right;
+        }
+
+        /* 봇 메시지 스타일 (왼쪽) */
+        .bot-message {
+            align-self: flex-start;
+            background-color: #E0E0E0;
+            color: black;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 5px;
+            max-width: 70%;
+        }
+
+        /* 입력란 스타일 */
+        #chatbot-input-container {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        #chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        #send-button {
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-left: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+	     #temperaturePopup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        width: 90%;
+        max-width: 1000px;
+        height: 80%;
+        max-height: 700px;
+        overflow-y: auto; /* 스크롤 추가 */
+        text-align: center;
+    }
+
+    /* 차트 컨테이너 스타일 */
+    #chartContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    /* 각 차트 wrapper 스타일 */
+    .chart-wrapper {
+        width: 45%; /* 차트 너비를 조절하여 2열로 배치 */
+        height: 300px;
+    }
+
+    /* 차트 캔버스 크기 */
+    .chart-wrapper canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+    /* 닫기 버튼 스타일 */
+    #closePopup {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #closePopup:hover {
+        background-color: #0056b3;
+    }
+    /* 아이콘 버튼 스타일 */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.icon-button:hover {
+    color: #0056b3;
+} 
     </style>
 </head>
 <body>
@@ -370,11 +536,23 @@
      <<!-- 차트 섹션 -->
      <!-- 생산량 차트 -->
     <div class="graph-container">
-        <h2>생산량 차트</h2>
-        <canvas id="productionChart"></canvas> <!-- 생산량 차트를 그릴 캔버스 -->
-        
+    <h2>셍신량 차트</h2>
+    <canvas id="productionChart" ></canvas>
+    <!-- 임시로 추가한 버튼 -->
+    <button id="viewMoreTemperatureChart">더보기</button>
+</div>
+<!-- 온도 그래프 팝업 창 -->
+<div id="temperaturePopup" style="display:none;">
+    <h2>온도 데이터 (지역별)</h2>
+    <div id="chartContainer">
+        <div class="chart-wrapper"><canvas id="chart60"></canvas></div>
+        <div class="chart-wrapper"><canvas id="chart56"></canvas></div>
+        <div class="chart-wrapper"><canvas id="chart31"></canvas></div>
+        <div class="chart-wrapper"><canvas id="chart51"></canvas></div>
+        <div class="chart-wrapper"><canvas id="chart41"></canvas></div>
     </div>
-
+    <button id="closePopup">닫기</button>
+</div>
     <!-- 수요량 차트 -->
     <div class="graph-container">
         <h2>수요량 차트</h2>
@@ -391,116 +569,195 @@
     <h2>수입 차트 </h2>
     <canvas id="importChart"></canvas> <!-- 수입 차트를 위한 캔버스 -->
 	</div>
+	<!-- 챗봇 버튼 -->
+    <button id="chatbot-button">💬</button>
+
+    <!-- 챗봇 컨테이너 -->
+    <div id="chatbot-container">
+        <div id="chatbot-header">카카오톡 스타일 Chatbot</div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="메시지를 입력하세요..." />
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+	
+   <script>
+   document.addEventListener("DOMContentLoaded", function () {
+	    fetch('/api/production-data')
+	        .then(response => response.json())
+	        .then(data => {
+	        	 // 2024년 이후의 데이터만 필터링
+	            const filteredData = data.filter(item => new Date(item.mainDate).getFullYear() >= 2014);
+	            const startDate = new Date("2024-05-01");
+
+	            // 전체 날짜 리스트
+	            const allDates = data.map(item => item.mainDate);
+
+	            // 각 데이터셋을 날짜에 맞게 정렬하고 나머지는 null로 채워줌
+	            const productionBefore2024 = allDates.map(date => {
+	                const item = data.find(item => item.mainDate === date && new Date(item.mainDate) < startDate);
+	                return item ? item.production : null;
+	            });
+
+	            const productionAfter2024 = allDates.map(date => {
+	                const item = data.find(item => item.mainDate === date && new Date(item.mainDate) >= startDate);
+	                return item ? item.production : null;
+	            });
+
+	            const ctx = document.getElementById('productionChart').getContext('2d');
+	            new Chart(ctx, {
+	                type: 'line',
+	                data: {
+	                    labels: allDates,
+	                    datasets: [
+	                        {
+	                            label: '생산량 (2024년 1월 이전)',
+	                            data: productionBefore2024,
+	                            borderColor: '#007bff',
+	                            backgroundColor: 'rgba(0, 123, 255, 0.2)',
+	                            fill: true,
+	                            tension: 0.1
+	                        },
+	                        {
+	                            label: '생산량 (2024년 1월 이후)',
+	                            data: productionAfter2024,
+	                            borderColor: '#ff5733',  // 다른 색상
+	                            backgroundColor: 'rgba(255, 87, 51, 0.2)',
+	                            fill: true,
+	                            tension: 0.1
+	                        }
+	                    ]
+	                },
+	                options: {
+	                    responsive: true,
+	                    scales: {
+	                        x: { title: { display: true, text: '날짜' } },
+	                        y: { title: { display: true, text: '생산량' }, beginAtZero: true }
+	                    }
+	                }
+	            });
+	        })
+	        .catch(error => console.error('생산량 데이터를 가져오는 중 오류 발생:', error));
+	});
+    </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // 서버로부터 데이터를 fetch를 사용해 가져옴
-            fetch('/api/production-data') // API 엔드포인트
-                .then(response => response.json()) // JSON 형식으로 변환
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("viewMoreTemperatureChart").addEventListener("click", function () {
+            document.getElementById("temperaturePopup").style.display = "block";
+
+            fetch("/api/temperature-data")
+                .then(response => response.json())
                 .then(data => {
-                    // 데이터 확인을 위한 console 출력
-                   // console.log("서버로부터 받은 데이터:", data);
+                    const colors = {
+                        "60": "#ff5733",
+                        "56": "#33ff57",
+                        "31": "#3357ff",
+                        "51": "#ff33a1",
+                        "41": "#a1ff33"
+                    };
 
-                    // mainDate와 production 값을 배열로 분리
-                    const mainDates = data.map(item => item.mainDate); // X축 데이터 (날짜)
-                    const productionValues = data.map(item => item.production); // Y축 데이터 (생산량)
+                    const labels = {
+                        "60": "온도 (부산)",
+                        "56": "온도 (전북)",
+                        "31": "온도 (충남)",
+                        "51": "온도 (전남)",
+                        "41": "온도 (경기)"
+                    };
 
-                    // 배열이 비어 있지 않은지 확인
-                    if (mainDates.length === 0 || productionValues.length === 0) {
-                        console.error("데이터가 없습니다.");
-                        return;
-                    }
+                    for (let rCode in data) {
+                        const ctx = document.getElementById(`chart${rCode}`).getContext("2d");
+                        const dates = data[rCode].map(item => item.mainDate);
+                        const temperatures = data[rCode].map(item => item.temperature);
 
-                    // Chart.js를 사용해 차트 생성
-                    const ctx = document.getElementById('productionChart').getContext('2d');
-                    new Chart(ctx, {
-                        type: 'line', // 차트 유형: 선형 차트
-                        data: {
-                            labels: mainDates, // X축: 날짜
-                            datasets: [{
-                                label: '생산량',  // 차트 제목
-                                data: productionValues,  // Y축: 생산량
-                                borderColor: '#007bff',  // 선 색상
-                                backgroundColor: 'rgba(0, 123, 255, 0.2)',  // 배경 색상
-                                fill: true,  // 채우기 여부
-                                tension: 0.1  // 곡선 정도
-                            }]
-                        },
-                        options: {
-                            responsive: true, // 반응형 설정
-                            scales: {
-                                x: { 
-                                    title: { display: true, text: '날짜' }  // X축 제목
-                                },
-                                y: { 
-                                    title: { display: true, text: '생산량' },  // Y축 제목
-                                    beginAtZero: true // Y축이 0부터 시작
+                        new Chart(ctx, {
+                            type: "line",
+                            data: {
+                                labels: dates,
+                                datasets: [{
+                                    label: labels[rCode],  // 지역 이름으로 변경
+                                    data: temperatures,
+                                    borderColor: colors[rCode],
+                                    backgroundColor: colors[rCode] + "33",
+                                    fill: true
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    x: { title: { display: true, text: "날짜" } },
+                                    y: { title: { display: true, text: "온도" }, beginAtZero: true }
                                 }
                             }
-                        }
-                    });
+                        });
+                    }
                 })
-                .catch(error => {
-                    console.error('데이터를 가져오는 중 오류 발생:', error);
-                });
+                .catch(error => console.error("온도 데이터를 가져오는 중 오류 발생:", error));
         });
+
+        document.getElementById("closePopup").addEventListener("click", function () {
+            document.getElementById("temperaturePopup").style.display = "none";
+        });
+    });
     </script>
- <script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        fetch('/api/demand-data')
+            .then(response => response.json())
+            .then(data => {
+                const thresholdDate = new Date("2024-05-01");
 
- document.addEventListener("DOMContentLoaded", function () {
- 		    // 서버로부터 수요량 데이터를 가져와 차트를 그리는 함수
- 		    fetch('/api/demand-data')  // 수요량 API 엔드포인트
- 		        .then(response => response.json())
- 		        .then(data => {
- 		            console.log("서버로부터 받은 Demand 데이터:", data);
+                // 날짜와 수요량 데이터 배열 생성
+                const demandDates = data.map(item => new Date(item.demandDate));
+                const demandValues = data.map(item => item.demand);
 
- 		            // demand_date와 demand 값을 배열로 분리
- 		            const demandDates = data.map(item => item.demandDate);  // X축: 날짜
- 		            const demandValues = data.map(item => item.demand);  // Y축: 수요량
+                // 2024년 5월 이전과 이후 데이터를 나누어 배열에 저장
+                const datesBeforeThreshold = demandDates.filter(date => date < thresholdDate).map(date => date.toISOString().split('T')[0]);
+                const valuesBeforeThreshold = demandDates
+                    .map((date, index) => (date < thresholdDate ? demandValues[index] : null));
 
- 		            // 데이터가 비어있는지 확인
- 		            if (demandDates.length === 0 || demandValues.length === 0) {
- 		                console.error('수요량 데이터가 없습니다.');
- 		                return;
- 		            }
+                const datesAfterThreshold = demandDates.filter(date => date >= thresholdDate).map(date => date.toISOString().split('T')[0]);
+                const valuesAfterThreshold = demandDates
+                    .map((date, index) => (date >= thresholdDate ? demandValues[index] : null));
 
- 		            // Chart.js로 수요량 차트 그리기
- 		            const ctxDemand = document.getElementById('demandChart').getContext('2d');
- 		            new Chart(ctxDemand, {
- 		                type: 'line',
- 		                data: {
- 		                    labels: demandDates,  // X축: 날짜
- 		                    datasets: [{
- 		                        label: '날짜별 수요량',  // 차트 제목
- 		                        data: demandValues,  // Y축: 수요량 데이터
- 		                        borderColor: '#ff6384',  // 선 색상
- 		                        backgroundColor: 'rgba(255, 99, 132, 0.2)',  // 배경 색상
- 		                        fill: true,  // 선 아래 영역 채우기
- 		                        tension: 0.1  // 곡선 정도
- 		                    }]
- 		                },
- 		                options: {
- 		                    responsive: true,
- 		                    scales: {
- 		                        x: {
- 		                            title: {
- 		                                display: true,
- 		                                text: '날짜'
- 		                            }
- 		                        },
- 		                        y: {
- 		                            title: {
- 		                                display: true,
- 		                                text: '수요량'
- 		                            },
- 		                            beginAtZero: true  // Y축을 0부터 시작
- 		                        }
- 		                    }
- 		                }
- 		            });
- 		        })
- 		        .catch(error => console.error('Demand 데이터를 가져오는 중 오류 발생:', error));
- 		});
-    </script>
+                const ctxDemand = document.getElementById('demandChart').getContext('2d');
+                new Chart(ctxDemand, {
+                    type: 'line',
+                    data: {
+                        labels: demandDates.map(date => date.toISOString().split('T')[0]),
+                        datasets: [
+                            {
+                                label: '수요량 (2024년 5월 이전)',
+                                data: valuesBeforeThreshold,
+                                borderColor: '#003366',  // 진한 파란색
+                                backgroundColor: 'rgba(0, 51, 102, 0.3)',
+                                fill: true,
+                                tension: 0.1
+                            },
+                            {
+                                label: '수요량 (2024년 5월 이후)',
+                                data: valuesAfterThreshold,
+                                borderColor: '#ff3300',  // 진한 빨간색
+                                backgroundColor: 'rgba(255, 51, 0, 0.3)',
+                                fill: true,
+                                tension: 0.1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        scales: {
+                            x: { title: { display: true, text: '날짜' } },
+                            y: { title: { display: true, text: '수요량' }, beginAtZero: true }
+                        },
+                        plugins: {
+                            legend: { position: 'top' }
+                        }
+                    }
+                });
+            })
+            .catch(error => console.error('수요량 데이터를 가져오는 중 오류 발생:', error));
+    });
+</script>
 	<script>
 	document.addEventListener("DOMContentLoaded", function () {
 	    // Trade 데이터를 가져와 차트를 그리는 함수
@@ -601,5 +858,78 @@
 	        .catch(error => console.error('Import 데이터를 가져오는 중 오류 발생:', error));
 	});
 	</script>
+	  <script>
+        // 챗봇 버튼과 창 제어
+        const chatbotButton = document.getElementById('chatbot-button');
+        const chatbotContainer = document.getElementById('chatbot-container');
+
+        chatbotButton.addEventListener('click', () => {
+            chatbotContainer.style.display = chatbotContainer.style.display === 'none' ? 'block' : 'none';
+        });
+
+        // 서버에 메시지 전송 및 응답 받기
+        async function sendMessage() {
+            try {
+                const userInput = document.getElementById("chatbot-input").value;
+                if (!userInput) return;
+
+                // 사용자 메시지 추가
+                const messageContainer = document.getElementById("chatbot-messages");
+                const userMessage = document.createElement("div");
+                userMessage.classList.add("user-message");
+                userMessage.textContent = userInput;
+                messageContainer.appendChild(userMessage);
+
+                // 서버로 POST 요청 보내기
+                const response = await fetch('http://localhost:8000/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (data.error) {
+                    throw new Error(data.error);  // 서버에서 에러가 발생하면 처리
+                }
+
+                // 챗봇 응답 추가
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("bot-message");
+                botMessage.textContent = data.response;
+                messageContainer.appendChild(botMessage);
+
+                // 입력 창 비우기
+                document.getElementById("chatbot-input").value = '';
+                messageContainer.scrollTop = messageContainer.scrollHeight;  // 스크롤 하단으로 이동
+            } catch (error) {
+                console.error('Error:', error);  // 오류 발생 시 콘솔에 출력
+
+                // 에러 메시지를 사용자에게 보여줌
+                const messageContainer = document.getElementById("chatbot-messages");
+                const errorMessage = document.createElement("div");
+                errorMessage.classList.add("bot-message");
+                errorMessage.textContent = `Error: ${error.message}`;
+                messageContainer.appendChild(errorMessage);
+            }
+        }
+
+        // 전송 버튼 클릭 이벤트
+        document.getElementById("send-button").addEventListener("click", sendMessage);
+
+        // 엔터 키 입력 시 전송
+        document.getElementById("chatbot-input").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+	
 </body>
 </html>

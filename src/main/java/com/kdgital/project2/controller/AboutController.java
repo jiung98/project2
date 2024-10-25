@@ -26,6 +26,11 @@ public class AboutController {
 	@GetMapping("/dashboard/dashboard")
 	public String joinIn() {
 		
+		return "dashboard/dashList";
+	}
+	@GetMapping("/dashboard/dashboardd")
+	public String joinInON() {
+		
 		return "dashboard/dashboard";
 	}
 }

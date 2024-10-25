@@ -36,9 +36,13 @@ public class DashboardDTO {
                 .build();
     }
 
-    // 서비스에서 사용되는 간단한 생성자 (mainDate와 production만 사용)
+    // 필요한 생성자 추가
     public DashboardDTO(LocalDate mainDate, Long production) {
         this.mainDate = mainDate;
         this.production = production;
+    }
+    public DashboardDTO(LocalDate mainDate, BigDecimal temperature) {
+        this.mainDate = mainDate;
+        this.temperature = temperature;
     }
 }

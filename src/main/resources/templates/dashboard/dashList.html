@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뉴스 목록</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+        }
+
+        /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8;
+            padding: 30px 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            border-bottom: 1px solid #dcdcdc;
+        }
+
+        /* 로고 및 텍스트 박스 */
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* 로고 이미지 */
+        header .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px; /* 텍스트와 간격 */
+        }
+
+        header .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        header .logo-text span:first-child {
+            font-size: 14px;
+            color: #555;
+        }
+
+        header .logo-text span:last-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        /* 네비게이션 메뉴 */
+        header nav {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+        }
+
+        header nav a {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            line-height: 2;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        /* 로그인/회원가입 섹션 */
+        header .actions {
+            position: absolute;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-size: 16px;
+            list-style: none;
+            color: #000000;
+        }
+
+        header .actions a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        header .actions a:hover {
+            color: #007bff;
+        }
+
+        header .actions span.divider {
+            margin: 0 10px;
+            color: #999;
+            font-size: 16px;
+        }
+
+        header .actions .logged-out {
+            display: flex;
+            align-items: center;
+        }
+
+        header .actions .logged-in {
+            margin-top: 10px;
+        }
+
+        /* Hero 섹션 */
+        .hero {
+            background-color: #e1e4e8;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        /* 이미지와 텍스트 간격 */
+        .hero {
+            background-color: #e1e4e8; /* 배경색 */
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 카테고리 섹션 */
+        .category-section {
+            margin-bottom: 40px;
+        }
+
+        .category-section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        /* 품목 리스트 */
+        .category-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .category-item {
+            flex: 1 1 20%;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            background-color: #ffffff;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .category-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-item a {
+            display: block;
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .category-item a:hover {
+            color: #007bff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- 헤더 -->
+    <header>
+        <!-- 로고 및 텍스트 박스 -->
+        <div class="logo">
+        <a th:href="@{/}">
+            <!-- 로고 이미지 -->
+            <img th:src="@{/images/logo.png}" alt="logo">
+            <!-- 로고 텍스트 -->
+            <div class="logo-text">
+            </a>
+                <span>JDT</span>
+                <span>농수산물 데이터 제공 서비스</span>
+            </div>
+        </div>
+
+        <!-- 네비게이션 메뉴 -->
+        <nav>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
+            <a th:href="@{/cs/csList}">고객지원</a>
+        </nav>
+
+        <!-- 로그인/회원가입 -->
+        <div class="actions">
+            <!-- 인증이 되지 않은 사람 -->
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/user/join}">회원가입</a>
+                <span>|</span>
+                <a th:href="@{/user/login}">로그인</a>
+            </li>
+            <!-- 인증이 된 사람 -->
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/mypage}">개인정보 수정</a>
+            </li>
+        </div>
+    </header>
+
+   <!-- Hero 섹션 -->
+    <section class="hero">
+        <img src="https://data.mafra.go.kr/images/common/img-service-03.svg" alt="대시보드 이미지">
+        <h1>DashBoard</h1>
+        <p>다양한 품목별 무역데이터를 제공받을 수 있는 대시보드 페이지입니다.<br>아래 메뉴에서 품목을 선택해주세요.</p>
+    </section>
+
+    <!-- 카테고리 섹션 -->
+    <div class="container">
+        <!-- 채소 카테고리 -->
+        <div class="category-section">
+            <h2>채소</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">파프리카</a></div>
+                <div class="category-item"><a href="#">딸기</a></div>
+                <div class="category-item"><a href="#">토마토</a></div>
+            </div>
+        </div>
+
+        <!-- 과실/임산물 카테고리 -->
+        <div class="category-section">
+            <h2>과실/임산물</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">배</a></div>
+                <div class="category-item"><a href="#">유자(차)</a></div>
+                <div class="category-item"><a href="#">사과</a></div>
+                <div class="category-item"><a href="#">포도</a></div>
+                <div class="category-item"><a href="#">밤</a></div>
+                <div class="category-item"><a href="#">표고버섯</a></div>
+                <div class="category-item"><a href="#">단감</a></div>
+            </div>
+        </div>
+
+        <!-- 신선기타 카테고리 -->
+        <div class="category-section">
+            <h2>신선기타</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">인삼</a></div>
+                <div class="category-item"><a href="#">김치</a></div>
+                <div class="category-item"><a href="#">새송이버섯</a></div>
+                <div class="category-item"><a href="#">팽이버섯</a></div>
+                <div class="category-item"><a href="#">쌀</a></div>
+                <div class="category-item"><a href="#">백합</a></div>
+                <div class="category-item"><a href="#">장미</a></div>
+                <div class="category-item"><a href="#">국화</a></div>
+            </div>
+        </div>
+
+        <!-- 가공 카테고리 -->
+        <div class="category-section">
+            <h2>가공</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">과자</a></div>
+                <div class="category-item"><a href="#">라면</a></div>
+                <div class="category-item"><a href="#">음료</a></div>
+                <div class="category-item"><a href="#">막걸리</a></div>
+                <div class="category-item"><a href="#">커피(조제품)</a></div>
+                <div class="category-item"><a href="#">소스</a></div>
+                <div class="category-item"><a href="#">유제품</a></div>
+            </div>
+        </div>
+
+        <!-- 수산물 카테고리 -->
+        <div class="category-section">
+            <h2>수산물</h2>
+            <div class="category-list">
+                <div class="category-item"><a href="#">참치</a></div>
+                <div class="category-item"><a href="#">넙치</a></div>
+                <div class="category-item"><a th:href="@{/dashboard/dashboardd}">김</a></div>
+                <div class="category-item"><a href="#">전복</a></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

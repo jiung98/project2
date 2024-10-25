@@ -44,13 +44,16 @@ public class DashboardEntity {
     @Column(name = "production", nullable = false)
     private Long production;
 
-    @Column(name = "temperatue", nullable = false)
+    @Column(name = "temperature", nullable = false)
     private BigDecimal temperature;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "r_code")
-    private RegionEntity regionEntity;
+//    @ManyToOne
+//    @JoinColumn(name = "r_code", referencedColumnName = "r_code")
+//    private RegionEntity regionEntity;
 
+    @Column(name = "r_code", nullable = false)
+    private String rCode;
+    
     // DTO 변환 메소드
     public static DashboardEntity toEntity(DashboardDTO dto, RegionEntity regionEntity) {
         return DashboardEntity.builder()
@@ -58,7 +61,7 @@ public class DashboardEntity {
                 .mainDate(dto.getMainDate())
                 .production(dto.getProduction())
                 .temperature(dto.getTemperature())
-                .regionEntity(regionEntity)
+                .rCode(dto.getRCode())
                 .build();
     }
 }
