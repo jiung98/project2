@@ -2,6 +2,7 @@ package com.kdgital.project2.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,5 +23,9 @@ public class DemandController {
     @GetMapping("/demand-data")
     public List<DemandDTO> getDemandData() {
         return demandService.getDemandDataByDate();
+    }
+    @GetMapping("/demand-details")
+    public List<DemandDTO> getDemandDetails() {
+        return demandService.getDetailedDemandData();
     }
 }

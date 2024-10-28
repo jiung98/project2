@@ -35,8 +35,8 @@ public class TradeDTO {
 				.tradeDate(tradeEntity.getTradeDate())
 				.export(tradeEntity.getExport())
 				.importValue(tradeEntity.getImportValue())
-				.rCode(rCode)
-				.cCode(cCode)
+				.rCode(tradeEntity.getRCode())
+				.cCode(tradeEntity.getCCode())
 				.build();
 	}
 	// 수출용 생성자
@@ -49,5 +49,14 @@ public class TradeDTO {
     public TradeDTO(LocalDate tradeDate, Long importSum, boolean isImport) {
         this.tradeDate = tradeDate;
         this.importValue = importSum;
+    }
+    
+ // 생성자 추가
+    public TradeDTO(LocalDate tradeDate, String rCode, String cCode, Long export, Long importValue) {
+        this.tradeDate = tradeDate;
+        this.rCode = rCode;
+        this.cCode = cCode;
+        this.export = export;
+        this.importValue=importValue;
     }
 }

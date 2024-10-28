@@ -47,13 +47,19 @@ public class TradeEntity {
     @Column(name = "import", nullable = false)
     private Long importValue;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "c_code")
-    private CountryEntity countryEntity;
-
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "r_code")
-    private RegionEntity regionEntity;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name = "c_code")
+//    private CountryEntity countryEntity;
+//
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name = "r_code")
+//    private RegionEntity regionEntity;
+    
+    @Column(name = "c_code")
+    private String cCode;
+    
+    @Column(name = "r_code")
+    private String rCode;
     
     private static TradeEntity toEntity(TradeDTO tradeDTO, CountryEntity countryEntity, RegionEntity regionEntity) {
     	return TradeEntity.builder()
@@ -61,8 +67,8 @@ public class TradeEntity {
     			.tradeDate(tradeDTO.getTradeDate())
     			.export(tradeDTO.getExport())
     			.importValue(tradeDTO.getImportValue())
-    			.countryEntity(countryEntity)
-    			.regionEntity(regionEntity)
+    			.cCode(tradeDTO.getCCode())
+    			.rCode(tradeDTO.getRCode())
     			.build(); 
     }
 }

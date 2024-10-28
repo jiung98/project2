@@ -83,16 +83,18 @@
         }
 
         /* 로그인/회원가입 섹션 */
-        header .actions {
-            position: absolute;
-            right: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            font-size: 16px;
-            list-style: none;
-            color: #000000;
-        }
+         header .actions {
+	       position: absolute;
+	       right: 10px;
+	       top: 5px; /* 상단에 가까이 배치 */
+	       display: flex;
+	       flex-direction: row;
+	       align-items: flex-start; /* 항목을 상단으로 정렬 */
+	       gap: 0px;
+	       font-size: 15px;
+	       list-style: none;
+	       color: #000000;
+	   }
 
         header .actions a {
             color: #000000;
@@ -119,7 +121,6 @@
         header .actions .logged-in {
             margin-top: 10px;
         }
-
         /* Hero 섹션 */
         .hero {
             background-color: #e1e4e8;

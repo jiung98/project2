@@ -50,4 +50,5 @@ public class DemandDTO {
         this.demandDate = demandDate;
         this.demand = demand;
     }
+ 
 }

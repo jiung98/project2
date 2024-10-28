@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kdgital.project2.dto.DashboardDTO;
+import com.kdgital.project2.dto.DemandDTO;
 import com.kdgital.project2.service.DashboardService;
+import com.kdgital.project2.service.DemandService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DashboardController {
 
     private final DashboardService dashboardService;
+    final DemandService demandService;
 
      // 그룹화된 데이터를 반환하는 엔드포인트
     @GetMapping("/production-data")
@@ -37,5 +40,6 @@ public class DashboardController {
         Map<String, List<DashboardDTO>> temperatureDataByRCode = dashboardService.getTemperatureDataByRCode();
         return ResponseEntity.ok(temperatureDataByRCode);
     }
+    
     
 }

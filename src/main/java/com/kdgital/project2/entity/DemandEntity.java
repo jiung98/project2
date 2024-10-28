@@ -27,7 +27,6 @@ import lombok.ToString;
 @Getter
 @ToString
 @Builder
-
 @Entity
 @Table(name = "demands")
 public class DemandEntity {

@@ -28,7 +28,7 @@ public class DashboardService {
     public List<DashboardDTO> getProductionDataByDate() {
         return dashboardRepository.findProductionSumByDate();
     }
-
+ 
     // r_code에 맞는 데이터를 모두 가져오는 메서드
     public Map<String, List<DashboardDTO>> getTemperatureDataByRCode() {
         LocalDate startDate = LocalDate.of(2014, 1, 1);
@@ -43,4 +43,5 @@ public class DashboardService {
 
         return temperatureDataByRCode;
     }
+    
 }

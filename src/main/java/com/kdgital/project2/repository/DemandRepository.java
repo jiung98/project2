@@ -14,4 +14,7 @@ public interface DemandRepository extends JpaRepository<DemandEntity, Long> {
            "FROM DemandEntity e " +
            "ORDER BY e.demandDate ASC")
     List<DemandDTO> findDemandDataByDate();
+ // 수요량 데이터를 날짜별로 정렬하여 가져오는 쿼리
+    @Query("SELECT d FROM DemandEntity d ORDER BY d.demandDate ASC")
+    List<DemandEntity> findAllOrderedByDate();
 }
