@@ -7,57 +7,55 @@
     <title>메인화면</title>
     <script src="https://www.goat1000.com/tagcanvas.min.js" type="text/javascript"></script>
     <style>
-		* {
-	    margin: 0;
-	    padding: 0;
-	    box-sizing: border-box;
-	}
-	
-	body {
-	    font-family: 'Arial', sans-serif;
-	    background-color: #ffffff; /* 바디 배경색 */
-	    color: #333;
-	    overflow-x: hidden; /* 가로 스크롤바 숨김 */
-	}
-	
-	/* 헤더 스타일 */
-	header {
-	    background-color: #e1e4e8;
-	    background: linear-gradient(to bottom, #e1e4e8, #f5f5f5);
-	    padding: 30px 0;
-	    height:115px; 
-	    display: flex;
-	    justify-content: center;
-	    align-items: flex-end;
-	    position: relative;
-	    border-bottom: 1px solid #dcdcdc;
-	}
-	
-header .logo {
-    position: absolute;
-    left: 20px;
-    display: flex;
-    flex-direction: row; /* 로고 이미지와 텍스트를 가로로 배치 */
-    align-items: center; /* 텍스트와 이미지의 수직 정렬 */
-    font-size: 20px;
-    cursor: pointer;
-    max-width: none; /* 제한을 없애서 컨테이너가 충분히 넓게 */
-    white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-header .logo img {
-    max-height: 80px; /* 이미지가 너무 커지지 않도록 최대 높이 설정 */
-    height: auto; /* 높이는 자동 조정 */
-    width: auto; /* 가로 비율 유지 */
-    margin-right: 10px; /* 텍스트와 간격 */
-    display: block;
-}
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            overflow-x: hidden;
+        }
+ 
+        /* 헤더 스타일 */
+        header {
+            background-color: #e1e4e8;
+            background: linear-gradient(to bottom, #e1e4e8, #f5f5f5);
+            padding: 30px 0;
+            height: 115px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            position: relative;
+            border-bottom: 1px solid #dcdcdc;
+        }
 
-      /* 로고 텍스트 */
+        header .logo {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            max-width: none;
+            white-space: nowrap;
+        }
+
+        header .logo img {
+            max-height: 80px;
+            height: auto;
+            width: auto;
+            margin-right: 10px;
+            display: block;
+        }
+
         header .logo-text {
             display: flex;
             flex-direction: column;
-            
         }
 
         header .logo-text span:first-child {
@@ -65,209 +63,234 @@ header .logo img {
             color: #555;
         }
 
-       header .logo-text span:last-child {
-           font-size: 18px;
-           font-weight: bold;
-           color: #000;
-       }
-	
-	header nav {
-	    display: flex;
-	    gap: 60px;
-	    justify-content: center;
-	}
-	
-	header nav a {
-	    font-size: 20px;
-	    font-weight: bold;
-	    color: #333;
-	    text-decoration: none;
-	    padding: 10px;
-	    transition: color 0.3s;
-	}
-	
-	header nav a:hover {
-	    color: #007bff;
-	}
-	
-	header .actions {
-	    position: absolute;
-	    right: 20px;
-	    top: 50px; /* 상단에 가까이 배치 */
-	    display: flex;
-	    flex-direction: row;
-	    align-items: flex-start; /* 항목을 상단으로 정렬 */
-	    gap: 0px;
-	    font-size: 16px;
-	    list-style: none;
-	    color: #000000;
-	}
+        header .logo-text span:last-child {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
 
-	
-	header .actions a {
-	    color: #000000;
-	    text-decoration: none;
-	    font-weight: bold;
-	    cursor: pointer;
-	    margin : 0;
-	}
-	
-	header .actions a:hover {
-	    color: #007bff;
-	}
-	
-	header .actions span {
-	    color: #999;
-	    padding: 0 5px;
-	}
-	
-	/* hero 섹션: 중앙 배치 */
-	.hero-section {
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	    background: linear-gradient(to bottom, #f5f5f5, #ffffff);
-	    padding: 40px;
-	    position: relative; /* 비디오와 워드클라우드 컨테이너를 위한 상대 위치 */
-	}
-	
-	/* 왼쪽 콘텐츠 (농수산물, 공지사항, 뉴스) */
-	.hero-left {
-	    flex: 1;
-	    display: flex;
-	    flex-direction: column;
-	    gap: 10px;
-	    justify-content: flex-start;
-	}
-	
-	.hero-left h1 {
-	    font-size: 48px;
-	    font-weight: bold;
-	    color: #00008B;
-	}
-	
-	.hero-left h1 span {
-	    color: #007bff;
-	}
-	
-	.hero-left p {
-	    font-size: 18px;
-	    color: #555;
-	    margin-bottom: 50px;
-	}
-	
-	.section {
-	    background-color: #f5f5f5;
-	    padding: 20px;
-	    border-radius: 20px;
-	    position: relative;
-	    width: 100%;
-	    border: 2px solid #007bff;
-	    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	    transition: transform 0.3s ease, box-shadow 0.3s ease;
-	}
-	
-	.section:hover {
-	    transform: translateY(-10px);
-	    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-	}
-	
-	.section h2 {
-	    font-size: 24px;
-	    color: #000000;
-	    margin-bottom: 10px;
-	    border-bottom: 1px solid #dcdcdc;
-	    padding-bottom: 30px;
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	}
-	
-	.more-button img {
-	    width: 24px;
-	    height: 24px;
-	    cursor: pointer;
-	}
-	
-	.notice-list, .news-list {
-	    list-style-type: none;
-	    margin: 0;
-	    padding: 0;
-	}
-	
-	.notice-list li, .news-list li {
-	    margin-bottom: 8px;
-	    display: flex;
-	    justify-content: space-between;
-	    align-items: center;
-	}
-	
-	.notice-list li a, .news-list li a {
-	    text-decoration: none;
-	    color: #000000;
-	    font-size: 18px;
-	}
-	
-	.notice-list li .date, .news-list li .date {
-	    font-size: 16px;
-	    color: #777;
-	    text-align: right;
-	}
-	
-	.notice-list li a:hover, .news-list li a:hover {
-	    text-decoration: underline;
-	}
-	
-	/* 오른쪽 워드클라우드 */
-	.hero-right {
-	    flex: 0.6;
-	    display: flex;
-	    justify-content: center;
-	    align-items: center;
-	    position: relative;
-	}
-	
-	/* 비디오 스타일 */
-	#background-video {
-	    position: absolute;
-	    left: 160px; 
-	    top: 55%; /* 세로 중앙 정렬 */
-	    transform: translateY(-50%); /* 정확한 중앙 정렬 */
-	    width: 600px; /* 비디오 크기 */
-	    height: 600px;
-	    z-index: 0; /* 비디오가 뒤에 배치 */
-	    opacity: 0.5; /* 투명도 조절 */
-	    border-radius: 50%; /* 비디오를 둥글게 */
-	}
-	
-	/* 워드클라우드 캔버스 */
-	#myCanvasContainer {
-	    position: relative;
-	    z-index: 1; /* 워드클라우드가 앞에 보이게 */
-	    width: 900px; /* 워드클라우드 크기 */
-	    height: 650px;
-	}
-	
-	#myCanvas {
-	    width: 100%;
-	    height: 100%;
-	    background-color: transparent;
-	    border-radius: 50%;
-	}
-	
-	/* 단어 스타일 */
-	#tags a {
-	    font-size: 18px;
-	    color: #007bff;
-	    text-decoration: none;
-	}
-	
-	#tags a.kim, #tags a.ramen, #tags a.tuna, #tags a.ginseng {
-	    font-size: 50px;
-	}
-		
-</style>
-    
+        header nav {
+            display: flex;
+            gap: 60px;
+            justify-content: center;
+        }
+
+        header nav a {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            transition: color 0.3s;
+        }
+
+        header nav a:hover {
+            color: #007bff;
+        }
+
+        header .actions {
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 0px;
+            font-size: 15px;
+            list-style: none;
+            color: #000000;
+        }
+
+        header .actions a {
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0;
+        }
+
+        header .actions a:hover {
+            color: #007bff;
+        }
+
+        header .actions span {
+            color: #999;
+            padding: 0 5px;
+        }
+
+        /* hero 섹션: 중앙 배치 */
+        .hero-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+            padding: 40px;
+            position: relative;
+            gap: 20px;
+        }
+
+        /* 왼쪽 콘텐츠 (공지사항과 뉴스 섹션을 더 넓게 설정) */
+        .hero-left {
+            flex: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .hero-left h1,
+        .section h2 {
+            width: 100%;
+        }
+
+        .hero-left h1 {
+            font-size: 48px;
+            font-weight: bold;
+            color: #00008B;
+        }
+
+        .hero-left h1 span {
+            color: #007bff;
+        }
+
+        .hero-left p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 50px;
+        }
+
+        .section {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 20px;
+            position: relative;
+            width: 100%;
+            border: 2px solid #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            font-size: 24px;
+            color: #000000;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #dcdcdc;
+            padding-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .more-button img {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .notice-list,
+        .news-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .notice-list li,
+        .news-list li {
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notice-list li a,
+        .news-list li a {
+            text-decoration: none;
+            color: #000000;
+            font-size: 18px;
+        }
+
+        .notice-list li .date,
+        .news-list li .date {
+            font-size: 16px;
+            color: #777;
+            text-align: right;
+        }
+
+        .notice-list li a:hover,
+        .news-list li a:hover {
+            text-decoration: underline;
+        }
+
+        /* 오른쪽 워드클라우드 */
+        .hero-right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin-left: -100px;
+        }
+
+        /* 비디오 스타일 */
+        #background-video {
+            position: absolute;
+            left: 120px;
+            top: 60%;
+            transform: translateY(-50%);
+            width: 600px;
+            height: 600px;
+            z-index: 0;
+            opacity: 0.5;
+            border-radius: 50%;
+        }
+
+        /* 워드클라우드 캔버스 */
+        #myCanvasContainer {
+            position: relative;
+            z-index: 1;
+            width: 700px;
+            height: 500px;
+        }
+
+      /* 워드클라우드 제목 스타일 */
+      #myCanvasContainer h2 {
+          position: absolute; /* 제목을 절대 위치로 설정 */
+          top: 30px; /* 부모 컨테이너 내에서 아래로 이동 */
+          right: 0; /* 오른쪽으로 정렬 */
+          padding-right: 200px; /* 오른쪽 여백 */
+      }
+
+
+      /* 워드클라우드 캔버스 */
+      #myCanvas {
+          position: relative; /* 상대 위치 지정 */
+          top: 30px; /* 캔버스를 아래로 이동 */
+          width: 120%;
+          height: 120%;
+          background-color: transparent;
+          border-radius: 50%;
+      }
+
+
+        /* 단어 스타일 */
+        #tags a {
+            font-size: 18px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        #tags a.kim,
+        #tags a.ramen,
+        #tags a.tuna,
+        #tags a.ginseng {
+            font-size: 50px;
+        }
+    </style>
 </head>
 
 <body>
@@ -276,7 +299,6 @@ header .logo img {
         <div class="logo">
             <img th:src="@{/images/logo.png}" alt="logo">
             <div class="logo-text">
-            
                 <span>JDT</span>
                 <span>농수산물 데이터 제공 서비스</span>
             </div>
@@ -297,7 +319,7 @@ header .logo img {
                 <a th:href="@{/user/login}">로그인</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/logout}">관리자님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
             </li>
         </div>
@@ -305,7 +327,7 @@ header .logo img {
 
     <section class="hero-section">
         <div class="hero-left">
-            <h1>농수산물 <span>데이터 제공 서비스</span></h1>
+            <h1>농수산물 데이터<span><br>제공 서비스</span></h1>
             <p>품목별 K-농수산물 정보를 제공하는 서비스입니다.</p>
 
             <section class="section">
@@ -315,7 +337,7 @@ header .logo img {
                     </a>
                 </h2>
                 <ul class="notice-list">
-                    <li th:each="board, stat : ${boardList}"  th:if="${stat.index} < 3"> >
+                    <li th:each="board, stat : ${boardList}" th:if="${stat.index} < 3">
                         <a th:href="@{/board/boardDetail(boardNum=${board.boardNum}, searchItem=${searchItem}, searchWord=${searchWord})}">
                             <span th:text="${board.boardTitle}">공지사항 제목</span>
                         </a>
@@ -330,7 +352,7 @@ header .logo img {
                         <img src="https://data.mafra.go.kr/images/ico/ico-search_bl.svg" alt="검색 아이콘">
                     </a>
                 </h2>
-                <ul class="news-list"  > 
+                <ul class="news-list">
                     <li th:each="news, stat : ${newsList}" th:if="${stat.index} < 3">
                         <a th:href="${news.url}">
                             <span th:text="${news.title}">뉴스 제목</span>
@@ -347,7 +369,7 @@ header .logo img {
                 <source th:src="@{/images/WordCloud.mp4}" type="video/mp4">
             </video>
             <div id="myCanvasContainer">
-                <h2 style="text-align: center;">인기 검색 품목</h2>
+                <h2>인기 검색 품목</h2>
                 <canvas width="600" height="400" id="myCanvas"></canvas>
             </div>
 
@@ -384,7 +406,7 @@ header .logo img {
     </section>
 
     <script type="text/javascript">
-        window.onload = function() {
+        window.onload = function () {
             try {
                 TagCanvas.Start('myCanvas', 'tags', {
                     textColour: '#007bff',
@@ -399,7 +421,7 @@ header .logo img {
                     wheelZoom: false,
                     shape: "ellipse",
                 });
-            } catch(e) {
+            } catch (e) {
                 document.getElementById('myCanvasContainer').style.display = 'none';
             }
         };

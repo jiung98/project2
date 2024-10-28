@@ -623,7 +623,7 @@
                 <a th:href="@{/user/login}">로그인</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">[[${loginName}]]([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/logout}">관리자님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
             </li>
         </div>

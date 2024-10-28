@@ -322,7 +322,7 @@
             </li>
             <!-- 인증이 된 사람 -->
             <li sec:authorize="isAuthenticated()">
-                <a th:href="@{/user/logout}">([[${#authentication.name} ]])님 로그아웃</a>
+                <a th:href="@{/user/logout}">관리자님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
             </li>
         </div>
