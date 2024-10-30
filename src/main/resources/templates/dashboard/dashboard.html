@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://thymeleaf.org" xmlns:sec="http://thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,17 +83,19 @@
         }
 
         header .actions {
-	       position: absolute;
-	       right: 10px;
-	       top: 5px; /* 상단에 가까이 배치 */
-	       display: flex;
-	       flex-direction: row;
-	       align-items: flex-start; /* 항목을 상단으로 정렬 */
-	       gap: 0px;
-	       font-size: 15px;
-	       list-style: none;
-	       color: #000000;
-	   }
+            position: absolute;
+            right: 10px;
+            top: 5px;
+            /* 상단에 가까이 배치 */
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            /* 항목을 상단으로 정렬 */
+            gap: 0px;
+            font-size: 15px;
+            list-style: none;
+            color: #000000;
+        }
 
         header .actions a {
             color: #000000;
@@ -120,6 +123,7 @@
         header .actions .logged-in {
             margin-top: 5px;
         }
+
         .hero {
             background-color: #e1e4e8;
             padding: 60px 20px;
@@ -163,7 +167,7 @@
             margin-bottom: 10px;
         }
 
-         /* 다섯 개 카드의 더보기 버튼 배치 */
+        /* 다섯 개 카드의 더보기 버튼 배치 */
         .category-box .more-btn {
             position: absolute;
             top: 45%;
@@ -257,27 +261,35 @@
             align-items: center;
             justify-content: space-between;
         }
- 
-        .graph-container .more-btn, .button {
-		 	position: absolute;
-		    top: 10px;      /* 상단 모서리에 배치 */
-		    right: 10px;    /* 오른쪽 모서리에 배치 */
-		    background: url('https://data.mafra.go.kr/images/ico/ico-search_bl.svg') no-repeat center;
-		    background-size: 24px;
-		    width: 24px;
-		    height: 24px;
-		    border: none;
-		    cursor: pointer;
+
+        .graph-container .more-btn,
+        .button {
+            position: absolute;
+            top: 10px;
+            /* 상단 모서리에 배치 */
+            right: 10px;
+            /* 오른쪽 모서리에 배치 */
+            background: url('https://data.mafra.go.kr/images/ico/ico-search_bl.svg') no-repeat center;
+            background-size: 24px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            cursor: pointer;
         }
 
-.graph-container .more-btn:hover,
-.graph-container .button:hover {
-    color: #0056b3;
-    background-color: rgba(0, 123, 255, 0.1); /* 약간의 배경 강조 */
-    border-radius: 50%; /* 둥근 버튼 형태 */
-    transition: background-color 0.3s ease; /* 부드러운 색상 전환 */
-}
-        .graph-container, .rate-box {
+        .graph-container .more-btn:hover,
+        .graph-container .button:hover {
+            color: #0056b3;
+            background-color: rgba(0, 123, 255, 0.1);
+            /* 약간의 배경 강조 */
+            border-radius: 50%;
+            /* 둥근 버튼 형태 */
+            transition: background-color 0.3s ease;
+            /* 부드러운 색상 전환 */
+        }
+
+        .graph-container,
+        .rate-box {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
@@ -301,23 +313,31 @@
             color: #000000;
         }
 
-         .graph-container {
+        .graph-container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px auto;
             width: 60%;
-            text-align: center;  /* 그래프를 중앙 정렬 */
+            text-align: center;
+            /* 그래프를 중앙 정렬 */
         }
 
         /* 차트 크기 조정 */
-        #productionChart, #demandChart, #tradeChart, #importChart {
-            width: 90%;  /* 너비를 50%로 조정 */
-            height: 300px;  /* 높이를 200px로 줄임 */
-            margin: 0 auto;  /* 중앙 정렬 */
-        } 
-          /* 챗봇 버튼 스타일 */
+        #productionChart,
+        #demandChart,
+        #tradeChart,
+        #importChart {
+            width: 90%;
+            /* 너비를 50%로 조정 */
+            height: 300px;
+            /* 높이를 200px로 줄임 */
+            margin: 0 auto;
+            /* 중앙 정렬 */
+        }
+
+        /* 챗봇 버튼 스타일 */
         #chatbot-button {
             position: fixed;
             bottom: 20px;
@@ -413,188 +433,205 @@
             border-radius: 10px;
             cursor: pointer;
         }
-	     #temperaturePopup, #demandPopup, #tradePopup, #tradeinPopup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        width: 90%;
-        max-width: 1000px;
-        height: 80%;
-        max-height: 700px;
-        overflow-y: auto; /* 스크롤 추가 */
-        text-align: center;
-    }
 
-    /* 차트 컨테이너 스타일 */
-    #chartContainer {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        gap: 20px;
-    }
+        #temperaturePopup,
+        #demandPopup,
+        #tradePopup,
+        #tradeinPopup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            width: 90%;
+            max-width: 1000px;
+            height: 80%;
+            max-height: 700px;
+            overflow-y: auto;
+            /* 스크롤 추가 */
+            text-align: center;
+        }
 
-    /* 각 차트 wrapper 스타일 */
-    .chart-wrapper {
-        width: 45%; /* 차트 너비를 조절하여 2열로 배치 */
-        height: 300px;
-    }
+        /* 차트 컨테이너 스타일 */
+        #chartContainer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
 
-    /* 차트 캔버스 크기 */
-    .chart-wrapper canvas {
-        width: 100%;
-        height: 100%;
-    }
+        /* 각 차트 wrapper 스타일 */
+        .chart-wrapper {
+            width: 45%;
+            /* 차트 너비를 조절하여 2열로 배치 */
+            height: 300px;
+        }
 
-    /* 닫기 버튼 스타일 */
-    #closePopup, #closeDemandPopup, #closeTradePopup, #closeTradeinPopup {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer; 
-    }
+        /* 차트 캔버스 크기 */
+        .chart-wrapper canvas {
+            width: 100%;
+            height: 100%;
+        }
 
-    #closePopup:hover {
-        background-color: #0056b3;
-    }
-    /* 아이콘 버튼 스타일 */
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 24px;
-    color: #007bff;
-    transition: color 0.3s;
-}
+        /* 닫기 버튼 스타일 */
+        #closePopup,
+        #closeDemandPopup,
+        #closeTradePopup,
+        #closeTradeinPopup {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-.icon-button:hover {
-    color: #0056b3;
-} 
- /* 스타일 정의 (생략) */
+        #closePopup:hover {
+            background-color: #0056b3;
+        }
+
+        /* 아이콘 버튼 스타일 */
+        .icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #007bff;
+            transition: color 0.3s;
+        }
+
+        .icon-button:hover {
+            color: #0056b3;
+        }
+
+        /* 스타일 정의 (생략) */
         #filteredTradeData table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-        #filteredTradeData th, #filteredTradeData td {
+
+        #filteredTradeData th,
+        #filteredTradeData td {
             padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
         }
+
         #filteredTradeData th {
             background-color: #f2f2f2;
             font-weight: bold;
         }
+
         /* 필터링 UI 스타일 */
-.modal {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 800px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    text-align: center;
-    overflow-y: auto;
-}
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 300px;
+            /* 팝업의 좌우 폭 조정 */
+            width: 80%;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
 
-.filter-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-}
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
 
-.filter-input {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    width: 150px;
-    font-size: 14px;
-    outline: none;
-    transition: all 0.3s;
-}
+        .filter-input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 150px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+        }
 
-.filter-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
-}
+        .filter-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+        }
 
-.search-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .search-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.search-button:hover {
-    background-color: #0056b3;
-}
+        .search-button:hover {
+            background-color: #0056b3;
+        }
 
-.results-container {
-    margin-top: 20px;
-    overflow-x: auto;
-    font-size: 14px;
-}
+        .results-container {
+            margin-top: 20px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
 
-.results-container table {
-    width: 100%;
-    border-collapse: collapse;
-}
+        .results-container table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-.results-container th, .results-container td {
-    padding: 10px;
-    border: 1px solid #ddd;
-    text-align: center;
-}
+        .results-container th,
+        .results-container td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
 
-.results-container th {
-    background-color: #f5f5f5;
-    font-weight: bold;
-}
+        .results-container th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
 
-.close-button {
-    margin-top: 20px;
-    padding: 8px 20px;
-    background-color: #ff4d4f;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+        .close-button {
+            margin-top: 20px;
+            padding: 8px 20px;
+            background-color: #ff4d4f;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
 
-.close-button:hover {
-    background-color: #cc0000;
-}
+        .close-button:hover {
+            background-color: #cc0000;
+        }
     </style>
 </head>
+
 <body>
 
     <!-- 헤더 -->
@@ -603,17 +640,17 @@
             <a th:href="@{/}">
                 <img th:src="@{/images/logo.png}" alt="logo">
                 <div class="logo-text">
-                </a>
-                    <span>JDT</span>
-                    <span>농수산물 데이터 제공 서비스</span>
-                </div>
-            
+            </a>
+            <span>JDT</span>
+            <span>농수산물 데이터 제공 서비스</span>
+        </div>
+
         </div>
         <nav>
-            <a th:href="@{/about/about}">About Us</a> 
-            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
-            <a th:href="@{/board/boardList}">공지사항</a> 
-            <a th:href="@{/news/newsList}">뉴스</a> 
+            <a th:href="@{/about/about}">About Us</a>
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a>
+            <a th:href="@{/board/boardList}">공지사항</a>
+            <a th:href="@{/news/newsList}">뉴스</a>
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
         <div class="actions">
@@ -632,11 +669,12 @@
     <!-- Hero 섹션 -->
     <section class="hero">
         <img src="https://data.mafra.go.kr/images/common/img-service-03.svg" alt="대시보드 이미지">
+        <h1>김</h1>
         <h1>DashBoard</h1>
         <p>다양한 품목별 무역데이터를 제공받을 수 있는 대시보드 페이지입니다.<br>아래 메뉴에서 품목을 선택해주세요.</p>
     </section>
 
-<!-- 다섯 개의 카테고리 카드 -->
+    <!-- 다섯 개의 카테고리 카드 -->
     <div class="category-row">
         <div class="category-box">
             <h3>채소</h3>
@@ -644,7 +682,7 @@
         </div>
         <div class="category-box">
             <h3>과실/임산물</h3>
-            <button class="more-btn" onclick="showPopup('과실/임산물', ['배', '유자(차)', '사과', '포도', '밤'])"></button>
+            <button class="more-btn" onclick="showPopup('과실/임산물', ['배', '유자(차)', '사과', '포도'])"></button> <!-- , '밤' -->
         </div>
         <div class="category-box">
             <h3>신선기타</h3>
@@ -665,684 +703,702 @@
         <div class="button-list" id="popupButtons"></div>
     </div>
     <div id="overlay" class="overlay" onclick="closePopup()"></div>
-    
+
     <!-- 수출/수입증감률 및 무역수지 카드 -->
     <div class="dashboard-container">
         <div class="rate-box">
             <h2>수출증감률</h2>
-            <p class="rate-value">+12.5%</p>
+            <p class="rate-value">+2.2%상승(588억 달러)</p>
         </div>
         <div class="rate-box">
             <h2>수입증감률</h2>
-            <p class="rate-value">-8.3%</p>
+            <p class="rate-value">+2.2%상승(521억 달러)</p>
         </div>
         <div class="rate-box">
-            <h2>무역수지</h2>
-            <p class="rate-value">+5.6억 USD</p>
+            <h2>9월 무역수지</h2>
+            <p class="rate-value">+67억 USD</p>
         </div>
     </div>
 
     <!-- 차트 섹션 -->
-     <!-- 차트 섹션 -->
-     <!-- 생산량 차트 -->
+    <!-- 차트 섹션 -->
+    <!-- 생산량 차트 -->
     <div class="graph-container">
-    <h2>생신량 차트</h2>
-    <canvas id="productionChart" ></canvas>
-    <!-- 임시로 추가한 버튼 -->
-    <button id="viewMoreTemperatureChart" class="more-btn"></button>
-</div>
-<!-- 온도 그래프 팝업 창 -->
-<div id="temperaturePopup" style="display:none;">
-    <h2>온도 데이터 (지역별)</h2>
-    <div id="chartContainer">
-        <div class="chart-wrapper"><canvas id="chart60"></canvas></div>
-        <div class="chart-wrapper"><canvas id="chart56"></canvas></div>
-        <div class="chart-wrapper"><canvas id="chart31"></canvas></div>
-        <div class="chart-wrapper"><canvas id="chart51"></canvas></div>
-        <div class="chart-wrapper"><canvas id="chart41"></canvas></div>
+        <h2>생산량 </h2>
+        <canvas id="productionChart"></canvas>
+        <!-- 임시로 추가한 버튼 -->
+        <button id="viewMoreTemperatureChart" class="more-btn"></button>
     </div>
-    <button id="closePopup">닫기</button>
-</div>
+    <!-- 온도 그래프 팝업 창 -->
+    <div id="temperaturePopup" style="display:none;">
+        <h2>온도 데이터 (지역별)</h2>
+        <div id="chartContainer">
+            <div class="chart-wrapper"><canvas id="chart60"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart56"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart31"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart51"></canvas></div>
+            <div class="chart-wrapper"><canvas id="chart41"></canvas></div>
+        </div>
+        <button id="closePopup">닫기</button>
+    </div>
 
-   <!-- 수요량 차트 섹션 -->
-	<div class="graph-container">
-    <h2>수요량 차트</h2>
-    <canvas id="demandChart"></canvas>
-    <!-- 더보기 버튼 -->
-    <button id="viewMoreDemandChart"  class="more-btn"></button>
-</div>
- <!-- 수요량 상세 모달 창 -->
+    <!-- 수요량 차트 섹션 -->
+    <div class="graph-container">
+        <h2>수요량</h2>
+        <canvas id="demandChart"></canvas>
+        <!-- 더보기 버튼 -->
+        <button id="viewMoreDemandChart" class="more-btn"></button>
+    </div>
+    <!-- 수요량 상세 모달 창 -->
     <div id="demandPopup" style="display: none;">
         <h2>세부 수요량 차트</h2>
         <canvas id="demandDetailChart"></canvas>
         <button id="closeDemandPopup">닫기</button>
     </div>
-    
+
     <!-- 수출량 차트 영역 -->
     <div class="graph-container">
-        <h2>수출량 차트</h2>
+        <h2>수출량 </h2>
         <canvas id="tradeChart"></canvas>
         <button id="viewMoreTradeChart" class="more-btn"></button> <!-- 돋보기 아이콘 버튼 -->
     </div>
 
-     <!-- 필터링 팝업 -->
-      <!-- 수출 필터링 모달 -->
-<div id="tradePopup" class="modal">
-    <h2>수출 데이터 필터링</h2>
-    
-    <div class="filter-container">
-        <label for="tradeDate">날짜:</label>
-        <select id="tradeDate" class="filter-input">
-            <option value="">모두</option>
-        </select>
-        
-        <label for="rCode">지역:</label>
-        <select id="rCode" class="filter-input">
-            <option value="">모두</option>
-        </select>
-        
-        <label for="cCode">국가:</label>
-        <select id="cCode" class="filter-input">
-            <option value="">모두</option>
-        </select>
-        
-        <button id="searchTradeData" class="search-button">검색</button>
-    </div>
-    
-    <div id="filteredTradeData" class="results-container"></div>
-    
-    <button id="closeTradePopup" class="close-button">닫기</button>
-</div>
-    
-    <div class="graph-container">
-    <h2>수입 차트 </h2>
-    <canvas id="importChart"></canvas> <!-- 수입 차트를 위한 캔버스 -->
-    <button id="viewMoreTradeinChart" class="more-btn"></button> <!-- 돋보기 아이콘 버튼 -->
-	</div>
-	
-<div id="tradeinPopup" class="modal">
-    <h2>수입 데이터 - 상위 5개 국가</h2>
-    <!-- 수입 막대 차트 캔버스 -->
-    <canvas id="importBarChart" style="width: 100%;"></canvas>
-    <button id="closeTradeinPopup" class="close-button">닫기</button>
-</div>
+    <!-- 필터링 팝업 -->
+    <!-- 수출 필터링 모달 -->
+    <div id="tradePopup" class="modal">
+        <h2>수출 데이터 필터링</h2>
 
-	<!-- 챗봇 버튼 -->
+        <div class="filter-container">
+            <label for="tradeDate">날짜:</label>
+            <select id="tradeDate" class="filter-input">
+                <option value="">모두</option>
+            </select>
+
+            <label for="rCode">지역:</label>
+            <select id="rCode" class="filter-input">
+                <option value="">모두</option>
+            </select>
+
+            <label for="cCode">국가:</label>
+            <select id="cCode" class="filter-input">
+                <option value="">모두</option>
+            </select>
+
+            <button id="searchTradeData" class="search-button">검색</button>
+        </div>
+
+        <div id="filteredTradeData" class="results-container"></div>
+
+        <button id="closeTradePopup" class="close-button">닫기</button>
+    </div>
+
+    <div class="graph-container">
+        <h2>수입량 </h2>
+        <canvas id="importChart"></canvas> <!-- 수입 차트를 위한 캔버스 -->
+        <button id="viewMoreTradeinChart" class="more-btn"></button> <!-- 돋보기 아이콘 버튼 -->
+    </div>
+
+    <div id="tradeinPopup" class="modal">
+        <h2>수입 데이터 - 상위 5개 국가</h2>
+        <!-- 수입 막대 차트 캔버스 -->
+        <canvas id="importBarChart" style="width: 100%;"></canvas>
+        <button id="closeTradeinPopup" class="close-button">닫기</button>
+    </div>
+
+    <!-- 챗봇 버튼 -->
     <button id="chatbot-button">💬</button>
 
     <!-- 챗봇 컨테이너 -->
     <div id="chatbot-container">
-        <div id="chatbot-header">카카오톡 스타일 Chatbot</div>
+        <div id="chatbot-header"> JDT 봇</div>
         <div id="chatbot-messages"></div>
         <div id="chatbot-input-container">
             <input type="text" id="chatbot-input" placeholder="메시지를 입력하세요..." />
             <button id="send-button">Send</button>
         </div>
     </div>
-	
-	<!-- 딸각 -->
-	<script>
-	function showPopup(title, items = []) {
-        document.getElementById('popupTitle').textContent = title;
-        const buttonList = document.getElementById('popupButtons');
-        buttonList.innerHTML = ''; // 기존 버튼 제거
-        items.forEach(item => {
-            const button = document.createElement('button');
-            button.textContent = item;
-            buttonList.appendChild(button);
-        });
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    }
-	 function closePopup() {
-         document.getElementById('popup').style.display = 'none';
-         document.getElementById('overlay').style.display = 'none';
-     }
-	</script>
-  
-  <!-- 생산량 -->
-   <script>
-   document.addEventListener("DOMContentLoaded", function () {
-	    fetch('/api/production-data')
-	        .then(response => response.json())
-	        .then(data => {
-	        	 // 2014년 1월 1일부터의 데이터만 필터링
-	            const ChartDate = new Date("2014-01-01");
-	            const filteredData = data.filter(item => new Date(item.mainDate) >= ChartDate);
-	            const startDate = new Date("2024-05-01");
 
-	            // 전체 날짜 리스트
-	            const allDates = filteredData.map(item => item.mainDate);
-
-	            // 각 데이터셋을 날짜에 맞게 정렬하고 나머지는 null로 채워줌
-	            const productionBefore2024 = allDates.map(date => {
-	                const item = filteredData.find(item => item.mainDate === date && new Date(item.mainDate) < startDate);
-	                return item ? item.production : null;
-	            });
-
-	            const productionAfter2024 = allDates.map(date => {
-	                const item = filteredData.find(item => item.mainDate === date && new Date(item.mainDate) >= startDate);
-	                return item ? item.production : null;
-	            });
-
-	            const ctx = document.getElementById('productionChart').getContext('2d');
-	            new Chart(ctx, {
-	                type: 'line',
-	                data: {
-	                    labels: allDates,
-	                    datasets: [
-	                        {
-	                            label: '생산량 (2024년 5월 이전)',
-	                            data: productionBefore2024,
-	                            borderColor: '#007bff',
-	                            backgroundColor: 'rgba(0, 123, 255, 0.2)',
-	                            fill: true,
-	                            tension: 0.1
-	                        },
-	                        {
-	                            label: '생산량 (2024년 5월 이후)',
-	                            data: productionAfter2024,
-	                            borderColor: '#ff5733',  // 다른 색상
-	                            backgroundColor: 'rgba(255, 87, 51, 0.2)',
-	                            fill: true,
-	                            tension: 0.1
-	                        }
-	                    ]
-	                },
-	                options: {
-	                    responsive: true,
-	                    scales: {
-	                        x: { title: { display: true, text: '날짜' } },
-	                        y: { title: { display: true, text: '생산량' }, beginAtZero: true }
-	                    }
-	                }
-	            });
-	        })
-	        .catch(error => console.error('생산량 데이터를 가져오는 중 오류 발생:', error));
-	});
-    </script>
-    
-    <!-- 생산량 팝업  -->
+    <!-- 딸각 -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.getElementById("viewMoreTemperatureChart").addEventListener("click", function () {
-            document.getElementById("temperaturePopup").style.display = "block";
+        function showPopup(title, items = []) {
+            document.getElementById('popupTitle').textContent = title;
+            const buttonList = document.getElementById('popupButtons');
+            buttonList.innerHTML = ''; // 기존 버튼 제거
 
-            fetch("/api/temperature-data")
+            items.forEach(item => {
+                const button = document.createElement('button');
+                button.textContent = item;
+
+                // "김" 버튼 클릭 시 "/dashboard/dashboardd"로 이동
+                if (item === '사과') {
+                    button.addEventListener('click', function () {
+                        window.location.href = '/dashboard/dashboarddd'; // 설정된 경로로 이동
+                    });
+                } else {
+                    button.addEventListener('click', function () {
+                        alert(item + ' 버튼 클릭');
+                    });
+                }
+
+                buttonList.appendChild(button);
+            });
+
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
+
+    <!-- 생산량 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/api/production-data')
                 .then(response => response.json())
                 .then(data => {
-                    const colors = {
-                        "60": "#ff5733",
-                        "56": "#33ff57",
-                        "31": "#3357ff",
-                        "51": "#ff33a1",
-                        "41": "#a1ff33"
-                    };
+                    // 2014년 1월 1일부터의 데이터만 필터링
+                    const ChartDate = new Date("2014-01-01");
+                    const filteredData = data.filter(item => new Date(item.mainDate) >= ChartDate);
+                    const startDate = new Date("2024-05-01");
 
-                    const labels = {
-                        "60": "온도 (부산)",
-                        "56": "온도 (전북)",
-                        "31": "온도 (충남)",
-                        "51": "온도 (전남)",
-                        "41": "온도 (경기)"
-                    };
+                    // 전체 날짜 리스트
+                    const allDates = filteredData.map(item => item.mainDate);
 
-                    const startDate = new Date("2024-03-01");
-                    const endDate = new Date("2025-03-31");
+                    // 각 데이터셋을 날짜에 맞게 정렬하고 나머지는 null로 채워줌
+                    const productionBefore2024 = allDates.map(date => {
+                        const item = filteredData.find(item => item.mainDate === date && new Date(item.mainDate) < startDate);
+                        return item ? item.production : null;
+                    });
 
-                    for (let rCode in data) {
-                        const ctx = document.getElementById(`chart${rCode}`).getContext("2d");
+                    const productionAfter2024 = allDates.map(date => {
+                        const item = filteredData.find(item => item.mainDate === date && new Date(item.mainDate) >= startDate);
+                        return item ? item.production : null;
+                    });
 
-                        // 필터링 적용: 2024년 3월부터 2025년 3월까지 데이터만 사용
-                        const filteredData = data[rCode].filter(item => {
-                            const date = new Date(item.mainDate);
-                            return date >= startDate && date <= endDate;
-                        });
+                    const ctx = document.getElementById('productionChart').getContext('2d');
+                    new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: allDates,
+                            datasets: [
+                                {
+                                    label: '생산량 (2024년 5월 이전)',
+                                    data: productionBefore2024,
+                                    borderColor: '#007bff',
+                                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                                    fill: true,
+                                    tension: 0.1
+                                },
+                                {
+                                    label: '생산량 (2024년 5월 이후)',
+                                    data: productionAfter2024,
+                                    borderColor: '#ff5733',  // 다른 색상
+                                    backgroundColor: 'rgba(255, 87, 51, 0.2)',
+                                    fill: true,
+                                    tension: 0.1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: { title: { display: true, text: '날짜' } },
+                                y: { title: { display: true, text: '생산량(속)' }, beginAtZero: true }
+                            },
 
-                        const dates = filteredData.map(item => item.mainDate);
-                        const temperatures = filteredData.map(item => item.temperature);
+                        }
+                    });
+                })
+                .catch(error => console.error('생산량 데이터를 가져오는 중 오류 발생:', error));
+        });
+    </script>
 
+    <!-- 생산량 팝업  -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("viewMoreTemperatureChart").addEventListener("click", function () {
+                document.getElementById("temperaturePopup").style.display = "block";
+
+                fetch("/api/temperature-data")
+                    .then(response => response.json())
+                    .then(data => {
+                        const colors = {
+                            "60": "#ff5733",
+                            "56": "#33ff57",
+                            "31": "#3357ff",
+                            "51": "#ff33a1",
+                            "41": "#a1ff33"
+                        };
+
+                        const labels = {
+                            "60": "온도 (부산)",
+                            "56": "온도 (전북)",
+                            "31": "온도 (충남)",
+                            "51": "온도 (전남)",
+                            "41": "온도 (경기)"
+                        };
+
+                        const startDate = new Date("2024-03-01");
+                        const endDate = new Date("2025-03-31");
+
+                        for (let rCode in data) {
+                            const ctx = document.getElementById(`chart${rCode}`).getContext("2d");
+
+                            // 필터링 적용: 2024년 3월부터 2025년 3월까지 데이터만 사용
+                            const filteredData = data[rCode].filter(item => {
+                                const date = new Date(item.mainDate);
+                                return date >= startDate && date <= endDate;
+                            });
+
+                            const dates = filteredData.map(item => item.mainDate);
+                            const temperatures = filteredData.map(item => item.temperature);
+
+                            new Chart(ctx, {
+                                type: "line",
+                                data: {
+                                    labels: dates,
+                                    datasets: [{
+                                        label: labels[rCode],
+                                        data: temperatures,
+                                        borderColor: colors[rCode],
+                                        backgroundColor: colors[rCode] + "33",
+                                        fill: true
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        x: { title: { display: true, text: "날짜" } },
+                                        y: { title: { display: true, text: "온도('c)" }, beginAtZero: true }
+                                    }
+                                }
+                            });
+                        }
+                    })
+                    .catch(error => console.error("온도 데이터를 가져오는 중 오류 발생:", error));
+            });
+
+            document.getElementById("closePopup").addEventListener("click", function () {
+                document.getElementById("temperaturePopup").style.display = "none";
+            });
+        });
+    </script>
+
+    <!-- 수요 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch('/api/demand-data')
+                .then(response => response.json())
+                .then(data => {
+                    const thresholdDate = new Date("2024-05-01");
+
+                    // 날짜와 수요량 데이터 배열 생성
+                    const demandDates = data.map(item => new Date(item.demandDate));
+                    const demandValues = data.map(item => item.demand);
+
+                    // 2024년 5월 이전과 이후 데이터를 나누어 배열에 저장
+                    const datesBeforeThreshold = demandDates.filter(date => date < thresholdDate).map(date => date.toISOString().split('T')[0]);
+                    const valuesBeforeThreshold = demandDates
+                        .map((date, index) => (date < thresholdDate ? demandValues[index] : null));
+
+                    const datesAfterThreshold = demandDates.filter(date => date >= thresholdDate).map(date => date.toISOString().split('T')[0]);
+                    const valuesAfterThreshold = demandDates
+                        .map((date, index) => (date >= thresholdDate ? demandValues[index] : null));
+
+                    const ctxDemand = document.getElementById('demandChart').getContext('2d');
+                    new Chart(ctxDemand, {
+                        type: 'line',
+                        data: {
+                            labels: demandDates.map(date => date.toISOString().split('T')[0]),
+                            datasets: [
+                                {
+                                    label: '수요량 (2024년 5월 이전)',
+                                    data: valuesBeforeThreshold,
+                                    borderColor: '#003366',  // 진한 파란색
+                                    backgroundColor: 'rgba(0, 51, 102, 0.3)',
+                                    fill: true,
+                                    tension: 0.1
+                                },
+                                {
+                                    label: '수요량 (2024년 5월 이후)',
+                                    data: valuesAfterThreshold,
+                                    borderColor: '#ff3300',  // 진한 빨간색
+                                    backgroundColor: 'rgba(255, 51, 0, 0.3)',
+                                    fill: true,
+                                    tension: 0.1
+                                }
+                            ]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: { title: { display: true, text: '날짜' } },
+                                y: { title: { display: true, text: '수요량(USD)' }, beginAtZero: true }
+                            },
+                            plugins: {
+                                legend: { position: 'top' }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('수요량 데이터를 가져오는 중 오류 발생:', error));
+        });
+    </script>
+
+
+    <!-- 수요량 팝업 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("viewMoreDemandChart").addEventListener("click", function () {
+                document.getElementById("demandPopup").style.display = "block";
+
+                fetch("/api/demand-details")
+                    .then(response => response.json())
+                    .then(data => {
+                        // 2024년 3월까지의 데이터만 필터링
+                        const endDate = new Date("2024-03-31");
+
+                        const filteredData = data.filter(item => new Date(item.demandDate) <= endDate);
+
+                        // 필터링된 데이터를 각 필드에 매핑
+                        const dates = filteredData.map(item => item.demandDate);
+                        const usa_yk = filteredData.map(item => item.usaYk);
+                        const usa_gk = filteredData.map(item => item.usaGk);
+                        const usa_gs = filteredData.map(item => item.usaGs / 100000);
+                        const jp_yk = filteredData.map(item => item.jpYk);
+                        const jp_ik = filteredData.map(item => item.jpIk / 100000);
+                        const jp_gk = filteredData.map(item => item.jpGk / 10);
+
+                        const ctx = document.getElementById("demandDetailChart").getContext("2d");
                         new Chart(ctx, {
-                            type: "line",
+                            type: 'line',
                             data: {
                                 labels: dates,
-                                datasets: [{
-                                    label: labels[rCode],
-                                    data: temperatures,
-                                    borderColor: colors[rCode],
-                                    backgroundColor: colors[rCode] + "33",
-                                    fill: true
-                                }]
+                                datasets: [
+                                    { label: "미국 YK", data: usa_yk, borderColor: '#FF5733', fill: false },
+                                    { label: "미국 GK", data: usa_gk, borderColor: '#33FF57', fill: false },
+                                    { label: "미국 구글 CPC", data: usa_gs, borderColor: '#3357FF', fill: false },
+                                    { label: "일본 YK", data: jp_yk, borderColor: '#FFC300', fill: false },
+                                    { label: "일본 IK", data: jp_ik, borderColor: '#FF33A1', fill: false },
+                                    { label: "일본 GK", data: jp_gk, borderColor: '#A1FF33', fill: false }
+                                ]
                             },
                             options: {
+                                responsive: true,
                                 scales: {
-                                    x: { title: { display: true, text: "날짜" } },
-                                    y: { title: { display: true, text: "온도" }, beginAtZero: true }
+                                    x: { title: { display: true, text: '날짜' } },
+                                    y: { title: { display: true, text: '검색량' }, beginAtZero: true }
                                 }
                             }
                         });
-                    }
-                })
-                .catch(error => console.error("온도 데이터를 가져오는 중 오류 발생:", error));
-        });
+                    })
+                    .catch(error => console.error("수요량 데이터를 가져오는 중 오류 발생:", error));
+            });
 
-        document.getElementById("closePopup").addEventListener("click", function () {
-            document.getElementById("temperaturePopup").style.display = "none";
+            // "닫기" 버튼 클릭 시 모달 닫기
+            document.getElementById("closeDemandPopup").addEventListener("click", function () {
+                document.getElementById("demandPopup").style.display = "none";
+            });
         });
-    });
     </script>
-    
-    <!-- 수요 -->
+
+
+    <!-- 수출 -->
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        fetch('/api/demand-data')
-            .then(response => response.json())
-            .then(data => {
-                const thresholdDate = new Date("2024-05-01");
+        document.addEventListener("DOMContentLoaded", function () {
+            // Trade 데이터를 가져와 차트를 그리는 함수
+            fetch('/api/trade-data')  // Trade API 엔드포인트
+                .then(response => response.json())
+                .then(data => {
+                    console.log("서버로부터 받은 Trade 데이터:", data);
 
-                // 날짜와 수요량 데이터 배열 생성
-                const demandDates = data.map(item => new Date(item.demandDate));
-                const demandValues = data.map(item => item.demand);
+                    // trade_date와 export 값을 배열로 분리
+                    const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
+                    const exportValues = data.map(item => item.export);  // Y축: export 합계
 
-                // 2024년 5월 이전과 이후 데이터를 나누어 배열에 저장
-                const datesBeforeThreshold = demandDates.filter(date => date < thresholdDate).map(date => date.toISOString().split('T')[0]);
-                const valuesBeforeThreshold = demandDates
-                    .map((date, index) => (date < thresholdDate ? demandValues[index] : null));
-
-                const datesAfterThreshold = demandDates.filter(date => date >= thresholdDate).map(date => date.toISOString().split('T')[0]);
-                const valuesAfterThreshold = demandDates
-                    .map((date, index) => (date >= thresholdDate ? demandValues[index] : null));
-
-                const ctxDemand = document.getElementById('demandChart').getContext('2d');
-                new Chart(ctxDemand, {
-                    type: 'line',
-                    data: {
-                        labels: demandDates.map(date => date.toISOString().split('T')[0]),
-                        datasets: [
-                            {
-                                label: '수요량 (2024년 5월 이전)',
-                                data: valuesBeforeThreshold,
-                                borderColor: '#003366',  // 진한 파란색
-                                backgroundColor: 'rgba(0, 51, 102, 0.3)',
-                                fill: true,
-                                tension: 0.1
-                            },
-                            {
-                                label: '수요량 (2024년 5월 이후)',
-                                data: valuesAfterThreshold,
-                                borderColor: '#ff3300',  // 진한 빨간색
-                                backgroundColor: 'rgba(255, 51, 0, 0.3)',
-                                fill: true,
-                                tension: 0.1
+                    // Chart.js로 Trade 차트 그리기
+                    const ctxTrade = document.getElementById('tradeChart').getContext('2d');
+                    new Chart(ctxTrade, {
+                        type: 'line',
+                        data: {
+                            labels: tradeDates,  // X축: trade_date
+                            datasets: [{
+                                label: '날짜별 수출 합계',  // 차트 제목
+                                data: exportValues,  // Y축: export 합계 데이터
+                                borderColor: '#28a745',  // 선 색상
+                                backgroundColor: 'rgba(40, 167, 69, 0.2)',  // 배경 색상
+                                fill: true,  // 선 아래 영역 채우기
+                                tension: 0.1  // 곡선 정도
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: '날짜'  // X축 제목
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: '수출 합계(USD)'  // Y축 제목
+                                    },
+                                    beginAtZero: true  // Y축을 0부터 시작
+                                }
                             }
-                        ]
+                        }
+                    });
+                })
+                .catch(error => console.error('Trade 데이터를 가져오는 중 오류 발생:', error));
+        });
+    </script>
+
+
+    <!-- 수출 팝업 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            function populateOptions() {
+                fetch("/api/trade-options")
+                    .then(response => response.json())
+                    .then(data => {
+                        populateSelect("tradeDate", data.tradeDates.sort((a, b) => new Date(b) - new Date(a)));
+                        populateSelect("rCode", data.rCodes);
+                        populateSelect("cCode", data.cCodes);
+                    })
+                    .catch(error => console.error("Options loading error:", error));
+            }
+
+            function populateSelect(elementId, options) {
+                const select = document.getElementById(elementId);
+                select.innerHTML = '<option value="">모두</option>';
+                options.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.textContent = option;
+                    select.appendChild(opt);
+                });
+            }
+
+            function displayFilteredData(data, tradeDate, rCode, cCode) {
+                const container = document.getElementById("filteredTradeData");
+                container.innerHTML = `<h2>${rCode || '모두'} >>>    ${cCode || '모두'}</h2>`;
+
+                if (data.length === 0) {
+                    container.innerHTML += "<p>김을 수출 하지 않았습니다.</p>";
+                } else {
+                    let table = `<table>
+                    <thead><tr><th>날짜</th><th>수출 금액(USD)</th></tr></thead>
+                    <tbody>`;
+                    data.forEach(item => {
+                        // 수출량에 쉼표 추가
+                        const exportValue = item.export ? item.export.toLocaleString() : '0';
+                        table += `<tr>
+                                <td>${item.tradeDate || ''}</td>
+                                <td>${exportValue}</td>
+                              </tr>`;
+                    });
+                    table += "</tbody></table>";
+                    container.innerHTML += table;
+                }
+            }
+
+            function searchFilteredData() {
+                const tradeDate = document.getElementById("tradeDate").value;
+                const rCode = document.getElementById("rCode").value;
+                const cCode = document.getElementById("cCode").value;
+
+                let queryString = `/api/trade-filter?`;
+                if (tradeDate) queryString += `tradeDate=${tradeDate}&`;
+                if (rCode && rCode !== '모두') queryString += `rCode=${rCode}&`;
+                if (cCode && cCode !== '모두') queryString += `cCode=${cCode}`;
+
+                fetch(queryString)
+                    .then(response => response.json())
+                    .then(data => {
+                        data.sort((a, b) => new Date(b.tradeDate) - new Date(a.tradeDate));
+                        displayFilteredData(data, tradeDate, rCode, cCode);
+                    })
+                    .catch(error => console.error("Filtering error:", error));
+            }
+
+            document.getElementById("searchTradeData").addEventListener("click", searchFilteredData);
+            document.getElementById("closeTradePopup").addEventListener("click", function () {
+                document.getElementById("tradePopup").style.display = "none";
+            });
+
+            document.getElementById("viewMoreTradeChart").addEventListener("click", function () {
+                document.getElementById("tradePopup").style.display = "block";
+                populateOptions();
+            });
+        });
+
+    </script>
+
+    <!-- 리셋 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // 두 팝업 각각의 옵션을 초기화하기 위한 함수
+            function populateOptionsForPopup(dateId, rCodeId, cCodeId) {
+                fetch("/api/trade-options")
+                    .then(response => response.json())
+                    .then(data => {
+                        populateSelect(dateId, data.tradeDates.sort((a, b) => new Date(b) - new Date(a)));
+                        populateSelect(rCodeId, data.rCodes);
+                        populateSelect(cCodeId, data.cCodes);
+                    })
+                    .catch(error => console.error("Options loading error:", error));
+            }
+
+            // 공통 함수: 드롭다운에 옵션 추가
+            function populateSelect(elementId, options) {
+                const select = document.getElementById(elementId);
+                select.innerHTML = '<option value="">모두</option>';
+                options.forEach(option => {
+                    const opt = document.createElement("option");
+                    opt.value = option;
+                    opt.textContent = option;
+                    select.appendChild(opt);
+                });
+            }
+
+            // 수출 차트 팝업 열기 및 옵션 추가
+            document.getElementById("viewMoreTradeChart").addEventListener("click", function () {
+                document.getElementById("tradePopup").style.display = "block";
+                populateOptionsForPopup("tradeDate", "rCode", "cCode");
+            });
+
+            // 수입 차트 팝업 열기 및 옵션 추가
+            document.getElementById("viewMoreTradeinChart").addEventListener("click", function () {
+                document.getElementById("tradeinPopup").style.display = "block";
+                populateOptionsForPopup("tradeDate_in", "rCode_in", "cCode_in");
+            });
+
+            // 팝업 닫기
+            document.getElementById("closeTradePopup").addEventListener("click", function () {
+                document.getElementById("tradePopup").style.display = "none";
+            });
+
+            document.getElementById("closeTradeinPopup").addEventListener("click", function () {
+                document.getElementById("tradeinPopup").style.display = "none";
+            });
+        });
+    </script>
+
+
+    <!-- 수입 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Import 데이터를 가져와 차트를 그리는 함수
+            fetch('/api/import-data')  // API에서 수입 데이터를 가져옴
+                .then(response => response.json())
+                .then(data => {
+                    console.log("서버로부터 받은 Import 데이터:", data);  // 콘솔에 데이터 확인
+
+                    // trade_date와 import 값을 배열로 분리
+                    const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
+                    const importValues = data.map(item => item.importValue);  // Y축: import 합계
+
+                    // Chart.js로 Import 차트 그리기
+                    const ctxImport = document.getElementById('importChart').getContext('2d');
+                    new Chart(ctxImport, {
+                        type: 'line',
+                        data: {
+                            labels: tradeDates,  // X축: trade_date
+                            datasets: [{
+                                label: '날짜별 수입 합계',  // 차트 제목
+                                data: importValues,  // Y축: import 합계 데이터
+                                borderColor: '#6f42c1',  // 선 색상
+                                backgroundColor: 'rgba(111, 66, 193, 0.2)',  // 배경 색상
+                                fill: true,  // 선 아래 영역 채우기
+                                tension: 0.1  // 곡선 정도
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            scales: {
+                                x: {
+                                    title: {
+                                        display: true,
+                                        text: '날짜'  // X축 제목
+                                    }
+                                },
+                                y: {
+                                    title: {
+                                        display: true,
+                                        text: '수입 합계(USD)'  // Y축 제목
+                                    },
+                                    beginAtZero: true  // Y축을 0부터 시작
+                                }
+                            }
+                        }
+                    });
+                })
+                .catch(error => console.error('Import 데이터를 가져오는 중 오류 발생:', error));
+        });
+    </script>
+
+
+    <!-- 수입 팝업 -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const importValues = [101401067, 82243638, 24413842, 15110181, 3971643];  // 상위 5개 국가 수입 수치
+            const countries = ["인도네시아", "중국", "모로코", "칠레", "일본"];
+
+            // 수입 돋보기 버튼 클릭 시 팝업 열기
+            document.getElementById("viewMoreTradeinChart").addEventListener("click", function () {
+                // 막대 차트를 생성하여 팝업에 표시
+                const ctx = document.getElementById("importBarChart").getContext("2d");
+                new Chart(ctx, {
+                    type: "bar",
+                    data: {
+                        labels: countries,
+                        datasets: [{
+                            label: '수입 금액 (USD)',
+                            data: importValues,
+                            backgroundColor: [
+                                "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
+                            ],
+                            borderColor: [
+                                "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
+                            ],
+                            borderWidth: 1
+                        }]
                     },
                     options: {
                         responsive: true,
                         scales: {
-                            x: { title: { display: true, text: '날짜' } },
-                            y: { title: { display: true, text: '수요량' }, beginAtZero: true }
+                            x: {
+                                title: { display: true, text: '국가' }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: '수입 금액 (USD)' }
+                            }
                         },
                         plugins: {
-                            legend: { position: 'top' }
+                            legend: { display: false }
                         }
                     }
                 });
-            })
-            .catch(error => console.error('수요량 데이터를 가져오는 중 오류 발생:', error));
-    });
-</script>
 
-
-<!-- 수요량 팝업 -->
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("viewMoreDemandChart").addEventListener("click", function () {
-        document.getElementById("demandPopup").style.display = "block";
-
-        fetch("/api/demand-details")
-            .then(response => response.json())
-            .then(data => {
-                // 2024년 3월까지의 데이터만 필터링
-                const endDate = new Date("2024-03-31");
-
-                const filteredData = data.filter(item => new Date(item.demandDate) <= endDate);
-
-                // 필터링된 데이터를 각 필드에 매핑
-                const dates = filteredData.map(item => item.demandDate);
-                const usa_yk = filteredData.map(item => item.usaYk);
-                const usa_gk = filteredData.map(item => item.usaGk);
-                const usa_gs = filteredData.map(item => item.usaGs/100000);
-                const jp_yk = filteredData.map(item => item.jpYk);
-                const jp_ik = filteredData.map(item => item.jpIk/100000);
-                const jp_gk = filteredData.map(item => item.jpGk/10);
-
-                const ctx = document.getElementById("demandDetailChart").getContext("2d");
-                new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: dates,
-                        datasets: [
-                            { label: "미국 YK", data: usa_yk, borderColor: '#FF5733', fill: false },
-                            { label: "미국 GK", data: usa_gk, borderColor: '#33FF57', fill: false },
-                            { label: "미국 GS", data: usa_gs, borderColor: '#3357FF', fill: false },
-                            { label: "일본 YK", data: jp_yk, borderColor: '#FFC300', fill: false },
-                            { label: "일본 IK", data: jp_ik, borderColor: '#FF33A1', fill: false },
-                            { label: "일본 GK", data: jp_gk, borderColor: '#A1FF33', fill: false }
-                        ]
-                    },
-                    options: {
-                        responsive: true,
-                        scales: {
-                            x: { title: { display: true, text: '날짜' } },
-                            y: { title: { display: true, text: '수요량' }, beginAtZero: true }
-                        }
-                    }
-                });
-            })
-            .catch(error => console.error("수요량 데이터를 가져오는 중 오류 발생:", error));
-    });
-
-    // "닫기" 버튼 클릭 시 모달 닫기
-    document.getElementById("closeDemandPopup").addEventListener("click", function () {
-        document.getElementById("demandPopup").style.display = "none";
-    });
-});
-</script>
-	
-	
-	<!-- 수출 -->
-	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-	    // Trade 데이터를 가져와 차트를 그리는 함수
-	    fetch('/api/trade-data')  // Trade API 엔드포인트
-	        .then(response => response.json())
-	        .then(data => {
-	            console.log("서버로부터 받은 Trade 데이터:", data);
-
-	            // trade_date와 export 값을 배열로 분리
-	            const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
-	            const exportValues = data.map(item => item.export);  // Y축: export 합계
-
-	            // Chart.js로 Trade 차트 그리기
-	            const ctxTrade = document.getElementById('tradeChart').getContext('2d');
-	            new Chart(ctxTrade, {
-	                type: 'line',
-	                data: {
-	                    labels: tradeDates,  // X축: trade_date
-	                    datasets: [{
-	                        label: '날짜별 수출 합계',  // 차트 제목
-	                        data: exportValues,  // Y축: export 합계 데이터
-	                        borderColor: '#28a745',  // 선 색상
-	                        backgroundColor: 'rgba(40, 167, 69, 0.2)',  // 배경 색상
-	                        fill: true,  // 선 아래 영역 채우기
-	                        tension: 0.1  // 곡선 정도
-	                    }]
-	                },
-	                options: {
-	                    responsive: true,
-	                    scales: {
-	                        x: {
-	                            title: {
-	                                display: true,
-	                                text: '날짜'  // X축 제목
-	                            }
-	                        },
-	                        y: {
-	                            title: {
-	                                display: true,
-	                                text: '수출 합계'  // Y축 제목
-	                            },
-	                            beginAtZero: true  // Y축을 0부터 시작
-	                        }
-	                    }
-	                }
-	            });
-	        })
-	        .catch(error => console.error('Trade 데이터를 가져오는 중 오류 발생:', error));
-	});
-	</script>
-
-
-<!-- 수출 팝업 -->
-    <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        function populateOptions() {
-            fetch("/api/trade-options")
-                .then(response => response.json())
-                .then(data => {
-                    populateSelect("tradeDate", data.tradeDates.sort((a, b) => new Date(b) - new Date(a)));
-                    populateSelect("rCode", data.rCodes);
-                    populateSelect("cCode", data.cCodes);
-                })
-                .catch(error => console.error("Options loading error:", error));
-        }
-
-        function populateSelect(elementId, options) {
-            const select = document.getElementById(elementId);
-            select.innerHTML = '<option value="">모두</option>';
-            options.forEach(option => {
-                const opt = document.createElement("option");
-                opt.value = option;
-                opt.textContent = option;
-                select.appendChild(opt);
+                // 팝업창 표시
+                document.getElementById("tradeinPopup").style.display = "block";
             });
-        }
 
-        function displayFilteredData(data, tradeDate, rCode, cCode) {
-            const container = document.getElementById("filteredTradeData");
-            container.innerHTML = `<h2>${rCode || '모두'} >>>    ${cCode || '모두'}</h2>`;
-
-            if (data.length === 0) {
-                container.innerHTML += "<p>김을 수출 하지 않았습니다.</p>";
-            } else {
-                let table = `<table>
-                    <thead><tr><th>날짜</th><th>수출량</th></tr></thead>
-                    <tbody>`;
-                data.forEach(item => {
-                    table += `<tr>
-                                <td>${item.tradeDate || ''}</td>
-                                <td>${item.export || 0}</td>
-                              </tr>`;
-                });
-                table += "</tbody></table>";
-                container.innerHTML += table;
-            }
-        }
-
-        function searchFilteredData() {
-            const tradeDate = document.getElementById("tradeDate").value;
-            const rCode = document.getElementById("rCode").value;
-            const cCode = document.getElementById("cCode").value;
-
-            let queryString = `/api/trade-filter?`;
-            if (tradeDate) queryString += `tradeDate=${tradeDate}&`;
-            if (rCode && rCode !== '모두') queryString += `rCode=${rCode}&`;
-            if (cCode && cCode !== '모두') queryString += `cCode=${cCode}`;
-
-            fetch(queryString)
-                .then(response => response.json())
-                .then(data => {
-                    data.sort((a, b) => new Date(b.tradeDate) - new Date(a.tradeDate));
-                    displayFilteredData(data, tradeDate, rCode, cCode);
-                })
-                .catch(error => console.error("Filtering error:", error));
-        }
-
-        document.getElementById("searchTradeData").addEventListener("click", searchFilteredData);
-        document.getElementById("closeTradePopup").addEventListener("click", function () {
-            document.getElementById("tradePopup").style.display = "none";
+            // 닫기 버튼 클릭 시 팝업 닫기
+            document.getElementById("closeTradeinPopup").addEventListener("click", function () {
+                document.getElementById("tradeinPopup").style.display = "none";
+            });
         });
-
-        document.getElementById("viewMoreTradeChart").addEventListener("click", function () {
-            document.getElementById("tradePopup").style.display = "block";
-            populateOptions();
-        });
-    });
-    
     </script>
-    
-    <!-- 리셋 -->
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // 두 팝업 각각의 옵션을 초기화하기 위한 함수
-        function populateOptionsForPopup(dateId, rCodeId, cCodeId) {
-            fetch("/api/trade-options")
-                .then(response => response.json())
-                .then(data => {
-                    populateSelect(dateId, data.tradeDates.sort((a, b) => new Date(b) - new Date(a)));
-                    populateSelect(rCodeId, data.rCodes);
-                    populateSelect(cCodeId, data.cCodes);
-                })
-                .catch(error => console.error("Options loading error:", error));
-        }
-
-        // 공통 함수: 드롭다운에 옵션 추가
-        function populateSelect(elementId, options) {
-            const select = document.getElementById(elementId);
-            select.innerHTML = '<option value="">모두</option>';
-            options.forEach(option => {
-                const opt = document.createElement("option");
-                opt.value = option;
-                opt.textContent = option;
-                select.appendChild(opt);
-            });
-        }
-
-        // 수출 차트 팝업 열기 및 옵션 추가
-        document.getElementById("viewMoreTradeChart").addEventListener("click", function () {
-            document.getElementById("tradePopup").style.display = "block";
-            populateOptionsForPopup("tradeDate", "rCode", "cCode");
-        });
-
-        // 수입 차트 팝업 열기 및 옵션 추가
-        document.getElementById("viewMoreTradeinChart").addEventListener("click", function () {
-            document.getElementById("tradeinPopup").style.display = "block";
-            populateOptionsForPopup("tradeDate_in", "rCode_in", "cCode_in");
-        });
-
-        // 팝업 닫기
-        document.getElementById("closeTradePopup").addEventListener("click", function () {
-            document.getElementById("tradePopup").style.display = "none";
-        });
-
-        document.getElementById("closeTradeinPopup").addEventListener("click", function () {
-            document.getElementById("tradeinPopup").style.display = "none";
-        });
-    });
-</script>
 
 
-<!-- 수입 -->
-	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-	    // Import 데이터를 가져와 차트를 그리는 함수
-	    fetch('/api/import-data')  // API에서 수입 데이터를 가져옴
-	        .then(response => response.json())
-	        .then(data => {
-	            console.log("서버로부터 받은 Import 데이터:", data);  // 콘솔에 데이터 확인
-
-	            // trade_date와 import 값을 배열로 분리
-	            const tradeDates = data.map(item => item.tradeDate);  // X축: 날짜
-	            const importValues = data.map(item => item.importValue);  // Y축: import 합계
-
-	            // Chart.js로 Import 차트 그리기
-	            const ctxImport = document.getElementById('importChart').getContext('2d');
-	            new Chart(ctxImport, {
-	                type: 'line',
-	                data: {
-	                    labels: tradeDates,  // X축: trade_date
-	                    datasets: [{
-	                        label: '날짜별 수입 합계',  // 차트 제목
-	                        data: importValues,  // Y축: import 합계 데이터
-	                        borderColor: '#6f42c1',  // 선 색상
-	                        backgroundColor: 'rgba(111, 66, 193, 0.2)',  // 배경 색상
-	                        fill: true,  // 선 아래 영역 채우기
-	                        tension: 0.1  // 곡선 정도
-	                    }]
-	                },
-	                options: {
-	                    responsive: true,
-	                    scales: {
-	                        x: {
-	                            title: {
-	                                display: true,
-	                                text: '날짜'  // X축 제목
-	                            }
-	                        },
-	                        y: {
-	                            title: {
-	                                display: true,
-	                                text: '수입 합계'  // Y축 제목
-	                            },
-	                            beginAtZero: true  // Y축을 0부터 시작
-	                        }
-	                    }
-	                }
-	            });
-	        })
-	        .catch(error => console.error('Import 데이터를 가져오는 중 오류 발생:', error));
-	});
-	</script>
-	
-	
-	<!-- 수입 팝업 -->
-	 <script>
-	 document.addEventListener("DOMContentLoaded", function () {
-		    const importValues = [101401067, 82243638, 24413842, 15110181, 3971643];  // 상위 5개 국가 수입 수치
-		    const countries = ["인도네시아", "중국", "모로코", "칠레", "일본"];
-		    
-		    // 수입 돋보기 버튼 클릭 시 팝업 열기
-		    document.getElementById("viewMoreTradeinChart").addEventListener("click", function () {
-		        // 막대 차트를 생성하여 팝업에 표시
-		        const ctx = document.getElementById("importBarChart").getContext("2d");
-		        new Chart(ctx, {
-		            type: "bar",
-		            data: {
-		                labels: countries,
-		                datasets: [{
-		                    label: '수입 금액 (원)',
-		                    data: importValues,
-		                    backgroundColor: [
-		                        "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
-		                    ],
-		                    borderColor: [
-		                        "#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"
-		                    ],
-		                    borderWidth: 1
-		                }]
-		            },
-		            options: {
-		                responsive: true,
-		                scales: {
-		                    x: {
-		                        title: { display: true, text: '국가' }
-		                    },
-		                    y: {
-		                        beginAtZero: true,
-		                        title: { display: true, text: '수입 금액 (원)' }
-		                    }
-		                },
-		                plugins: {
-		                    legend: { display: false }
-		                }
-		            }
-		        });
-
-		        // 팝업창 표시
-		        document.getElementById("tradeinPopup").style.display = "block";
-		    });
-
-		    // 닫기 버튼 클릭 시 팝업 닫기
-		    document.getElementById("closeTradeinPopup").addEventListener("click", function () {
-		        document.getElementById("tradeinPopup").style.display = "none";
-		    });
-		});
-		</script>
-	
-	
-	 <!-- 봇 -->
-	  <script>
+    <!-- 봇 -->
+    <script>
         // 챗봇 버튼과 창 제어
         const chatbotButton = document.getElementById('chatbot-button');
         const chatbotContainer = document.getElementById('chatbot-container');
@@ -1414,6 +1470,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     </script>
-	
+
 </body>
+
 </html>

@@ -33,4 +33,9 @@ public class AboutController {
 		
 		return "dashboard/dashboard";
 	}
+	@GetMapping("/dashboard/dashboarddd")
+	public String joinInOPN() {
+		
+		return "dashboard/dashList2";
+	}
 }

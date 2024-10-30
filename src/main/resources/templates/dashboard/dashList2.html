@@ -7,8 +7,7 @@
     <title>대시보드</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* 스타일 설정 */
-        * {
+      * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -82,7 +81,7 @@
             color: #007bff;
         }
 
-	   header .actions {
+        header .actions {
 	       position: absolute;
 	       right: 10px;
 	       top: 5px; /* 상단에 가까이 배치 */
@@ -102,7 +101,7 @@
             cursor: pointer;
         }
 
-        header .actions a:hover {
+        header .actions a:hover { 
             color: #007bff;
         }
 
@@ -121,7 +120,6 @@
         header .actions .logged-in {
             margin-top: 5px;
         }
-
         .hero {
             background-color: #e1e4e8;
             padding: 60px 20px;
@@ -143,6 +141,97 @@
             color: #555;
         }
 
+        .category-row {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+
+        .category-box {
+            position: relative;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 18%;
+        }
+
+        .category-box h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+         /* 다섯 개 카드의 더보기 버튼 배치 */
+        .category-box .more-btn {
+            position: absolute;
+            top: 45%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: url('https://data.mafra.go.kr/images/ico/ico-search_bl.svg') no-repeat center;
+            background-size: 24px;
+            width: 24px;
+            height: 24px;
+            border: none;
+            cursor: pointer;
+        }
+
+       .button-list button {
+            padding: 15px;
+            margin: 10px;
+            background-color: #0084FF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .button-list button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            max-width: 300px; /* 팝업의 좌우 폭 조정 */
+            width: 80%;
+            text-align: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .modal h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .modal .button-list {
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 900;
+        }
+
         .dashboard-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -152,11 +241,49 @@
             margin: 0 auto;
         }
 
-        .rate-box {
+        .graph-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .graph-container h2 {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+ 
+        .graph-container .more-btn, .button {
+		 	position: absolute;
+		    top: 10px;      /* 상단 모서리에 배치 */
+		    right: 10px;    /* 오른쪽 모서리에 배치 */
+		    background: url('https://data.mafra.go.kr/images/ico/ico-search_bl.svg') no-repeat center;
+		    background-size: 24px;
+		    width: 24px;
+		    height: 24px;
+		    border: none;
+		    cursor: pointer;
+        }
+
+.graph-container .more-btn:hover,
+.graph-container .button:hover {
+    color: #0056b3;
+    background-color: rgba(0, 123, 255, 0.1); /* 약간의 배경 강조 */
+    border-radius: 50%; /* 둥근 버튼 형태 */
+    transition: background-color 0.3s ease; /* 부드러운 색상 전환 */
+}
+        .graph-container, .rate-box {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .rate-box {
             text-align: center;
         }
 
@@ -172,27 +299,23 @@
             color: #000000;
         }
 
-        .graph-container {
+         .graph-container {
             background-color: #ffffff;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin: 20px auto;
             width: 60%;
-            text-align: center;
+            text-align: center;  /* 그래프를 중앙 정렬 */
         }
 
         /* 차트 크기 조정 */
-        #productionChart,
-        #demandChart,
-        #tradeChart,
-        #importChart {
-            width: 90%;
-            height: 300px;
-            margin: 0 auto;
-        }
-
-        /* 챗봇 버튼 스타일 */
+        #productionChart, #demandChart, #tradeChart, #importChart {
+            width: 90%;  /* 너비를 50%로 조정 */
+            height: 300px;  /* 높이를 200px로 줄임 */
+            margin: 0 auto;  /* 중앙 정렬 */
+        } 
+          /* 챗봇 버튼 스타일 */
         #chatbot-button {
             position: fixed;
             bottom: 20px;
@@ -232,7 +355,7 @@
             font-weight: bold;
         }
 
-        /* 메시지 영역 */
+        /* 메시지 영역 스타일 */
         #chatbot-messages {
             padding: 10px;
             height: 400px;
@@ -242,7 +365,7 @@
             flex-direction: column;
         }
 
-        /* 사용자 메시지 */
+        /* 사용자 메시지 스타일 (오른쪽) */
         .user-message {
             align-self: flex-end;
             background-color: #9FE2BF;
@@ -254,7 +377,7 @@
             text-align: right;
         }
 
-        /* 봇 메시지 */
+        /* 봇 메시지 스타일 (왼쪽) */
         .bot-message {
             align-self: flex-start;
             background-color: #E0E0E0;
@@ -288,27 +411,189 @@
             border-radius: 10px;
             cursor: pointer;
         }
+    /* 차트 컨테이너 스타일 */
+    #chartContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 20px;
+    }
+
+    /* 각 차트 wrapper 스타일 */
+    .chart-wrapper {
+        width: 45%; /* 차트 너비를 조절하여 2열로 배치 */
+        height: 300px;
+    }
+
+    /* 차트 캔버스 크기 */
+    .chart-wrapper canvas {
+        width: 100%;
+        height: 100%;
+    }
+
+
+    #closePopup:hover {
+        background-color: #0056b3;
+    }
+    /* 아이콘 버튼 스타일 */
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.icon-button:hover {
+    color: #0056b3;
+} 
+ /* 스타일 정의 (생략) */
+        #filteredTradeData table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        #filteredTradeData th, #filteredTradeData td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        #filteredTradeData th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+        /* 필터링 UI 스타일 */
+.modal {
+   
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.modal {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 12px;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+          max-width: 500px; /* 팝업의 좌우 폭을 줄였습니다 */
+          width: 80%;
+          text-align: center;
+          z-index: 1000;
+          display: none;
+      }
+.filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter-input {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 150px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.filter-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+}
+
+.results-container {
+    margin-top: 20px;
+    overflow-x: auto;
+    font-size: 14px;
+}
+
+.results-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results-container th, .results-container td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.results-container th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.close-button {
+    margin-top: 20px;
+    padding: 8px 20px;
+    background-color: #ff4d4f;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.close-button:hover {
+    background-color: #cc0000;
+}
     </style>
 </head>
 
 <body>
-
-    <!-- 헤더 -->
+ <!-- 헤더 -->
     <header>
         <div class="logo">
             <a th:href="@{/}">
                 <img th:src="@{/images/logo.png}" alt="logo">
                 <div class="logo-text">
+                </a>
                     <span>JDT</span>
                     <span>농수산물 데이터 제공 서비스</span>
                 </div>
-            </a>
+            
         </div>
         <nav>
-            <a th:href="@{/about/about}">About Us</a>
-            <a th:href="@{/dashboard/dashboard}">메인 서비스</a>
-            <a th:href="@{/board/boardList}">공지사항</a>
-            <a th:href="@{/news/newsList}">뉴스</a>
+            <a th:href="@{/about/about}">About Us</a> 
+            <a th:href="@{/dashboard/dashboard}">메인 서비스</a> 
+            <a th:href="@{/board/boardList}">공지사항</a> 
+            <a th:href="@{/news/newsList}">뉴스</a> 
             <a th:href="@{/cs/csList}">고객지원</a>
         </nav>
         <div class="actions">
@@ -318,7 +603,7 @@
                 <a th:href="@{/user/login}">로그인</a>
             </li>
             <li sec:authorize="isAuthenticated()">
-               <a th:href="@{/user/logout}">관리자님 로그아웃</a>
+                <a th:href="@{/user/logout}">관리자님 로그아웃</a>
                 <a th:href="@{/user/mypage}">개인정보 수정</a>
             </li>
         </div>
@@ -327,7 +612,7 @@
     <!-- Hero 섹션 -->
     <section class="hero">
         <img src="https://data.mafra.go.kr/images/common/img-service-03.svg" alt="대시보드 이미지">
-        <h1>DashBoard</h1>
+        <h1>사과</h1><h1>DashBoard</h1>
         <p>다양한 품목별 무역데이터를 제공받을 수 있는 대시보드 페이지입니다.<br>아래 메뉴에서 품목을 선택해주세요.</p>
     </section>
 
@@ -365,39 +650,107 @@
     <div class="dashboard-container">
         <div class="rate-box">
             <h2>수출증감률</h2>
-            <p class="rate-value">+12.5%</p>
+            <p class="rate-value">+2.2%상승(588억 달러)</p>
         </div>
         <div class="rate-box">
             <h2>수입증감률</h2>
-            <p class="rate-value">-8.3%</p>
+            <p class="rate-value">+2.2%상승(521억 달러)</p>
         </div>
         <div class="rate-box">
-            <h2>무역수지</h2>
-            <p class="rate-value">+5.6억 USD</p>
+            <h2>9월 무역수지</h2>
+            <p class="rate-value">+67억 USD</p>
         </div>
     </div>
 
     <!-- 차트 섹션 -->
     <div class="graph-container">
-        <h2>생산량 차트</h2>
+        <h2>생산량 </h2>
         <canvas id="productionChart"></canvas>
     </div>
 
     <div class="graph-container">
-        <h2>수요량 차트</h2>
+        <h2>수요량 </h2>
         <canvas id="demandChart"></canvas>
     </div>
 
     <div class="graph-container">
-        <h2>수출 차트</h2>
+        <h2>수출 금액</h2>
         <canvas id="tradeChart"></canvas>
     </div>
 
     <div class="graph-container">
-        <h2>수입 차트</h2>
+        <h2>수입 금액</h2>
         <canvas id="importChart"></canvas>
     </div>
+ <script>
+    function showPopup(title, items = []) {
+        document.getElementById('popupTitle').textContent = title;
+        const buttonList = document.getElementById('popupButtons');
+        buttonList.innerHTML = ''; // 기존 버튼 제거
 
+        items.forEach(item => {
+            const button = document.createElement('button');
+            button.textContent = item;
+
+            // "김" 버튼 클릭 시 "/dashboard/dashboardd"로 이동
+            if (item === '김') {
+                button.addEventListener('click', function() {
+                    window.location.href = '/dashboard/dashboardd'; // 설정된 경로로 이동
+                });
+            } else {
+                button.addEventListener('click', function() {
+                    alert(item + ' 버튼 클릭');
+                });
+            }
+            
+            buttonList.appendChild(button);
+        });
+
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+    
+<!-- 딸각 -->
+	<script>
+    function showPopup(title, items = []) {
+        document.getElementById('popupTitle').textContent = title;
+        const buttonList = document.getElementById('popupButtons');
+        buttonList.innerHTML = ''; // 기존 버튼 제거
+
+        items.forEach(item => {
+            const button = document.createElement('button');
+            button.textContent = item;
+
+            // "김" 버튼 클릭 시 "/dashboard/dashboardd"로 이동
+            if (item === '김') {
+                button.addEventListener('click', function() {
+                    window.location.href = '/dashboard/dashboardd'; // 정확한 경로로 이동
+                });
+            } else {
+                button.addEventListener('click', function() {
+                    alert(item + ' 버튼 클릭');
+                });
+            }
+            
+            buttonList.appendChild(button);
+        });
+
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+	
     <!-- 차트에 더미 데이터 삽입 -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -407,11 +760,11 @@
             const importCtx = document.getElementById('importChart').getContext('2d');
 
             // 더미 데이터
-            const labels = ['2020', '2021', '2022', '2023', '2024'];
-            const productionData = [100, 200, 150, 250, 300];
-            const demandData = [120, 190, 170, 210, 260];
-            const tradeData = [80, 150, 130, 180, 220];
-            const importData = [70, 110, 120, 150, 190];
+            const labels = ['2018','2019','2020', '2021', '2022', '2023', '2024'];
+            const productionData = [180, 220, 260, 270, 220,230,200];
+            const demandData = [190, 150, 170, 290, 200,280,260];
+            const tradeData = [180, 150, 130, 180, 220,200,130];
+            const importData = [70, 110, 120, 150, 190,270,250];
 
             new Chart(productionCtx, {
                 type: 'line',
